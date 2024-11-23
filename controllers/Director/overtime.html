@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personal Information</title>
+    <link rel="stylesheet" href="overtime.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="/images/avatar.png" alt="logo" />
+        <h3 style="color: #fff">Director</h3>
+      </div>
+      <ul class="sidebar-links">
+        <h4>
+          <span>Dashboard Menu</span>
+          <div class="menu-separator"></div>
+        </h4>
+        <li>
+          <a href="profile.html">
+            <i class="fas fa-address-card"> </i> Personal Information<br />
+            Dashboard</a
+          >
+        </li>
+        <li>
+          <a href="Timekeeping-Rules.html"
+            ><i class="far fa-check-circle"></i>Timekeeping Rules</a
+          >
+        </li>
+        <li>
+          <a href="overtime.html">
+            <i class="fas fa-calendar-check"></i>Overtime Regulations
+          </a>
+        </li>
+        <h4>
+          <span>General</span>
+          <div class="menu-separator"></div>
+        </h4>
+        <li>
+          <a href="ApplicationForLeave.html">
+            <i class="fas fa-bug"></i>Leave Request Approval</a
+          >
+        </li>
+        <li>
+          <a href="notification-error.html"
+            ><i class="far fa-clock"></i>Receiving Violation notice</a
+          >
+        </li>
+        <li>
+          <a href="Viewreport.html"
+            ><i class="far fa-clock"></i>View Summary Report</a
+          >
+        </li>
+        <li>
+          <a href="reviewthereport.html"
+            ><i class="far fa-clock"></i>Accounting Report Approval
+          </a>
+        </li>
+        <li>
+          <a href="#"> <i class="fab fa-angellist"></i>Logout </a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Search bar -->
+      <div class="search-container">
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Tìm kiếm..." />
+        </div>
+      </div>
+
+      <!-- Tab and action buttons -->
+      <div class="action-bar">
+        <div class="tabs">
+          <button class="tab-btn active">General</button>
+          <button class="tab-btn">Overtime Schedule</button>
+        </div>
+        <div class="action-buttons">
+          <button class="action-btn edit-btn">Edit</button>
+          <button class="action-btn save-btn">Save</button>
+        </div>
+      </div>
+
+      <!-- Content area -->
+      <div class="content-area">
+        <div class="overtime-rules">
+          <h2>Overtime Regulations</h2>
+
+          <div class="rule-card">
+            <div class="rule-icon">
+              <i class="far fa-clock"></i>
+            </div>
+            <div class="rule-content">
+              <h3>Check-in Requirements</h3>
+              <p>
+                Employees must arrive at least 10 minutes before overtime shift
+                begins
+              </p>
+            </div>
+          </div>
+
+          <div class="rule-card">
+            <div class="rule-icon">
+              <i class="far fa-file-alt"></i>
+            </div>
+            <div class="rule-content">
+              <h3>Application Submission</h3>
+              <p>
+                Overtime requests must be submitted at least 1 day in advance
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personal Information</title>
+    <link rel="stylesheet" href="reviewthereport.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="/images/avatar.png" alt="logo" />
+        <h3 style="color: #fff">Director</h3>
+      </div>
+      <ul class="sidebar-links">
+        <h4>
+          <span>Dashboard Menu</span>
+          <div class="menu-separator"></div>
+        </h4>
+        <li>
+          <a href="profile.html">
+            <i class="fas fa-address-card"> </i> Personal Information<br />
+            Dashboard</a
+          >
+        </li>
+        <li>
+          <a href="Timekeeping-Rules.html"
+            ><i class="far fa-check-circle"></i>Timekeeping Rules</a
+          >
+        </li>
+        <li>
+          <a href="overtime.html">
+            <i class="fas fa-calendar-check"></i>Overtime Regulations
+          </a>
+        </li>
+        <h4>
+          <span>General</span>
+          <div class="menu-separator"></div>
+        </h4>
+        <li>
+          <a href="ApplicationForLeave.html">
+            <i class="fas fa-bug"></i>Leave Request Approval</a
+          >
+        </li>
+        <li>
+          <a href="notification-error.html"
+            ><i class="far fa-clock"></i>Receiving Violation notice</a
+          >
+        </li>
+        <li>
+          <a href="Viewreport.html"
+            ><i class="far fa-clock"></i>View Summary Report</a
+          >
+        </li>
+        <li>
+          <a href="reviewthereport.html"
+            ><i class="far fa-clock"></i>Accounting Report Approval
+          </a>
+        </li>
+        <li>
+          <a href="#"> <i class="fab fa-angellist"></i>Logout </a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="content-header">
+        <h2>Review Reports</h2>
+      </div>
+
+      <div class="m-search-container">
+        <input type="text" id="searchInput" placeholder="Search employee..." />
+        <button class="add-employee-btn">
+          <i class="fas fa-plus"></i> Add Employee
+        </button>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Account ID</th>
+              <th>Employee Name</th>
+              <th>Report Type</th>
+              <th>Date</th>
+              <th>Attachment</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>KT-001</td>
+              <td>Tran Phu Nguyen</td>
+              <td>Leave Request Data</td>
+              <td>30/10/2024</td>
+              <td><i class="fas fa-file-pdf"></i></td>
+              <td><span class="status-viewed">Viewed</span></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>KT-002</td>
+              <td>Vo Thi Tuyet Nhi</td>
+              <td>Employee Attendance Error</td>
+              <td>30/10/2024</td>
+              <td><i class="fas fa-file-pdf"></i></td>
+              <td><span class="status-viewed">Viewed</span></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>KT-003</td>
+              <td>Le Thi My Na</td>
+              <td>Employee Salary Report</td>
+              <td>30/10/2024</td>
+              <td><i class="fas fa-file-pdf"></i></td>
+              <td><span class="status-pending">Pending</span></td>
+            </tr>
+            <!-- Add more rows as needed -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pagination">
+        <span>Show</span>
+        <select>
+          <option>50</option>
+          <option>100</option>
+          <option>200</option>
+        </select>
+        <span>entries</span>
+        <div class="page-numbers">
+          <button>&lt;</button>
+          <button class="active">1</button>
+          <button>2</button>
+          <button>3</button>
+          <button>&gt;</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
