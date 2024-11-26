@@ -14,7 +14,7 @@
 <aside class="sidebar">
       <div class="sidebar-header">
         <img src=" assets/images/logo-HR-quan-tri-nhan-su-2.png" alt="Avatar"/>
-        <h2>Attendance</h2>
+        <h2>Employee</h2>
       </div>
       <div class="sidebar-links">
         <h4>

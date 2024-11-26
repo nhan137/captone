@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Profile</title>
-    <link rel="stylesheet" href="profile.css" />
+    <title>Edit Personal Information</title>
+    <link rel="stylesheet" href="edit_profile.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -56,66 +56,73 @@
 
     <!-- Main Content -->
     <div class="main-content">
-      <h2>Personal Information</h2>
-      <div class="personal-info-form">
+      <h2>Edit Personal Information</h2>
+      <form class="personal-info-form">
+        <!-- Information Section -->
         <div class="form-row">
           <h3>INFORMATION</h3>
         </div>
         <div class="form-row">
           <div class="form-group full-width">
-            <label>Full Name</label>
-            <p>John Doe</p>
+            <label for="fullname">Full Name</label>
+            <input type="text" id="fullname" value="John Doe" required />
           </div>
           <div class="form-group full-width">
-            <label>Employee ID</label>
-            <p>123456</p>
+            <label for="employee-id">Employee ID</label>
+            <input type="text" id="employee-id" value="123456" required />
           </div>
           <div class="form-group full-width">
-            <label>Marital Status</label>
-            <p>Single</p>
+            <label for="marital-status">Marital Status</label>
+            <select id="marital-status" required>
+              <option value="single" selected>Single</option>
+              <option value="married">Married</option>
+            </select>
           </div>
         </div>
 
+        <!-- Profile Section -->
         <div class="form-row">
           <h3>PROFILE</h3>
         </div>
         <div class="form-row">
           <div class="form-group full-width">
-            <label>ID Number</label>
-            <p>987654321</p>
+            <label for="id-number">ID Number</label>
+            <input type="text" id="id-number" value="987654321" required />
           </div>
           <div class="form-group full-width">
-            <label>Date of Issue</label>
-            <p>01/01/2020</p>
+            <label for="date-of-issue">Date of Issue</label>
+            <input type="date" id="date-of-issue" value="2020-01-01" required />
           </div>
           <div class="form-group full-width">
-            <label>Place of Issue</label>
-            <p>City Hall</p>
+            <label for="place-of-issue">Place of Issue</label>
+            <input type="text" id="place-of-issue" value="City Hall" required />
           </div>
         </div>
 
+        <!-- Address Section -->
         <div class="form-row">
           <h3>ADDRESS</h3>
         </div>
         <div class="form-row">
           <div class="form-group full-width">
-            <label>Hometown</label>
-            <p>City 1</p>
+            <label for="hometown">Hometown</label>
+            <input type="text" id="hometown" value="City 1" required />
           </div>
           <div class="form-group full-width">
-            <label>Place of Birth</label>
-            <p>District 1</p>
+            <label for="place-of-birth">Place of Birth</label>
+            <input type="text" id="place-of-birth" value="District 1" required />
           </div>
           <div class="form-group full-width">
-            <label>Nationality</label>
-            <p>Country 1</p>
+            <label for="nationality">Nationality</label>
+            <input type="text" id="nationality" value="Country 1" required />
           </div>
         </div>
 
+        <!-- Submit Button -->
         <div class="form-row">
-          <a href="edit_profile.html" class="edit-button">Edit Information</a>
+          <button type="submit" class="update-button">Update Personal Information</button>
         </div>
-      </div>
+      </form>
     </div>
   </body>
 </html>

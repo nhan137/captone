@@ -12,7 +12,7 @@ class LeaveRequestController {
 
     // Hàm gửi đơn nghỉ phép
     public function submitRequest() {
-        if ((!isset($_SESSION['id'])) || $_SESSION['role'] !== 'nhân viên') {
+        if ((!isset($_SESSION['id'])) || $_SESSION['role'] !== 'nhan vien') {
             header("Location: index.php?action=login");
             exit();
         }
@@ -45,7 +45,7 @@ class LeaveRequestController {
 
     // Hàm xem các đơn nghỉ phép chờ duyệt của mỗi nhân viên
     public function viewPendingRequests() {
-        if ((!isset($_SESSION['id'])) || $_SESSION['role'] !== 'nhân viên') {
+        if ((!isset($_SESSION['id'])) || $_SESSION['role'] !== 'nhan vien') {
             header("Location: index.php?action=login");
             exit();
         }
@@ -55,7 +55,7 @@ class LeaveRequestController {
 
     // Hàm xem tất cả các đơn nghỉ phép Status = 'Pending'
     public function viewAllPendingRequests() {
-        if ((!isset($_SESSION['id'])) || $_SESSION['role'] !== 'giám đốc') {
+        if ((!isset($_SESSION['id'])) || $_SESSION['role'] !== 'giam doc') {
             header("Location: index.php?action=login");
             exit();
         }

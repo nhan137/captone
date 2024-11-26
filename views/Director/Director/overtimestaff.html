@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Timekeeping Staff</title>
-    <link rel="stylesheet" href="profile.css" />
+    <link rel="stylesheet" href="overtimestaff.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -14,7 +14,7 @@
     <!-- Sidebar -->
     <aside class="sidebar">
       <div class="sidebar-header">
-        <img src="/Mangager_Human/images/avatar.png" alt="logo" />
+        <img src="/images/avatar.png" alt="logo" />
         <h3 style="color: #fff">Director</h3>
       </div>
       <ul class="sidebar-links">
@@ -83,13 +83,13 @@
             General
           </button>
           <button
-            class="tab-button active"
+            class="tab-button"
             onclick="switchTab(this, 'TimekeepingStaff.html')"
           >
             Timekeeping Staff
           </button>
           <button
-            class="tab-button"
+            class="tab-button active"
             onclick="switchTab(this, 'OvertimeStaff.html')"
           >
             Overtime Staff
@@ -122,18 +122,18 @@
         </div>
 
         <div class="table-wrapper">
-          <table>
+          <table class="overtime-table">
             <thead>
               <tr>
                 <th class="checkbox-column">
                   <input type="checkbox" />
                 </th>
                 <th>Employee ID</th>
-                <th>Avatar</th>
                 <th>Full Name</th>
-                <th>Position</th>
-                <th>Department</th>
-                <th>Created Date</th>
+                <th>Shift</th>
+                <th>Time</th>
+                <th>Register Date</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody>
@@ -141,24 +141,17 @@
                 <td><input type="checkbox" /></td>
                 <td>NV001</td>
                 <td>
-                  <div class="avatar pink">BT</div>
+                  <div class="employee-info">
+                    <div class="avatar pink">BT</div>
+                    <span>Bui Thi Thuy</span>
+                  </div>
                 </td>
-                <td>Bui Thi Thuy</td>
-                <td>Staff</td>
-                <td>Production Department</td>
-                <td>10/10/2024</td>
+                <td>Day</td>
+                <td>18h - 21h00</td>
+                <td>7/11/2024</td>
+                <td><button class="status-btn">Pending</button></td>
               </tr>
-              <tr>
-                <td><input type="checkbox" /></td>
-                <td>NV002</td>
-                <td>
-                  <div class="avatar green">VH</div>
-                </td>
-                <td>Vo thi My Huong</td>
-                <td>Staff</td>
-                <td>Production Department</td>
-                <td>10/10/2024</td>
-              </tr>
+              <!-- More rows similar to above -->
             </tbody>
           </table>
         </div>

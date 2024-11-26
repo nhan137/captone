@@ -11,8 +11,15 @@
     />
 </head>
 <body>
-    <?php include 'views/layouts/sidebar.php'; ?>
-
+            <?php
+                if ($_SESSION['role'] === 'nhan vien') {
+                    include 'views/layouts/sidebar.php';
+                } else if ($_SESSION['role'] === 'giam doc') {
+                    include 'views/layouts/sidebar_director.php';
+                } else {
+                    
+                }
+        ?>
     <div class="main-content">
     <h2>Edit Profile Information</h2>
     <form method="POST" action="index.php?action=update_Profile" class="personal-info-form">

@@ -119,27 +119,30 @@ body {
 }
 
 .main-content {
-  margin-left: 300px;
   padding: 30px;
   max-width: 1200px;
   margin: 0 auto;
-  background-color: #ffffff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+}
+
+.personal-info-form {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
-  font-size: 24px;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 20px;
+  color: #2c3e50;
+  font-size: 20px;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #eee;
 }
 
 h3 {
+  color: #2c3e50;
   font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 10px;
-  color: #555;
+  margin: 30px 0 20px;
 }
 
 .form-row {
@@ -152,24 +155,37 @@ h3 {
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
+}
+
+/* Điều chỉnh kích thước của các cột */
+.form-group.full-width {
+  grid-column: span 3; /* Chiếm toàn bộ chiều ngang */
+}
+
+.form-group.half-width {
+  grid-column: span 2; /* Chiếm 2 cột trong lưới */
+}
+
+.form-group.third-width {
+  grid-column: span 1; /* Chiếm 1 cột trong lưới */
 }
 
 .form-group label {
+  font-weight: 500;
   color: #4a5568;
   font-size: 14px;
-  font-weight: 500;
 }
 
 .form-group input,
 .form-group select {
-  padding: 12px;
-  font-size: 14px;
+  width: 100%;
+  padding: 12px 15px;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
   background-color: #f8fafc;
-  width: 100%;
-  transition: 0.3s ease;
 }
 
 .form-group input:focus,
@@ -177,6 +193,7 @@ h3 {
   outline: none;
   border-color: #4299e1;
   box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+  background-color: white;
 }
 
 button.update-button {
@@ -195,10 +212,17 @@ button.update-button:hover {
   background-color: #27ae60;
 }
 
-/* Responsive adjustments */
 @media (max-width: 1024px) {
   .form-row {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .form-group.half-width {
+    grid-column: span 1; /* Tự động thu hẹp cho màn hình nhỏ */
+  }
+
+  .form-group.third-width {
+    grid-column: span 1; /* Đảm bảo bố cục hợp lý */
   }
 }
 
@@ -206,31 +230,16 @@ button.update-button:hover {
   .form-row {
     grid-template-columns: 1fr;
   }
-  
+
   .main-content {
-    margin-left: 0;
     padding: 15px;
   }
 
-  .form-group {
-    gap: 15px;
+  .personal-info-form {
+    padding: 20px;
+  }
+
+  .form-group.full-width {
+    grid-column: span 1; /* Toàn bộ chiều rộng trên màn hình nhỏ */
   }
 }
-.edit-button {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #2ecc71; /* Green color */
-  color: white;
-  border-radius: 5px;
-  font-size: 16px;
-  font-weight: bold;
-  text-decoration: none; /* Remove underline */
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.edit-button:hover {
-  background-color: #27ae60; /* Darker green on hover */
-}
-

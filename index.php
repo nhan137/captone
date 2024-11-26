@@ -102,7 +102,7 @@ switch ($action) {
         $LeaveRequestController = new LeaveRequestController($pdo);
         $LeaveRequestController->viewAllPendingRequests();
         break;
-
+        
     case 'approveLeaveRequest':
         if (isset($_GET['id'])) {
             $leaveRequestController = new LeaveRequestController($pdo);

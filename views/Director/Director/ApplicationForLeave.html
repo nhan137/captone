@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Personal Information</title>
-    <link rel="stylesheet" href="profile.css" />
+    <link rel="stylesheet" href="ApplicationForLeave.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -13,7 +13,7 @@
   <body>
     <aside class="sidebar">
       <div class="sidebar-header">
-        <img src="/Mangager_Human/images/avatar.png" alt="logo" />
+        <img src="/images/avatar.png" alt="logo" />
         <h3 style="color: #fff">Director</h3>
       </div>
       <ul class="sidebar-links">
@@ -69,55 +69,58 @@
 
     <!-- Main Content -->
     <div class="main-content">
-      <!-- Search bar -->
       <div class="search-container">
         <div class="search-box">
           <i class="fas fa-search"></i>
-          <input type="text" placeholder="Tìm kiếm..." />
+          <input type="text" placeholder="Search..." />
         </div>
       </div>
 
-      <!-- Tab and action buttons -->
-      <div class="action-bar">
-        <div class="tabs">
-          <button class="tab-btn active">General</button>
-          <button class="tab-btn">Overtime Schedule</button>
-        </div>
-        <div class="action-buttons">
-          <button class="action-btn edit-btn">Edit</button>
-          <button class="action-btn save-btn">Save</button>
-        </div>
-      </div>
+      <div class="table-container">
+        <table class="leave-requests-table">
+          <thead>
+            <tr>
+              <th><input type="checkbox" class="select-all" /></th>
+              <th>Employee Name</th>
+              <th>Position</th>
+              <th>Department</th>
+              <th>Leave Days</th>
+              <th>Leave Type</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="checkbox" /></td>
+              <td>
+                <a href="leave-request-details.html" class="employee-name"
+                  >John Smith</a
+                >
+              </td>
+              <td>Staff</td>
+              <td>Production</td>
+              <td>1</td>
+              <td>Annual Leave</td>
+              <td><span class="status-badge approved">Approved</span></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" /></td>
+              <td>Mary Johnson</td>
+              <td>Accountant</td>
+              <td>Finance - HR</td>
+              <td>4</td>
+              <td>Annual Leave</td>
+              <td><span class="status-badge pending">Pending</span></td>
+            </tr>
+            <!-- Add more rows as needed -->
+          </tbody>
+        </table>
 
-      <!-- Content area -->
-      <div class="content-area">
-        <div class="overtime-rules">
-          <h2>Overtime Regulations</h2>
-
-          <div class="rule-card">
-            <div class="rule-icon">
-              <i class="far fa-clock"></i>
-            </div>
-            <div class="rule-content">
-              <h3>Check-in Requirements</h3>
-              <p>
-                Employees must arrive at least 10 minutes before overtime shift
-                begins
-              </p>
-            </div>
-          </div>
-
-          <div class="rule-card">
-            <div class="rule-icon">
-              <i class="far fa-file-alt"></i>
-            </div>
-            <div class="rule-content">
-              <h3>Application Submission</h3>
-              <p>
-                Overtime requests must be submitted at least 1 day in advance
-              </p>
-            </div>
-          </div>
+        <div class="table-footer">
+          <div class="rows-count">Showing 1 to 50 records</div>
+          <button class="next-btn">
+            Next <i class="fas fa-chevron-right"></i>
+          </button>
         </div>
       </div>
     </div>

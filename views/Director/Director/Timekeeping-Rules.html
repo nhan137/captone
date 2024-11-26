@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Timekeeping Staff</title>
-    <link rel="stylesheet" href="profile.css" />
+    <title>Timekeeping Rules</title>
+    <link rel="stylesheet" href="Timekeeping-Rules.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -71,13 +71,13 @@
     <!-- Main Content -->
     <div class="main-content">
       <div class="content-header">
-        <h2>Timekeeping Staff Configuration</h2>
+        <h2>Timekeeping Rules Configuration</h2>
       </div>
-      <!-- Header with tabs -->
+
       <div class="tab-container">
         <div class="tab-group">
           <button
-            class="tab-button"
+            class="tab-button active"
             onclick="switchTab(this, 'Timekeeping-Rules.html')"
           >
             General
@@ -89,7 +89,7 @@
             Timekeeping Staff
           </button>
           <button
-            class="tab-button active"
+            class="tab-button"
             onclick="switchTab(this, 'OvertimeStaff.html')"
           >
             Overtime Staff
@@ -101,74 +101,95 @@
         </div>
       </div>
 
-      <!-- Search and Add section -->
-      <div class="search-container">
-        <div class="search-wrapper">
-          <i class="fas fa-search search-icon"></i>
-          <input type="text" placeholder="Search employee..." />
-        </div>
-        <button class="add-employee-btn">
-          <i class="fas fa-plus"></i>
-          Add Employee
-        </button>
-      </div>
-
-      <!-- Table section -->
-      <div class="table-section">
-        <div class="info-message">
-          <i class="fas fa-info-circle"></i>
-          Employees will be counted as full attendance if there is no leave
-          request (Example: Board of Directors)
-        </div>
-
-        <div class="table-wrapper">
-          <table class="overtime-table">
-            <thead>
-              <tr>
-                <th class="checkbox-column">
-                  <input type="checkbox" />
-                </th>
-                <th>Employee ID</th>
-                <th>Full Name</th>
-                <th>Shift</th>
-                <th>Time</th>
-                <th>Register Date</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><input type="checkbox" /></td>
-                <td>NV001</td>
-                <td>
-                  <div class="employee-info">
-                    <div class="avatar pink">BT</div>
-                    <span>Bui Thi Thuy</span>
-                  </div>
-                </td>
-                <td>Day</td>
-                <td>18h - 21h00</td>
-                <td>7/11/2024</td>
-                <td><button class="status-btn">Pending</button></td>
-              </tr>
-              <!-- More rows similar to above -->
-            </tbody>
-          </table>
+      <div class="settings-section">
+        <h2 class="section-title">GENERAL SETTINGS</h2>
+        <div class="form-group">
+          <h3>Employee Permissions</h3>
+          <div class="checkbox-group">
+            <label>
+              <input type="checkbox" />
+              <span>Allow employees to monitor daily attendance</span>
+            </label>
+            <label>
+              <input type="checkbox" />
+              <span>Enable sick leave and special leave management</span>
+            </label>
+            <label>
+              <input type="checkbox" />
+              <span>Auto-update detailed attendance records</span>
+            </label>
+          </div>
         </div>
 
-        <div class="table-footer">
-          <div class="records-info">Total records: 2000</div>
-          <div class="pagination">
-            <button class="page-nav">
-              <i class="fas fa-chevron-left"></i>
-            </button>
-            <span>Page 1 of 200</span>
-            <button class="page-nav">
-              <i class="fas fa-chevron-right"></i>
-            </button>
+        <div class="form-group">
+          <h3>Incomplete Shift Calculation</h3>
+          <div class="radio-group">
+            <label>
+              <input type="radio" name="work-hours" />
+              <span>Calculate as half day</span>
+            </label>
+            <label>
+              <input type="radio" name="work-hours" />
+              <span>Calculate based on actual hours</span>
+            </label>
           </div>
         </div>
       </div>
+
+      <div class="settings-section">
+        <h2 class="section-title">OVERTIME SETTINGS</h2>
+        <div class="form-group">
+          <h3>Overtime Pay Rates</h3>
+          <div class="radio-group">
+            <label>
+              <input type="radio" name="overtime" />
+              <span>Regular days - Standard company rate</span>
+            </label>
+            <label>
+              <input type="radio" name="overtime" />
+              <span>Holidays/Rest days - Double rate</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <h3>Overtime Shifts</h3>
+          <div class="radio-group">
+            <label>
+              <input type="radio" name="overtime-shift" />
+              <span>Full evening (6PM-12AM)</span>
+            </label>
+            <label>
+              <input type="radio" name="overtime-shift" />
+              <span>Half evening (6PM-9PM)</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h2 class="section-title">ATTENDANCE BONUS</h2>
+        <div class="form-group">
+          <div class="checkbox-group">
+            <label>
+              <input type="checkbox" />
+              <span
+                >Perfect attendance bonus -
+                <span class="bonus-amount">1,000,000</span></span
+              >
+            </label>
+            <label>
+              <input type="checkbox" />
+              <span
+                >Unauthorized absence penalty -
+                <span class="penalty-amount">100,000/day</span></span
+              >
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="update-button">Save Changes</button>
     </div>
 
     <script>
