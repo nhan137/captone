@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Overview - Attendance</title>
+    <link rel="stylesheet" href="profile.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="/Mangager_Human/images/avatar.png" alt="logo" />
+        <h3 style="color: #fff">Director</h3>
+      </div>
+      <ul class="sidebar-links">
+        <h4>
+          <span>Dashboard Menu</span>
+          <div class="menu-separator"></div>
+        </h4>
+        <li>
+          <a href="profile.html">
+            <i class="fas fa-address-card"> </i> Personal Information<br />
+            Dashboard</a
+          >
+        </li>
+        <li>
+          <a href="Timekeeping-Rules.html"
+            ><i class="far fa-check-circle"></i>Timekeeping Rules</a
+          >
+        </li>
+        <li>
+          <a href="overtime.html">
+            <i class="fas fa-calendar-check"></i>Overtime Regulations
+          </a>
+        </li>
+        <h4>
+          <span>General</span>
+          <div class="menu-separator"></div>
+        </h4>
+        <li>
+          <a href="ApplicationForLeave.html">
+            <i class="fas fa-bug"></i>Leave Request Approval</a
+          >
+        </li>
+        <li>
+          <a href="notification-error.html"
+            ><i class="far fa-clock"></i>Receiving Violation notice</a
+          >
+        </li>
+        <li>
+          <a href="Viewreport.html"
+            ><i class="far fa-clock"></i>View Summary Report</a
+          >
+        </li>
+        <li>
+          <a href="reviewthereport.html"
+            ><i class="far fa-clock"></i>Accounting Report Approval
+          </a>
+        </li>
+        <li>
+          <a href="#"> <i class="fab fa-angellist"></i>Logout </a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+      <div class="main-content">
+        <!-- Header with Title and Search -->
+        <div class="header-section">
+          <h2 class="page-title">View Summary Report</h2>
+          <div class="search-container">
+            <div class="search-box">
+              <i class="fas fa-search"></i>
+              <input type="text" placeholder="Search" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls-bar">
+          <div class="month-selector">
+            <select>
+              <option>View by month</option>
+              <option>January</option>
+              <!-- Add more months -->
+            </select>
+            <span class="select-arrow"></span>
+          </div>
+          <button class="settings-button">
+            <i class="fas fa-cog"></i>
+            Settings
+          </button>
+        </div>
+
+        <!-- Data Table -->
+        <div class="report-container">
+          <table class="report-table">
+            <thead>
+              <tr>
+                <th>Position</th>
+                <th>Leave Data</th>
+                <th>Employee Attendance Errors</th>
+                <th>Employee Salary</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Staff</td>
+                <td>20%</td>
+                <td>60%</td>
+                <td>20%</td>
+              </tr>
+              <tr>
+                <td>Accountant</td>
+                <td>5%</td>
+                <td>85%</td>
+                <td>5%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Graph Section -->
+        <div class="graph-section">
+          <div class="graph">
+            <!-- Graph will be implemented with Chart.js or similar library -->
+          </div>
+          <div class="date-label">Month 10-2024</div>
+          <div class="total-label">Total Employees: 3000</div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

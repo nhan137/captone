@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Attendance History</title>
+    <link rel="stylesheet" href="profile.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="/Mangager_Human/images/avatar.png" alt="logo" />
+        <h2>Attendance</h2>
+      </div>
+      <div class="sidebar-links">
+        <h4>
+          <span>Dashboard Menu</span>
+          <div class="menu-separator"></div>
+        </h4>
+        <li>
+          <a href="profile.html">
+            <i class="fas fa-address-card"></i> Personal Information Dashboard
+          </a>
+        </li>
+        <li>
+          <a href="checkin.html">
+            <i class="far fa-check-circle"></i>Check In/Check Out
+          </a>
+        </li>
+        <li>
+          <a href="attendancehistory.html" class="active">
+            <i class="fas fa-calendar-check"></i>Attendance History
+          </a>
+        </li>
+        <h4>
+          <span>General</span>
+          <div class="menu-separator"></div>
+        </h4>
+        <li>
+          <a href="errorreport.html">
+            <i class="fas fa-bug"></i>Error Report
+          </a>
+        </li>
+        <li>
+          <a href="leaveapplication.html">
+            <i class="far fa-clock"></i>Leave Application
+          </a>
+        </li>
+        <li>
+          <a href="ot.html">
+            <i class="fas fa-clock"></i>Overtime Registration
+          </a>
+        </li>
+        <li>
+          <a href="#"> <i class="fab fa-angellist"></i>Logout </a>
+        </li>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="attendance-container">
+        <div class="attendance-header">
+          <h2><i class="fas fa-history"></i> Attendance History</h2>
+          <div class="month-selector">
+            <button class="month-nav">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <h3>October 2024</h3>
+            <button class="month-nav">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="attendance-table-wrapper">
+          <table class="attendance-table">
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>Employee Name</th>
+                <th>Employee ID</th>
+                <th colspan="31">Days in Month</th>
+                <th><i class="fas fa-calendar-check"></i> Working Days</th>
+                <th><i class="fas fa-clock"></i> Late</th>
+                <th><i class="fas fa-calendar-times"></i> Days Off</th>
+                <th><i class="fas fa-umbrella-beach"></i> Leave Days</th>
+                <th><i class="fas fa-calendar-minus"></i> Unpaid Leave</th>
+                <th><i class="fas fa-calendar-plus"></i> Holiday</th>
+                <th><i class="fas fa-money-bill-wave"></i> Total Salary</th>
+              </tr>
+              <tr class="days-header">
+                <th colspan="3"></th>
+                <!-- Days 1-31 -->
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+                <th>6</th>
+                <th>7</th>
+                <th>8</th>
+                <th>9</th>
+                <th>10</th>
+                <th>11</th>
+                <th>12</th>
+                <th>13</th>
+                <th>14</th>
+                <th>15</th>
+                <th>16</th>
+                <th>17</th>
+                <th>18</th>
+                <th>19</th>
+                <th>20</th>
+                <th>21</th>
+                <th>22</th>
+                <th>23</th>
+                <th>24</th>
+                <th>25</th>
+                <th>26</th>
+                <th>27</th>
+                <th>28</th>
+                <th>29</th>
+                <th>30</th>
+                <th>31</th>
+                <th colspan="7"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Nguyen Van A</td>
+                <td>NV001</td>
+                <!-- Days cells -->
+                <td class="present">P</td>
+                <td class="present">P</td>
+                <td class="absent">A</td>
+                <td class="late">L</td>
+                <td class="present">P</td>
+                <td class="weekend">W</td>
+                <td class="weekend">W</td>
+                <td class="present">P</td>
+                <td class="present">P</td>
+                <td class="present">P</td>
+                <td class="late">L</td>
+                <td class="present">P</td>
+                <td class="present">P</td>
+                <td class="weekend">W</td>
+                <td class="weekend">W</td>
+                <td class="present">P</td>
+                <td class="present">P</td>
+                <td class="present">P</td>
+                <td class="present">P</td>
+                <td class="present">P</td>
+                <td class="weekend">W</td>
+                <td class="weekend">W</td>
+                <td class="holiday">H</td>
+                <td class="present">P</td>
+                <td class="present">P</td>
+                <td class="present">P</td>
+                <td class="leave">L</td>
+                <td class="weekend">W</td>
+                <td class="weekend">W</td>
+                <td class="present">P</td>
+                <td class="present">P</td>
+                <!-- Summary cells -->
+                <td>22</td>
+                <td>2</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>$3000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="attendance-legend">
+          <div class="legend-item">
+            <span class="legend-color present"></span>
+            <span>Present (P)</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-color absent"></span>
+            <span>Absent (A)</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-color late"></span>
+            <span>Late (L)</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-color weekend"></span>
+            <span>Weekend (W)</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-color holiday"></span>
+            <span>Holiday (H)</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-color leave"></span>
+            <span>Leave (L)</span>
+          </div>
+        </div>
+
+        <div class="attendance-actions">
+          <button class="export-button">
+            <i class="fas fa-file-export"></i> Export Report
+          </button>
+          <button class="print-button">
+            <i class="fas fa-print"></i> Print
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

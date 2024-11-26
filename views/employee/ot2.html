@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Overtime Records</title>
+    <link rel="stylesheet" href="profile.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="/Mangager_Human/images/avatar.png" alt="logo" />
+        <h2>Attendance</h2>
+      </div>
+      <div class="sidebar-links">
+        <h4>
+          <span>Dashboard Menu</span>
+          <div class="menu-separator"></div>
+        </h4>
+        <li>
+          <a href="profile.html">
+            <i class="fas fa-address-card"></i> Personal Information Dashboard
+          </a>
+        </li>
+        <li>
+          <a href="checkin.html">
+            <i class="far fa-check-circle"></i>Check In/Check Out
+          </a>
+        </li>
+        <li>
+          <a href="attendancehistory.html">
+            <i class="fas fa-calendar-check"></i>Attendance History
+          </a>
+        </li>
+        <h4>
+          <span>General</span>
+          <div class="menu-separator"></div>
+        </h4>
+        <li>
+          <a href="errorreport.html">
+            <i class="fas fa-bug"></i>Error Report
+          </a>
+        </li>
+        <li>
+          <a href="leaveapplication.html">
+            <i class="far fa-clock"></i>Leave Application
+          </a>
+        </li>
+        <li>
+          <a href="ot.html" class="active">
+            <i class="fas fa-clock"></i>Overtime Registration
+          </a>
+        </li>
+        <li>
+          <a href="#"> <i class="fab fa-angellist"></i>Logout </a>
+        </li>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="overtime-records-container">
+        <div class="records-header">
+          <h2><i class="fas fa-history"></i> Overtime Records</h2>
+          <div class="header-actions">
+            <button
+              class="new-request-button"
+              onclick="window.location.href='ot.html'"
+            >
+              <i class="fas fa-plus"></i> New Request
+            </button>
+            <button class="export-button">
+              <i class="fas fa-file-export"></i> Export
+            </button>
+          </div>
+        </div>
+
+        <div class="records-filters">
+          <div class="filter-group">
+            <label><i class="fas fa-calendar"></i> Date Range</label>
+            <select>
+              <option>This Month</option>
+              <option>Last Month</option>
+              <option>Last 3 Months</option>
+              <option>Custom Range</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label><i class="fas fa-filter"></i> Status</label>
+            <select>
+              <option>All Status</option>
+              <option>Pending</option>
+              <option>Approved</option>
+              <option>Rejected</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="records-table">
+          <table id="overtimeTable">
+            <thead>
+              <tr>
+                <th><i class="fas fa-hashtag"></i> No.</th>
+                <th><i class="fas fa-id-card"></i> Employee ID</th>
+                <th><i class="fas fa-user"></i> Full Name</th>
+                <th><i class="fas fa-user-clock"></i> Shift</th>
+                <th><i class="fas fa-clock"></i> Time</th>
+                <th><i class="fas fa-calendar-day"></i> Date</th>
+                <th><i class="fas fa-building"></i> Department</th>
+                <th><i class="fas fa-align-left"></i> Description</th>
+                <th><i class="fas fa-check-circle"></i> Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Rows will be added by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="records-summary">
+          <div class="summary-item">
+            <i class="fas fa-clock"></i>
+            <div class="summary-info">
+              <h4>Total Hours</h4>
+              <p>24 hours</p>
+            </div>
+          </div>
+          <div class="summary-item">
+            <i class="fas fa-check-circle"></i>
+            <div class="summary-info">
+              <h4>Approved</h4>
+              <p>16 hours</p>
+            </div>
+          </div>
+          <div class="summary-item">
+            <i class="fas fa-hourglass-half"></i>
+            <div class="summary-info">
+              <h4>Pending</h4>
+              <p>8 hours</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function loadOvertimeRecords() {
+        const records =
+          JSON.parse(localStorage.getItem("overtimeRecords")) || [];
+        const tbody = document.querySelector("#overtimeTable tbody");
+        tbody.innerHTML = "";
+
+        records.forEach((record, index) => {
+          const row = tbody.insertRow();
+          row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${record.employeeId}</td>
+                    <td>${record.fullName}</td>
+                    <td>${record.shift}</td>
+                    <td>${record.time}</td>
+                    <td>${record.date}</td>
+                    <td>${record.department}</td>
+                    <td>${record.description}</td>
+                    <td><span class="status-badge ${record.approvalStatus.toLowerCase()}">${
+            record.approvalStatus
+          }</span></td>
+                `;
+        });
+      }
+
+      window.onload = loadOvertimeRecords;
+    </script>
+  </body>
+</html>

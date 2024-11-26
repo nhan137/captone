@@ -1,0 +1,190 @@
+/* Đặt lại CSS mặc định */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Bố cục trang */
+body {
+  background-color: #f3f4f6;
+  min-height: 100vh;
+  display: flex;
+}
+
+.main-container {
+  max-width: 500px;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin: auto;
+  width: 100%;
+}
+
+/* Header Styles */
+.header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.header h1 {
+  font-size: 1.875rem;
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.header p {
+  color: #6b7280;
+}
+
+.avatar {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  margin: 1rem auto;
+  display: block;
+}
+
+/* Time Container */
+.time-container {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.time-container h2 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+#clock {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #111827;
+}
+
+#date {
+  color: #6b7280;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  gap: 20px;
+}
+
+/* Style cho tabs container */
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    gap: 20px;
+}
+
+/* Style chung cho các button */
+.tab-button {
+    padding: 12px 40px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Style mặc định cho Check In */
+#checkin-tab {
+    background-color: #22c55e; /* Màu xanh lá */
+}
+
+#checkin-tab:hover {
+    background-color: #16a34a;
+}
+
+/* Style mặc định cho Check Out */
+#checkout-tab {
+    background-color: #ef4444; /* Màu đỏ */
+}
+
+#checkout-tab:hover {
+    background-color: #dc2626;
+}
+
+/* Style cho button không active */
+.tab-button:not(.active) {
+    opacity: 0.7;
+    background-color: #d1d5db;
+}
+
+/* Form Styles */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form.hidden {
+  display: none;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.form-group input {
+  padding: 12px 15px;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  background-color: #f9fafb;
+  cursor: not-allowed;
+  font-size: 15px;
+}
+
+/* Nút Gửi */
+.submit-button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: background-color 0.3s ease;
+  font-size: 16px;
+}
+
+.submit-button.checkin {
+  background-color: #22c55e;
+}
+
+.submit-button.checkin:hover {
+  background-color: #16a34a;
+}
+
+.submit-button.checkout {
+  background-color: #ef4444;
+}
+
+.submit-button.checkout:hover {
+  background-color: #dc2626;
+}

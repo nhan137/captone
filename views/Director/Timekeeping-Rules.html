@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Timekeeping Rules</title>
+    <link rel="stylesheet" href="profile.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="/Mangager_Human/images/avatar.png" alt="logo" />
+        <h3 style="color: #fff">Director</h3>
+      </div>
+      <ul class="sidebar-links">
+        <h4>
+          <span>Dashboard Menu</span>
+          <div class="menu-separator"></div>
+        </h4>
+        <li>
+          <a href="profile.html">
+            <i class="fas fa-address-card"> </i> Personal Information<br />
+            Dashboard</a
+          >
+        </li>
+        <li>
+          <a href="Timekeeping-Rules.html"
+            ><i class="far fa-check-circle"></i>Timekeeping Rules</a
+          >
+        </li>
+        <li>
+          <a href="overtime.html">
+            <i class="fas fa-calendar-check"></i>Overtime Regulations
+          </a>
+        </li>
+        <h4>
+          <span>General</span>
+          <div class="menu-separator"></div>
+        </h4>
+        <li>
+          <a href="ApplicationForLeave.html">
+            <i class="fas fa-bug"></i>Leave Request Approval</a
+          >
+        </li>
+        <li>
+          <a href="notification-error.html"
+            ><i class="far fa-clock"></i>Receiving Violation notice</a
+          >
+        </li>
+        <li>
+          <a href="Viewreport.html"
+            ><i class="far fa-clock"></i>View Summary Report</a
+          >
+        </li>
+        <li>
+          <a href="reviewthereport.html"
+            ><i class="far fa-clock"></i>Accounting Report Approval
+          </a>
+        </li>
+        <li>
+          <a href="#"> <i class="fab fa-angellist"></i>Logout </a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="content-header">
+        <h2>Timekeeping Rules Configuration</h2>
+      </div>
+
+      <div class="tab-container">
+        <div class="tab-group">
+          <button
+            class="tab-button active"
+            onclick="switchTab(this, 'Timekeeping-Rules.html')"
+          >
+            General
+          </button>
+          <button
+            class="tab-button"
+            onclick="switchTab(this, 'TimekeepingStaff.html')"
+          >
+            Timekeeping Staff
+          </button>
+          <button
+            class="tab-button"
+            onclick="switchTab(this, 'OvertimeStaff.html')"
+          >
+            Overtime Staff
+          </button>
+        </div>
+        <div class="action-group">
+          <button class="action-button">Edit</button>
+          <button class="action-button">Save</button>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h2 class="section-title">GENERAL SETTINGS</h2>
+        <div class="form-group">
+          <h3>Employee Permissions</h3>
+          <div class="checkbox-group">
+            <label>
+              <input type="checkbox" />
+              <span>Allow employees to monitor daily attendance</span>
+            </label>
+            <label>
+              <input type="checkbox" />
+              <span>Enable sick leave and special leave management</span>
+            </label>
+            <label>
+              <input type="checkbox" />
+              <span>Auto-update detailed attendance records</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <h3>Incomplete Shift Calculation</h3>
+          <div class="radio-group">
+            <label>
+              <input type="radio" name="work-hours" />
+              <span>Calculate as half day</span>
+            </label>
+            <label>
+              <input type="radio" name="work-hours" />
+              <span>Calculate based on actual hours</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h2 class="section-title">OVERTIME SETTINGS</h2>
+        <div class="form-group">
+          <h3>Overtime Pay Rates</h3>
+          <div class="radio-group">
+            <label>
+              <input type="radio" name="overtime" />
+              <span>Regular days - Standard company rate</span>
+            </label>
+            <label>
+              <input type="radio" name="overtime" />
+              <span>Holidays/Rest days - Double rate</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <h3>Overtime Shifts</h3>
+          <div class="radio-group">
+            <label>
+              <input type="radio" name="overtime-shift" />
+              <span>Full evening (6PM-12AM)</span>
+            </label>
+            <label>
+              <input type="radio" name="overtime-shift" />
+              <span>Half evening (6PM-9PM)</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h2 class="section-title">ATTENDANCE BONUS</h2>
+        <div class="form-group">
+          <div class="checkbox-group">
+            <label>
+              <input type="checkbox" />
+              <span
+                >Perfect attendance bonus -
+                <span class="bonus-amount">1,000,000</span></span
+              >
+            </label>
+            <label>
+              <input type="checkbox" />
+              <span
+                >Unauthorized absence penalty -
+                <span class="penalty-amount">100,000/day</span></span
+              >
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="update-button">Save Changes</button>
+    </div>
+
+    <script>
+      function switchTab(selectedTab, pageUrl) {
+        // Remove active class from all tabs
+        document.querySelectorAll(".tab-button").forEach((tab) => {
+          tab.classList.remove("active");
+        });
+
+        // Add active class to clicked tab
+        selectedTab.classList.add("active");
+
+        // Navigate to the selected page
+        window.location.href = pageUrl;
+      }
+    </script>
+  </body>
+</html>

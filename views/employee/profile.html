@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personal Information</title>
+    <link rel="stylesheet" href="profile.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="/Mangager_Human/images/avatar.png" alt="logo" />
+        <h2>Attendance</h2>
+      </div>
+      <div class="sidebar-links">
+        <h4>
+          <span>Dashboard Menu</span>
+          <div class="menu-separator"></div>
+        </h4>
+        <li>
+          <a href="profile.html">
+            <i class="fas fa-address-card"> </i> Personal Information
+            Dashboard</a
+          >
+        </li>
+        <li>
+          <a href="checkin.html"
+            ><i class="far fa-check-circle"></i>Check In/Check Out</a
+          >
+        </li>
+        <li>
+          <a href="attendancehistory.html">
+            <i class="fas fa-calendar-check"></i>Attendance History</a
+          >
+        </li>
+        <h4>
+          <span>General</span>
+          <div class="menu-separator"></div>
+        </h4>
+        <li>
+          <a href="errorreport.html"> <i class="fas fa-bug"></i>Error Report</a>
+        </li>
+        <li>
+          <a href="leaveapplication.html"
+            ><i class="far fa-clock"></i>Leave Application</a
+          >
+        </li>
+        <li>
+          <a href="ot.html"
+            ><i class="fas fa-clock"></i>Overtime Registration</a
+          >
+        </li>
+        <li>
+          <a href="#"> <i class="fab fa-angellist"></i>Logout </a>
+        </li>
+        <!-- <h4>
+          <span>Account</span>
+          <div class="menu-separator"></div>
+        </h4> -->
+        <!-- </ul> -->
+        <!-- <div class="user-account">
+         <div class="user-profile">
+          <img src="images/profile-img.jpg" alt="Profile Image" />
+          <div class="user-detail">       </div>
+          <h3></h3> 
+          
+        
+        <span>Web Developer</span> -->
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <h2>Edit Personal Information</h2>
+      <form class="personal-info-form">
+        <div class="form-row">
+          <h2>INFORMATION</h2>
+          <br />
+          <div class="form-group">
+            <label for="fullname">Full Name</label>
+            <input type="text" id="fullname" required />
+          </div>
+          <div class="form-group">
+            <label for="employee-id">Employee ID</label>
+            <input type="text" id="employee-id" required />
+          </div>
+          <div class="form-group">
+            <label for="marital-status">Marital Status</label>
+            <select id="marital-status" required>
+              <option value="">Select status</option>
+              <option value="single">Single</option>
+              <option value="married">Married</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="dob">Date of Birth</label>
+            <input type="date" id="dob" required />
+          </div>
+          <div class="form-group">
+            <label for="gender">Gender</label>
+            <select id="gender" required>
+              <option value="">Select gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" required />
+          </div>
+          <br />
+          <h2>Profile</h2>
+          <br />
+          <div class="form-group">
+            <label for="id-number">ID Number</label>
+            <input type="text" id="id-number" required />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="issued-date">Date of Issue</label>
+              <input type="date" id="issued-date" required />
+            </div>
+            <div class="form-group">
+              <label for="issued-place">Place of Issue</label>
+              <input type="text" id="issued-place" required />
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" pattern="[0-9]{10}" required />
+          </div>
+        </div>
+
+        <h3>Address</h3>
+        <br />
+        <div class="form-row">
+          <!-- Province/City -->
+          <div class="form-group">
+            <label for="hometown">Hometown</label>
+            <select id="hometown" onchange="updateDistricts()" required>
+              <option value="">Select Province/City</option>
+              <!-- Cities -->
+              <option value="hanoi">Hanoi</option>
+              <option value="danang">Da Nang</option>
+              <option value="hochiminh">Ho Chi Minh</option>
+              <option value="haiphong">Quang Nam</option>
+              <!-- Add more cities... -->
+            </select>
+          </div>
+
+          <!-- District -->
+          <div class="form-group">
+            <label for="birthplace">Place of Birth</label>
+            <select id="birthplace" required>
+              <option value="">Select District</option>
+              <option value="thanh-khue">Thanh Khue District</option>
+              <option value="dien-ban">Dien Ban District</option>
+              <option value="district-1">District 1</option>
+              <!-- Districts will be updated automatically -->
+            </select>
+          </div>
+
+          <!-- Nationality -->
+          <div class="form-group">
+            <label for="nationality">Nationality</label>
+            <select id="nationality" required>
+              <option value="">Select nationality</option>
+              <option value="vietnamese">Vietnam</option>
+              <option value="usa">USA</option>
+              <option value="uk">UK</option>
+              <option value="japan">Japan</option>
+              <option value="korea">South Korea</option>
+              <option value="china">China</option>
+              <!-- Add more countries... -->
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="update-button">
+          Update Personal Information
+        </button>
+      </form>
+    </div>
+  </body>
+</html>
