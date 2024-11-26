@@ -1,4 +1,3 @@
-<!-- LeaveRequestModel.php -->
 <?php
 class LeaveRequest {
     protected $pdo;
