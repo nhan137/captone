@@ -13,7 +13,7 @@
 <body>
 <aside class="sidebar">
       <div class="sidebar-header">
-        <img src="/Mangager_Human/images/avatar.png" alt="logo" />
+        <img src="assets/images/avatar.png" alt="logo" />
         <h3 style="color: #fff">Director</h3>
       </div>
       <ul class="sidebar-links">

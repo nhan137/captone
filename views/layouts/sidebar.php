@@ -13,7 +13,7 @@
 <body>
 <aside class="sidebar">
       <div class="sidebar-header">
-        <img src=" assets/images/logo-HR-quan-tri-nhan-su-2.png" alt="Avatar"/>
+        <img src="assets/images/avatar.png" alt="Avatar"/>
         <h2>Employee</h2>
       </div>
       <div class="sidebar-links">
