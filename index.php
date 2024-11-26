@@ -6,6 +6,7 @@ require_once 'controllers/PasswordController.php';
 require_once 'controllers/AccountController.php';
 require_once 'controllers/AttendanceErrorReportController.php';
 require_once 'controllers/LeaveRequestController.php';
+require_once 'controllers/AttendanceController.php';
 require_once 'config.php';
 
 $action = isset($_GET['action']) ? $_GET['action'] : 'login';
@@ -123,7 +124,14 @@ switch ($action) {
     case 'submitErrorReport':
         $attendanceErrorReportController = new AttendanceErrorReportController($pdo);
         $attendanceErrorReportController->submitReport();
-        break;    
+        break;
+
+    case 'attendance': 
+        $attendanceController = new AttendanceController(pdo: $pdo);
+        $attendanceController->getAttendanceHistory();
+        break; 
+        
+    
     default:
         // Chuyển hướng về trang login nếu không có action hợp lệ
         header("Location: index.php?action=login");
