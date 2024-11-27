@@ -7,6 +7,7 @@ require_once 'controllers/AccountController.php';
 require_once 'controllers/AttendanceErrorReportController.php';
 require_once 'controllers/LeaveRequestController.php';
 require_once 'controllers/AttendanceController.php';
+require_once 'controllers/SalaryController.php';
 require_once 'config.php';
 
 $action = isset($_GET['action']) ? $_GET['action'] : 'login';
@@ -129,9 +130,31 @@ switch ($action) {
     case 'attendance': 
         $attendanceController = new AttendanceController(pdo: $pdo);
         $attendanceController->getAttendanceHistory();
-        break; 
+        break;
         
-    
+    case 'caculate-salary': 
+        $salaryController = new SalaryController(pdo: $pdo);
+        $employees = $salaryController->getEmployeeList();
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $employeeID = $_POST['employeeID'];
+            $baseSalary = $_POST['baseSalary'];
+            $bonus = $_POST['bonus'];
+            $deductions = $_POST['deductions'];
+        
+            $totalSalary = $salaryController->calculate($employeeID, $baseSalary, $bonus, $deductions);
+            $attendanceRecords = $salaryController->getEmployeeSalaryDetails($employeeID);
+           
+            require_once './views/employee/salary/details.php';
+            
+        } else {
+            require_once './views/employee/salary/details.php';
+        }
+        break;
+    case 'salary': 
+        $salaryController = new SalaryController(pdo: $pdo);
+        $salaries =  $salaryController->index();
+        break;
     default:
         // Chuyển hướng về trang login nếu không có action hợp lệ
         header("Location: index.php?action=login");

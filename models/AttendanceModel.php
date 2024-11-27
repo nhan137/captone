@@ -63,6 +63,24 @@ class AttendanceModel {
     
         return $attendanceData;
     }
+
+    public function getEmployeeAttendance($employeeID) {
+        $query = "SELECT * FROM checkincheckout WHERE EmployeeID = :employeeID";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':employeeID', $employeeID);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+     // Tính tổng số giờ làm thêm của nhân viên
+     public function getTotalOvertimeHours($employeeID) {
+        $query = "SELECT SUM(OvertimeHours) as totalOvertime FROM checkincheckout WHERE EmployeeID = :employeeID";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':employeeID', $employeeID);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['totalOvertime'] ?? 0;
+    }
     
     
 }
