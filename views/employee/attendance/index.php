@@ -1619,8 +1619,8 @@
 </head>
 
 <body>
-    <?php include 'views/layouts/sidebar.php'; ?>
 
+    <?php include 'views/layouts/sidebar.php'; ?>
     <!-- Main Content -->
     <div class="main-content">
         <div class="attendance-container">

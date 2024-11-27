@@ -93,6 +93,27 @@ class CheckinModel {
         }
     }
 
+    // public function hasCheckedInToday($employeeID) {
+    //     try {
+    //         $today = date('Y-m-d');
+    //         $sql = "SELECT COUNT(*) as count 
+    //                 FROM checkincheckout 
+    //                 WHERE EmployeeID = :employeeID 
+    //                 AND DATE(CheckinTime) = :today";
+            
+    //         $stmt = $this->pdo->prepare($sql);
+    //         $stmt->bindParam(':employeeID', $employeeID);
+    //         $stmt->bindParam(':today', $today);
+    //         $stmt->execute();
+            
+    //         $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    //         return $result['count'] > 0;
+
+    //     } catch (PDOException $e) {
+    //         error_log($e->getMessage());
+    //         return false;
+    //     }
+    // }
     public function hasCheckedInToday($employeeID) {
         try {
             $today = date('Y-m-d');
@@ -108,7 +129,7 @@ class CheckinModel {
             
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             return $result['count'] > 0;
-
+ 
         } catch (PDOException $e) {
             error_log($e->getMessage());
             return false;
@@ -142,6 +163,12 @@ class CheckinModel {
         $checkinDateTime = new DateTime($checkinTime);
         return $checkinDateTime > $lateThreshold;
     }
+    // public function isCheckinLate($checkinTime) {
+    //     $lateThreshold = new DateTime('08:15:00');
+    //     $earlyThreshold = new DateTime('17:30:00');
+    //     $checkinDateTime = new DateTime($checkinTime);
+    //     return $checkinDateTime > $lateThreshold && $checkinDateTime < $earlyThreshold;
+    // }
 
     public function isCheckoutEarly($checkoutTime) {
         $earlyThreshold = new DateTime('17:30:00');
@@ -151,7 +178,7 @@ class CheckinModel {
 
     public function isValidGPSLocation($gpsLocation) {
         // Giả sử tọa độ công ty là 10.762622, 106.660172
-        $companyGPS = "15.8674882, 108.2733526";
+        $companyGPS = "16.0550631, 108.194024";
         return $gpsLocation === $companyGPS;
     }
 }
