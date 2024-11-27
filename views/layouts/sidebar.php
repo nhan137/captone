@@ -33,10 +33,21 @@
                 <a href="index.php?action=attendance">
                     <i class="fas fa-calendar-check"></i>Attendance History</a>
             </li>
+
             <h4>
                 <span>General</span>
                 <div class="menu-separator"></div>
             </h4>
+            <li>
+                <a href="index.php?action=salary">
+                    <i class="fas fa-rectangle-list"></i>Salary</a>
+            </li>
+
+            <li>
+                <a href="index.php?action=caculate-salary">
+                    <i class="fas fa-rectangle-list"></i>Caculate Salary</a>
+            </li>
+
             <li>
                 <a href="index.php?action=submitErrorReport"> <i class="fas fa-bug"></i>Error Report</a>
             </li>

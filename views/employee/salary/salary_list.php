@@ -1615,6 +1615,90 @@
         /* Màu xanh lá cho thành công */
         border: 1px solid #27ae60;
     }
+
+    .salary-form {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .attendance-header h2 {
+        color: #007bff;
+        margin-bottom: 20px;
+    }
+
+    .salary-form {
+        margin-bottom: 30px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .btn {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .btn:hover {
+        background-color: #0056b3;
+    }
+
+    .attendance-table-wrapper {
+        margin-top: 20px;
+    }
+
+    .salary-summary {
+        margin-bottom: 15px;
+    }
+
+    .highlight {
+        color: #28a745;
+        font-weight: bold;
+    }
+
+    .attendance-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .attendance-table th,
+    .attendance-table td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .attendance-table th {
+        background-color: #f8f9fa;
+        font-weight: bold;
+    }
+
+    .attendance-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .no-data {
+        color: #666;
+        font-style: italic;
+    }
     </style>
 </head>
 
@@ -1626,159 +1710,43 @@
         <div class="attendance-container">
 
             <div class="attendance-header">
-                <h2><i class="fas fa-history"></i> Attendance History</h2>
-                <!-- <div class="month-selector">
-                    <button class="month-nav">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <h3>October 2024</h3>
-                    <button class="month-nav">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div> -->
-                <form method="GET">
-                    <label for="start_date">Start Date:</label>
-                    <input type="date" id="start_date" name="start_date"
-                        value="<?= htmlspecialchars($_GET['start_date'] ?? date('Y-m-01')) ?>">
-
-                    <label for="end_date">End Date:</label>
-                    <input type="date" id="end_date" name="end_date"
-                        value="<?= htmlspecialchars($_GET['end_date'] ?? date('Y-m-t')) ?>">
-
-                    <button type="submit">Filter</button>
-                </form>
+                <h2><i class="fas fa-list"></i> Salary List of Employee</h2>
             </div>
 
+            <!-- Salary and attendance table -->
             <div class="attendance-table-wrapper">
-                <table class="attendance-table">
+
+                <table>
                     <thead>
                         <tr>
-                            <th>No.</th>
-                            <th>Date</th>
-                            <th>Check-in</th>
-                            <th>Check-out</th>
-                            <th>Total Hours</th>
-                            <th>Check-in Location</th>
-                            <th>Check-out Location</th>
-                            <th>Status</th>
+                            <th>Employee ID</th>
+                            <th>Employee Name</th>
+                            <th>Base Salary</th>
+                            <th>Bonus</th>
+                            <th>Deductions</th>
+                            <th>Overtime Hours</th>
+                            <th>Overtime Pay</th>
+                            <th>Total Working Days</th>
+                            <th>Total Salary</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if (!empty($attendanceData)) : ?>
-                        <?php foreach ($attendanceData as $index => $attendance) : ?>
+                        <?php foreach ($salaries as $salary) : ?>
                         <tr>
-                            <td><?= $index + 1 ?></td>
-                            <td><?= DateTime::createFromFormat('Y-m-d', $attendance['WorkDate'])->format('d/m/y') ?>
+                            <td><?= htmlspecialchars($salary['EmployeeID']) ?></td>
+                            <td><?= htmlspecialchars($salary['FirstName']) . ' ' . htmlspecialchars($salary['LastName']) ?>
                             </td>
-                            <td>
-                                <?php if ($attendance['IsAbsent']) : ?>
-                                <!-- Hiển thị thông báo nghỉ nếu là ngày nghỉ -->
-                                <span class="badge badge-secondary">Absent</span>
-                                <?php else : ?>
-                                <?= DateTime::createFromFormat('Y-m-d H:i:s', $attendance['CheckinTime'])->format('d/m/y H:i') ?>
-                                <br />
-                                <?php if ($attendance['CheckinLate']) : ?>
-                                <!-- <span class="badge badge-danger">Late</span> -->
-                                <?php endif; ?>
-                                <?php endif; ?>
-                            </td>
-                            <td>
-                                <?php if ($attendance['IsAbsent']) : ?>
-                                <!-- Hiển thị thông báo nghỉ nếu là ngày nghỉ -->
-                                <span class="badge badge-secondary">Absent</span>
-                                <?php else : ?>
-                                <?= DateTime::createFromFormat('Y-m-d H:i:s', $attendance['CheckoutTime'])->format('d/m/y H:i') ?>
-                                <?php if ($attendance['CheckoutEarly']) : ?>
-                                <br />
-                                <!-- <span class="badge badge-warning">Early</span> -->
-                                <?php endif; ?>
-                                <?php endif; ?>
-                            </td>
-                            <td>
-                                <?php if ($attendance['IsAbsent']) : ?>
-                                <!-- Không có giờ làm nếu là ngày nghỉ -->
-                                N/A
-                                <?php else : ?>
-                                <?= htmlspecialchars($attendance['TotalWorkHours'] ?? 'N/A') ?>
-                                <?php endif; ?>
-                            </td>
-                            <td>
-                                <?php if ($attendance['IsAbsent']) : ?>
-                                <!-- Không có vị trí check-in nếu là ngày nghỉ -->
-                                N/A
-                                <?php else : ?>
-                                <?= htmlspecialchars($attendance['CheckinLocation']) ?>
-                                <?php endif; ?>
-                            </td>
-                            <td>
-                                <?php if ($attendance['IsAbsent']) : ?>
-                                <!-- Không có vị trí check-out nếu là ngày nghỉ -->
-                                N/A
-                                <?php else : ?>
-                                <?= htmlspecialchars($attendance['CheckoutLocation'] ?? 'N/A') ?>
-                                <?php endif; ?>
-                            </td>
-                            <td>
-                                <?php if ($attendance['IsAbsent']) : ?>
-                                <!-- Chỉ hiển thị thông báo nghỉ -->
-                                <span class="badge badge-secondary">Absent</span>
-                                <?php else : ?>
-                                <?php if ($attendance['CheckinLate']) : ?>
-                                <span class="badge badge-danger" style="margin-bottom: 10px;">Late Check-in</span>
-                                <br />
-                                <?php endif; ?>
-                                <?php if ($attendance['CheckoutEarly']) : ?>
-                                <span class="badge badge-warning">Early Checkout</span>
-                                <?php endif; ?>
-                                <?php endif; ?>
-                            </td>
+                            <td>$<?= number_format($salary['BaseSalary'], 2) ?></td>
+                            <td>$<?= number_format($salary['Bonus'], 2) ?></td>
+                            <td>$<?= number_format($salary['Deductions'], 2) ?></td>
+                            <td><?= htmlspecialchars($salary['OvertimeHours']) ?> hrs</td>
+                            <td>$<?= number_format($salary['OvertimeHours'] * $salary['OvertimeRate'], 2) ?></td>
+                            <td><?= htmlspecialchars(  $salary['TotalWorkingDays']) ?></td>
+                            <td>$<?= number_format($salary['TotalSalary'], 2) ?></td>
                         </tr>
                         <?php endforeach; ?>
-                        <?php else : ?>
-                        <tr>
-                            <td colspan="8">No attendance records found for the selected date range.</td>
-                        </tr>
-                        <?php endif; ?>
                     </tbody>
                 </table>
-
-
-            </div>
-
-            <div class="attendance-legend">
-                <div class="legend-item">
-                    <span class="legend-color present"></span>
-                    <span>Present (P)</span>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-color absent"></span>
-                    <span>Absent (A)</span>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-color late"></span>
-                    <span>Late (L)</span>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-color weekend"></span>
-                    <span>Weekend (W)</span>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-color holiday"></span>
-                    <span>Holiday (H)</span>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-color leave"></span>
-                    <span>Leave (L)</span>
-                </div>
-            </div>
-
-            <div class="attendance-actions">
-                <button class="export-button">
-                    <i class="fas fa-file-export"></i> Export Report
-                </button>
-                <button class="print-button">
-                    <i class="fas fa-print"></i> Print
-                </button>
             </div>
         </div>
     </div>
