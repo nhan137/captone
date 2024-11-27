@@ -1619,56 +1619,8 @@
 </head>
 
 <body>
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            <img src="/Mangager_Human/images/avatar.png" alt="logo" />
-            <h2>Attendance</h2>
-        </div>
-        <div class="sidebar-links">
-            <h4>
-                <span>Dashboard Menu</span>
-                <div class="menu-separator"></div>
-            </h4>
-            <li>
-                <a href="profile.html">
-                    <i class="fas fa-address-card"></i> Personal Information Dashboard
-                </a>
-            </li>
-            <li>
-                <a href="checkin.html">
-                    <i class="far fa-check-circle"></i>Check In/Check Out
-                </a>
-            </li>
-            <li>
-                <a href="attendancehistory.html" class="active">
-                    <i class="fas fa-calendar-check"></i>Attendance History
-                </a>
-            </li>
-            <h4>
-                <span>General</span>
-                <div class="menu-separator"></div>
-            </h4>
-            <li>
-                <a href="errorreport.html">
-                    <i class="fas fa-bug"></i>Error Report
-                </a>
-            </li>
-            <li>
-                <a href="leaveapplication.html">
-                    <i class="far fa-clock"></i>Leave Application
-                </a>
-            </li>
-            <li>
-                <a href="ot.html">
-                    <i class="fas fa-clock"></i>Overtime Registration
-                </a>
-            </li>
-            <li>
-                <a href="#"> <i class="fab fa-angellist"></i>Logout </a>
-            </li>
-        </div>
-    </aside>
 
+    <?php include 'views/layouts/sidebar.php'; ?>
     <!-- Main Content -->
     <div class="main-content">
         <div class="attendance-container">
