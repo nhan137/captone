@@ -13,6 +13,7 @@
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <div class="card shadow mb-4">
                         <div class="card-body">
+                            <!-- Bảng hiển thị danh sách tài khoản người dùng -->
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
@@ -39,8 +40,8 @@
                                             <td><?= htmlspecialchars($account['PhoneNumber']) ?></td>
                                             <td><?= htmlspecialchars($account['Role']) ?></td>
                                             <td>
-                                                <a
-                                                    href="/?controller=account&action=edit&id=<?= $account['EmployeeID'] ?>">Sửa</a>
+                                                <!-- Nút chức năng sửa và xóa tài khoản -->
+                                                <a href="/?controller=account&action=edit&id=<?= $account['EmployeeID'] ?>">Sửa</a>
                                                 <a href="/?controller=account&action=delete&id=<?= $account['EmployeeID'] ?>"
                                                     onclick="return confirm('Bạn có chắc chắn muốn xóa tài khoản này?');">Xóa</a>
                                             </td>

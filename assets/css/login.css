@@ -24,9 +24,12 @@ body {
     width: 300px;
     height: auto;
     padding: 10px;
-    background-color: #2B4C7E;
+    background-color: transparent; /* Đảm bảo không có màu nền */
+    border: none; /* Đảm bảo không có viền */
+    display: flex; /* Nếu bạn muốn căn giữa logo */
+    justify-content: left ; /* Căn giữa logo */
+    align-items: center; /* Căn giữa logo */
 }
-
 .logo img {
     width: 100%;
     height: 100%;

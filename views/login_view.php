@@ -10,9 +10,9 @@
 <body>
     <!-- Thanh điều hướng -->
     <div class="navbar">
-      <div class="logo">
-        <!-- <img src="public/images/logo-HR-quan-tri-nhan-su-2.png" alt="Logo"> -->
-      </div>
+    <div class="logo">
+        <img src="assets/images/Logo_company.png" alt="Logo" style="border: none;"> 
+    </div>
       <div class="menu">
 
         <a href="#">Trang chủ</a>

@@ -7,6 +7,7 @@ require_once 'controllers/AccountController.php';
 require_once 'controllers/AttendanceErrorReportController.php';
 require_once 'controllers/LeaveRequestController.php';
 require_once 'controllers/AttendanceController.php';
+require_once 'controllers/OvertimeController.php';
 require_once 'config.php';
 
 $action = isset($_GET['action']) ? $_GET['action'] : 'login';
@@ -131,7 +132,13 @@ switch ($action) {
         $attendanceController->getAttendanceHistory();
         break; 
         
-    
+    case 'overtime':
+        require_once 'views/overtime.php';
+        break;
+    case 'viewOvertimeRequests':
+        $overtimeController = new OvertimeController($pdo);
+        $overtimeController->viewOvertimeRequests();
+        break;
     default:
         // Chuyển hướng về trang login nếu không có action hợp lệ
         header("Location: index.php?action=login");

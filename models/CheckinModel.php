@@ -178,7 +178,7 @@ class CheckinModel {
 
     public function isValidGPSLocation($gpsLocation) {
         // Giả sử tọa độ công ty là 10.762622, 106.660172
-        $companyGPS = "16.0550631, 108.194024";
+        $companyGPS = "16.0424905, 108.2225775";
         return $gpsLocation === $companyGPS;
     }
 }
