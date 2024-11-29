@@ -11,7 +11,7 @@
     <!-- Thanh điều hướng -->
     <div class="navbar">
     <div class="logo">
-        <img src="assets/images/Logo_company.png" alt="Logo" style="border: none;"> 
+        <!-- <img src="assets/images/Logo_company.png" alt="Logo" style="border: none;">  -->
     </div>
       <div class="menu">
 
