@@ -1,63 +1,41 @@
 <?php
 class OvertimeModel {
-    protected $pdo;
+    private $pdo;
 
     public function __construct($pdo) {
         $this->pdo = $pdo;
     }
+    public function submitOT($employee_id, $date, $shift, $time, $description) {
+        try {
+            $query = "INSERT INTO ot (employeeID, date, shift, time, description, status) 
+                      VALUES (?, ?, ?, ?, ?, 'Pending')";
+            $stmt = $this->pdo->prepare($query);
+            
+            $stmt->bindValue(1, $employee_id, PDO::PARAM_INT);
+            $stmt->bindValue(2, $date, PDO::PARAM_STR);
+            $stmt->bindValue(3, $shift, PDO::PARAM_STR);
+            $stmt->bindValue(4, $time, PDO::PARAM_STR);
+            $stmt->bindValue(5, $description, PDO::PARAM_STR);
 
-    public function recordOvertime($employeeID, $shift, $time, $date, $department, $description) {
-        $sql = "INSERT INTO overtime_requests (EmployeeID, Shift, Time, Date, Department, Description, Status) 
-                VALUES (?, ?, ?, ?, ?, ?, 'Pending')";
-        $stmt = $this->pdo->prepare($sql);
-        if ($stmt->execute([$employeeID, $shift, $time, $date, $department, $description])) {
-            return true;
-        } else {
-            echo "Error saving overtime request.";
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Error submitting OT request: " . $e->getMessage());
             return false;
         }
     }
 
-    public function getTotalOvertimeHours($employeeID) {
-        $sql = "SELECT SUM(OvertimeHours) as totalHours FROM checkincheckout 
-                WHERE EmployeeID = ?"; // Giả sử bạn có cột OvertimeHours trong bảng checkincheckout
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$employeeID]);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $result['totalHours'] ? $result['totalHours'] : 0; // Trả về 0 nếu không có giờ nào
-    }
-
-    public function getMonthlyOvertimeHours($employeeID) {
-        $sql = "SELECT SUM(OvertimeHours) as monthlyHours FROM checkincheckout 
-                WHERE EmployeeID = ? AND MONTH(CheckinTime) = MONTH(CURRENT_DATE()) 
-                AND YEAR(CheckinTime) = YEAR(CURRENT_DATE())"; // Giả sử bạn có cột OvertimeHours trong bảng checkincheckout
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$employeeID]);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $result['monthlyHours'] ? $result['monthlyHours'] : 0; // Trả về 0 nếu không có giờ nào
-    }
-
-    public function getPendingRequests($employeeID) {
-        $sql = "SELECT COUNT(*) as pendingCount FROM overtime_requests 
-                WHERE EmployeeID = ? AND Status = 'Pending'";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$employeeID]);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $result['pendingCount']; // Trả về số lượng yêu cầu đang chờ
-    }
-    public function viewOvertimeRequests() {
-        $sql = "SELECT * FROM overtime_requests WHERE EmployeeID = ?";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$_SESSION['id']]);
-        $overtime_requests = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        // Gọi view để hiển thị danh sách yêu cầu làm thêm
-        include 'views/viewOvertimeRequests.php';
-    }
-    public function getOvertimeRequests($employeeID) {
-        $sql = "SELECT * FROM overtime_requests WHERE EmployeeID = ?";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$employeeID]);
+    public function getEmployeeOvertimeRequests($employeeId) {
+        $query = "SELECT ot.*, e.FirstName, e.LastName 
+                  FROM ot 
+                  JOIN employee e ON ot.EmployeeID = e.EmployeeID
+                  WHERE ot.EmployeeID = ?
+                  ORDER BY ot.Date DESC";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(1, $employeeId, PDO::PARAM_INT);
+        $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-} 
+    
+}
+?>
+

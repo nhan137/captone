@@ -38,7 +38,7 @@
                 <span>General</span>
                 <div class="menu-separator"></div>
             </h4>
-            <li>
+            <!-- <li>
                 <a href="index.php?action=salary">
                     <i class="fas fa-rectangle-list"></i>Salary</a>
             </li>
@@ -46,7 +46,7 @@
             <li>
                 <a href="index.php?action=caculate-salary">
                     <i class="fas fa-rectangle-list"></i>Caculate Salary</a>
-            </li>
+            </li> -->
 
             <li>
                 <a href="index.php?action=submitErrorReport"> <i class="fas fa-bug"></i>Error Report</a>
@@ -56,7 +56,7 @@
                     <i class="far fa-clock"></i>Leave Application</a>
             </li>
             <li>
-                <a href="index.php?action=overtime"><i class="fas fa-clock"></i>Overtime Registration</a>
+                <a href="index.php?action=submitOT"><i class="fas fa-clock"></i>Overtime Registration</a>
             </li>
             <li>
                 <a href="index.php?action=logout"> <i class="fab fa-angellist"></i>Logout </a>

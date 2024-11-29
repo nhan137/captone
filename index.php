@@ -8,7 +8,9 @@ require_once 'controllers/AttendanceErrorReportController.php';
 require_once 'controllers/LeaveRequestController.php';
 require_once 'controllers/AttendanceController.php';
 require_once 'controllers/SalaryController.php';
+require_once 'controllers/OTController.php';
 require_once 'config.php';
+require_once 'models/OvertimeModel.php';
 
 $action = isset($_GET['action']) ? $_GET['action'] : 'login';
 
@@ -171,6 +173,15 @@ switch ($action) {
         $salaries =  $salaryController->index();
         break;
     
+    // gửi OT
+    case 'submitOT':
+        $OTController = new OTController($pdo);
+        $OTController->submitOT();
+        break;
+    case 'viewPendingOTRequests':
+        $OTController = new OTController($pdo);
+        $OTController->viewPendingOTRequests();
+        break;
     default:
         // Chuyển hướng về trang login nếu không có action hợp lệ
         header("Location: index.php?action=login");

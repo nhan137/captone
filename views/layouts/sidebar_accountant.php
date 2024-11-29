@@ -14,7 +14,7 @@
 <aside class="sidebar">
       <div class="sidebar-header">
         <img src="/Mangager_Human/Mangager_Human/images/avatar.png" alt="logo" />
-        <h2>Attendance</h2>
+        <h2>Accountant</h2>
       </div>
       <ul class="sidebar-links">
         <h4>
@@ -49,10 +49,15 @@
           >
         </li>
         <li>
-          <a href="salary.html"><i class="far fa-clock"></i>Calculate Salary</a>
+          <a href="index.php?action=salary">
+              <i class="fas fa-rectangle-list"></i>Salary</a>
         </li>
         <li>
-          <a href="#"> <i class="fab fa-angellist"></i>Logout </a>
+          <a href="index.php?action=caculate-salary">
+              <i class="fas fa-rectangle-list"></i>Caculate Salary</a>
+        </li>
+        <li>
+          <a href="index.php?action=logout"> <i class="fab fa-angellist"></i>Logout </a>
         </li>
         <!-- <h4>
           <span>Account</span>
