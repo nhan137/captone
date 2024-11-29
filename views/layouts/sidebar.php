@@ -56,7 +56,7 @@
                     <i class="far fa-clock"></i>Leave Application</a>
             </li>
             <li>
-                <a href="ot.html"><i class="fas fa-clock"></i>Overtime Registration</a>
+                <a href="index.php?action=submitOT"><i class="fas fa-clock"></i>Overtime Registration</a>
             </li>
             <li>
                 <a href="index.php?action=logout"> <i class="fab fa-angellist"></i>Logout </a>
