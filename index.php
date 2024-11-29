@@ -65,8 +65,8 @@ switch ($action) {
             $checkinController->processCheckout();
         }
         break; 
-      // Hiển thị danh sách tài khoản
-      case 'account': 
+    // Hiển thị danh sách tài khoản
+    case 'account': 
         $accountController = new AccountController(pdo: $pdo);
         $accountController->index();
         break;
@@ -92,18 +92,18 @@ switch ($action) {
         $LeaveRequestController->submitRequest();
         break;
 
-    // Chức năng xem tất cả các đơn đang chờ duyệt
+    // Chức năng xem tất cả các đơn của mỗi nhân viên
     case 'viewPendingRequests':
         $LeaveRequestController = new LeaveRequestController($pdo);
         $LeaveRequestController->viewPendingRequests();
         
         break;
-        
+    // Chức năng xem tất cả các đơn có status là Pending  
     case 'viewAllPendingRequests':
         $LeaveRequestController = new LeaveRequestController($pdo);
         $LeaveRequestController->viewAllPendingRequests();
         break;
-        
+    // Approve đơn nghỉ phép    
     case 'approveLeaveRequest':
         if (isset($_GET['id'])) {
             $leaveRequestController = new LeaveRequestController($pdo);
@@ -112,7 +112,7 @@ switch ($action) {
             echo "Leave Request ID is required.";
         }
         break;
-
+    // Reject đơn nghỉ phép
     case 'rejectLeaveRequest':
         if (isset($_GET['id'])) {
             $leaveRequestController = new LeaveRequestController($pdo);
@@ -121,11 +121,28 @@ switch ($action) {
             echo "Leave Request ID is required.";
         }
         break; 
+    // Chức năng gửi đơn báo cáo lỗi
     case 'submitErrorReport':
         $attendanceErrorReportController = new AttendanceErrorReportController($pdo);
         $attendanceErrorReportController->submitReport();
         break;
+    
+    // // case 'viewPendingReports':
+    // //     $controller->viewPendingReports();
+    // //     break;
 
+    // case 'viewAllPendingReports':
+    //     $attendanceErrorReportController = new AttendanceErrorReportController($pdo);
+    //     $attendanceErrorReportController->viewAllPendingReports();
+    //     break;
+    // case 'approveReport':
+    //     $reportId = $_GET['reportId'];
+    //     $controller->approveReport($reportId);
+    //     break;
+    // case 'rejectReport':
+    //     $reportId = $_GET['reportId'];
+    //     $controller->rejectReport($reportId);
+    //     break;
     case 'attendance': 
         $attendanceController = new AttendanceController(pdo: $pdo);
         $attendanceController->getAttendanceHistory();
