@@ -43,10 +43,8 @@
           <div class="menu-separator"></div>
         </h4>
         <li>
-          <a href="attendance-error.html">
-            <i class="fas fa-bug"></i>Time Attendance <br />Error
-            Notification</a
-          >
+        <a href="index.php?action=manageErrorReports">
+            <i class="fas fa-bug"></i>Time Attendance <br />Error Notification</a>
         </li>
         <li>
           <a href="index.php?action=salary">

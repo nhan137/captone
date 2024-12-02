@@ -12,19 +12,21 @@ class AttendanceErrorReportModel {
         $stmt->bindParam(':employeeID', $employeeID);
         $stmt->bindParam(':errorDescription', $errorDescription);
         $stmt->bindParam(':resolvedStatus', $resolvedStatus);
-        
-        // Save the original file name instead of the file content
-        if ($attachment) {
-            $attachmentName = basename($_FILES['attachment']['name']); // Get the original file name
-            $stmt->bindParam(':attachment', $attachmentName);
-        } else {
-            $attachmentName = null;
-            $stmt->bindParam(':attachment', $attachmentName);
-        }
+        $stmt->bindParam(':attachment', $attachment);
         
         return $stmt->execute();
     }
 
+    // public function getEmployeeErrorReports($employeeID) {
+    //     $query = "SELECT a.*, e.FirstName, e.LastName 
+    //               FROM attendanceerrorreport a 
+    //               JOIN employee e ON a.EmployeeID = e.EmployeeID 
+    //               WHERE a.EmployeeID = :employeeID";
+    //     $stmt = $this->pdo->prepare($query);
+    //     $stmt->bindParam(':employeeID', $employeeID);
+    //     $stmt->execute();
+    //     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // }
     public function getEmployeeErrorReports($employeeID) {
         $query = "SELECT a.*, e.FirstName, e.LastName 
                   FROM attendanceerrorreport a 
@@ -34,6 +36,30 @@ class AttendanceErrorReportModel {
         $stmt->bindParam(':employeeID', $employeeID);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function approveReport($id) {
+        $stmt = $this->pdo->prepare("UPDATE attendanceerrorreport 
+                                      SET ResolvedStatus = 'approved', 
+                                          ResolvedBy = :approver, 
+                                          ApprovedDate = NOW() 
+                                      WHERE ErrorReportID = :id");
+        return $stmt->execute([
+            'id' => $id,
+            'approver' => $_SESSION['username'] ?? 'System'
+        ]);
+    }
+
+    public function rejectReport($id) {
+        $stmt = $this->pdo->prepare("UPDATE attendanceerrorreport 
+                                      SET ResolvedStatus = 'rejected', 
+                                          ResolvedBy = :approver, 
+                                          ApprovedDate = NOW() 
+                                      WHERE ErrorReportID = :id");
+        return $stmt->execute([
+            'id' => $id,
+            'approver' => $_SESSION['username'] ?? 'System'
+        ]);
     }
 }
 ?>

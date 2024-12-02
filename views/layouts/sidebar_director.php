@@ -22,7 +22,7 @@
           <div class="menu-separator"></div>
         </h4>
         <li>
-          <a href="profile.html">
+          <a href="index.php?action=profile">
             <i class="fas fa-address-card"> </i> Personal Information<br />
             Dashboard</a
           >

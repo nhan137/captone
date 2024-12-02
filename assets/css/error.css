@@ -1,0 +1,29 @@
+/* assets/css/errorreport.css */
+
+.btn-approve {
+    background-color: #2ecc71; /* Màu xanh cho nút Approve */
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-approve:hover {
+    background-color: #27ae60; /* Màu xanh đậm khi hover */
+}
+
+.btn-reject {
+    background-color: #e74c3c; /* Màu đỏ cho nút Reject */
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-reject:hover {
+    background-color: #c0392b; /* Màu đỏ đậm khi hover */
+}

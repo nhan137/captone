@@ -5,6 +5,7 @@ require_once 'controllers/UserController.php';
 require_once 'controllers/PasswordController.php';
 require_once 'controllers/AccountController.php';
 require_once 'controllers/AttendanceErrorReportController.php';
+require_once 'controllers/ErrorReportController.php';
 require_once 'controllers/LeaveRequestController.php';
 require_once 'controllers/AttendanceController.php';
 require_once 'controllers/SalaryController.php';
@@ -124,11 +125,7 @@ switch ($action) {
             echo "Leave Request ID is required.";
         }
         break; 
-    // Chức năng gửi đơn báo cáo lỗi
-    case 'submitErrorReport':
-        $attendanceErrorReportController = new AttendanceErrorReportController($pdo);
-        $attendanceErrorReportController->submitReport();
-        break; 
+  
     // // case 'viewPendingReports':
     // //     $controller->viewPendingReports();
     // //     break;
@@ -181,6 +178,37 @@ switch ($action) {
     case 'viewPendingOTRequests':
         $OTController = new OTController($pdo);
         $OTController->viewPendingOTRequests();
+        break;
+    case 'viewPendingErrorReports':
+        $errorReportController = new ErrorReportController($pdo);
+        $errorReportController->viewPendingReports();
+        break;
+
+          // Chức năng gửi đơn báo cáo lỗi
+    case 'submitErrorReport':
+        $attendanceErrorReportController = new AttendanceErrorReportController($pdo);
+        $attendanceErrorReportController->submitReport();
+        break; 
+    case 'approveErrorReport':
+        if (isset($_POST['id'])) {
+            $errorReportController = new ErrorReportController($pdo);
+            $errorReportController->approveReport($_POST['id']);
+        } else {
+            echo "Report ID is required.";
+        }
+        break;
+
+    case 'rejectErrorReport':
+        if (isset($_POST['id'])) {
+            $errorReportController = new ErrorReportController($pdo);
+            $errorReportController->rejectReport($_POST['id']);
+        } else {
+            echo "Report ID is required.";
+        }
+        break;
+    case 'manageErrorReports':
+        $errorReportController = new ErrorReportController($pdo);
+        $errorReportController->viewManageReports();
         break;
     default:
         // Chuyển hướng về trang login nếu không có action hợp lệ

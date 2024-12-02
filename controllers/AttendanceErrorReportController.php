@@ -16,6 +16,7 @@ class AttendanceErrorReportController {
             // Handle the attachment
             if (isset($_FILES['attachment']) && $_FILES['attachment']['error'] == UPLOAD_ERR_OK) {
                 $attachment = $_FILES['attachment']['name']; // Save the original file name
+                move_uploaded_file($_FILES['attachment']['tmp_name'], 'uploads/' . $attachment); // Save the file to the server
             }
     
             if ($this->errorReportModel->submitErrorReport($employeeID, $errorDescription, $attachment)) {
