@@ -8,10 +8,77 @@ class SalaryModel {
 
     // Hàm tính lương tổng dựa trên các tham số
     public function calculateSalary($baseSalary, $overtimeHours, $overtimeRate, $bonus, $deductions) {
-        $overtimePay = $overtimeHours * $overtimeRate;
-        $totalSalary = $baseSalary + $overtimePay + $bonus - $deductions;
+        // Tạm thời lấy RuleID = 1 (Có thể thay bằng RuleID của nhân viên)
+        $ruleId = 1;
+        
+        // Truy vấn công thức và các tỷ lệ từ bảng attendancerule với RuleID = 1
+        $sql = "SELECT Formula, BaseOvertimeRate, LatePenaltyRate, EarlyLeavePenaltyRate 
+                FROM attendancerule 
+                WHERE RuleID = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$ruleId]);
+        $rule = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        // Kiểm tra xem có công thức hay không
+        if (!$rule) {
+            throw new Exception("Rule not found.");
+        }
+    
+        // Lấy công thức tính lương từ bảng
+        $formula = $rule['Formula']; // Công thức tính lương từ bảng
+    
+        // Lấy các tỷ lệ từ bảng attendancerule
+        $baseOvertimeRate = $rule['BaseOvertimeRate'];
+        $latePenaltyRate = $rule['LatePenaltyRate'];
+        $earlyLeavePenaltyRate = $rule['EarlyLeavePenaltyRate'];
+    
+        // Tính tiền làm thêm (overtime) theo số giờ làm thêm và tỷ lệ overtime lấy từ bảng
+        $overtimePay = $overtimeHours * $baseOvertimeRate;
+        
+        // Gán các giá trị cần thiết vào công thức tính lương
+        $variables = [
+            'BaseSalary' => $baseSalary,
+            'OvertimeHours' => $overtimeHours,
+            'OvertimeRate' => $baseOvertimeRate,
+            'bonus' => $bonus,
+            'deductions' => $deductions,
+            'LatePenaltyRate' => $latePenaltyRate, // Thêm LatePenaltyRate vào biến
+            'EarlyLeavePenaltyRate' => $earlyLeavePenaltyRate // Thêm EarlyLeavePenaltyRate vào biến
+        ];
+    
+        // Thay thế các biến trong công thức và tính toán lương
+        foreach ($variables as $key => $value) {
+            // Bao quanh tên biến bằng dấu nháy kép để đảm bảo là chuỗi trong eval
+            $formula = str_replace($key, "\"$value\"", $formula);
+        }
+    
+        // Kiểm tra công thức đã được thay thế đúng
+        print_r($formula);
+        print_r($variables);
+    
+        // Tính tổng lương từ công thức
+        try {
+            // Đảm bảo rằng công thức đã được chuẩn bị đúng
+            $totalSalary = eval("return $formula;");
+        } catch (Exception $e) {
+            throw new Exception("Error in formula evaluation: " . $e->getMessage());
+        }
+    
+        // Áp dụng các hình phạt (penalties) cho việc check-in muộn hoặc check-out sớm nếu có
+        if ($latePenaltyRate > 0) {
+            $totalSalary -= $latePenaltyRate;  // Trừ vào tổng lương nếu có hình phạt cho việc đến muộn
+        }
+        if ($earlyLeavePenaltyRate > 0) {
+            $totalSalary -= $earlyLeavePenaltyRate;  // Trừ vào tổng lương nếu có hình phạt cho việc về sớm
+        }
+    
+        // Trả lại lương sau khi tính toán
         return round($totalSalary, 2); // Làm tròn tới 2 chữ số thập phân
     }
+    
+    
+    
+    
 
     // Lưu thông tin lương vào bảng salary
     public function saveSalary($salaryData) {
