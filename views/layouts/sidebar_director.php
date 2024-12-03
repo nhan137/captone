@@ -56,11 +56,11 @@
             ><i class="far fa-clock"></i>View Summary Report</a
           >
         </li>
-        <!-- <li>
-          <a href="reviewthereport.html"
-            ><i class="far fa-clock"></i>Accounting Report Approval
+        <li>
+          <a href="index.php?action=summaryReport">
+            <i class="fas fa-chart-pie"></i> Summary Report
           </a>
-        </li> -->
+        </li>
         <li>
           <a href="index.php?action=logout"> <i class="fab fa-angellist"></i>Logout </a>
         </li>
