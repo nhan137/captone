@@ -20,7 +20,7 @@ class AttendanceController {
         }
 
         // Lấy dữ liệu lịch sử chấm công
-        $attendanceData = $this->attendanceModel->getAttendanceHistory($employee_id, $start_date, $end_date);
+        $attendanceData = $this->attendanceModel->getAttendanceAndOT($employee_id, $start_date, $end_date);
 
         // Truyền dữ liệu đến View
         require_once 'views/employee/attendance/index.php';

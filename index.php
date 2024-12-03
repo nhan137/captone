@@ -10,8 +10,11 @@ require_once 'controllers/LeaveRequestController.php';
 require_once 'controllers/AttendanceController.php';
 require_once 'controllers/SalaryController.php';
 require_once 'controllers/OTController.php';
+require_once 'controllers/AttendanceRuleController.php';
 require_once 'config.php';
 require_once 'models/OvertimeModel.php';
+
+
 
 $action = isset($_GET['action']) ? $_GET['action'] : 'login';
 
@@ -168,7 +171,7 @@ switch ($action) {
     case 'salary': 
         $salaryController = new SalaryController(pdo: $pdo);
         $salaries =  $salaryController->index();
-        break;
+        break;    
     
     // gửi OT
     case 'submitOT':
@@ -210,6 +213,33 @@ switch ($action) {
         $errorReportController = new ErrorReportController($pdo);
         $errorReportController->viewManageReports();
         break;
+
+    case 'list-attendance-rule':
+        $attendanceRuleController = new AttendanceRuleController($pdo);
+        $attendanceRuleController->index();
+        break;
+        
+    case 'edit-attendance-rule':
+        $id_rule = $_GET['id'];
+        if(isset($id_rule)){
+            $attendanceRuleController = new AttendanceRuleController($pdo);
+            $attendanceRuleController->edit($id_rule);
+            break;
+        }
+        
+    case 'create-attendance-rule':
+        $attendanceRuleController = new AttendanceRuleController($pdo);
+        $attendanceRuleController->create();
+        break;
+        
+    case 'delete-attendance-rule':
+        $id_rule = $_GET['id'];
+        if(isset($id_rule)){
+            $attendanceRuleController = new AttendanceRuleController($pdo);
+            $attendanceRuleController->delete($id_rule);
+            break;
+        }
+      
     default:
         // Chuyển hướng về trang login nếu không có action hợp lệ
         header("Location: index.php?action=login");

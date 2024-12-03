@@ -73,6 +73,7 @@ class AccountModel {
 
     // Sửa tài khoản
     public function updateAccount($id, $data) {
+
         $query = "UPDATE {$this->table} SET 
             Username = :username, 
             FirstName = :firstName, 

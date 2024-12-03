@@ -39,6 +39,8 @@ class AccountController {
                 'role' => $_POST['role']
             ];
 
+            var_dump($data);
+
 
 
             // Kiểm tra dữ liệu hợp lệ (có thể thêm các kiểm tra bổ sung)

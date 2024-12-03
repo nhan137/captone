@@ -6,9 +6,13 @@ class SalaryController {
     private $salaryModel;
     private $attendanceModel;
 
+    private $attendanceRuleModel;
+
     public function __construct($pdo) {
         $this->salaryModel = new SalaryModel($pdo);
         $this->attendanceModel = new AttendanceModel($pdo);
+        $this->attendanceRuleModel = new AttendanceRulesModel($pdo);
+
     }
 
     public function index() {
@@ -19,18 +23,50 @@ class SalaryController {
         require_once 'views/employee/salary/salary_list.php';
     }
 
-
     public function calculate($employeeID, $baseSalary, $bonus, $deductions) {
-        // Lấy tổng số giờ làm thêm cho nhân viên
-        $totalOvertimeHours = $this->attendanceModel->getTotalOvertimeHours($employeeID);
+        // Xác định khoảng thời gian cần tính toán (tháng hiện tại)
+        $startDate = date('Y-m-01'); // Ngày đầu tháng
+        $endDate = date('Y-m-t');   // Ngày cuối tháng
     
-        // Hệ số lương làm thêm
-        $overtimeRate = 50.00;
+        // Lấy dữ liệu chấm công và OT
+        $attendanceData = $this->attendanceModel->getAttendanceAndOT($employeeID, $startDate, $endDate);
+    
+        // Tổng số giờ OT đã phê duyệt
+        $totalOvertimeHours = 0;
+        $absentDays = 0;
+        $lateCheckins = 0;
+        $earlyCheckouts = 0;
+    
+        foreach ($attendanceData as $record) {
+            // Cộng giờ OT
+            $totalOvertimeHours += $record['TotalOTHours'];
+    
+            // Thống kê nghỉ phép, check-in muộn, check-out sớm
+            if ($record['IsAbsent']) {
+                $absentDays++;
+            }
+            if ($record['CheckinLate']) {
+                $lateCheckins++;
+            }
+            if ($record['CheckoutEarly']) {
+                $earlyCheckouts++;
+            }
+        }
+       
+    
+        // Lấy hệ số làm thêm từ bảng attendancerule
+        try {
+            // Truyền RuleID (ví dụ RuleID = 1)
+            $overtimeRate = $this->attendanceRuleModel->getOvertimeRateByRuleID();
+        } catch (Exception $e) {
+            // Nếu có lỗi thì báo lỗi
+            throw new Exception("Error retrieving overtime rate: " . $e->getMessage());
+        }
     
         // Tính tổng lương
         $totalSalary = $this->salaryModel->calculateSalary($baseSalary, $totalOvertimeHours, $overtimeRate, $bonus, $deductions);
     
-        // Lưu lương vào bảng salary chỉ 1 lần cho nhân viên
+        // Lưu dữ liệu lương vào bảng `salary`
         $this->salaryModel->saveSalary([
             'EmployeeID' => $employeeID,
             'BaseSalary' => $baseSalary,
@@ -38,11 +74,17 @@ class SalaryController {
             'Deductions' => $deductions,
             'TotalSalary' => $totalSalary,
             'OvertimeHours' => $totalOvertimeHours,
-            'OvertimeRate' => $overtimeRate
+            'OvertimeRate' => $overtimeRate,
+            'AbsentDays' => $absentDays,
+            'LateCheckins' => $lateCheckins,
+            'EarlyCheckouts' => $earlyCheckouts,
         ]);
     
         return $totalSalary;
     }
+    
+    
+    
     
     public function getEmployeeSalaryDetails($employeeID) {
         return $this->salaryModel->getSalaryByEmployeeID($employeeID);
