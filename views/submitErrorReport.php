@@ -42,9 +42,7 @@
                 <button type="submit" class="submit-button">
                     <i class="fas fa-paper-plane"></i> Submit Report
                 </button>
-                <button type="button" class="cancel-button" onclick="window.location.href='index.php?action=viewPendingErrorReports'">
-                    <i class="fas fa-times"></i> Cancel
-                </button>
+                <input type="reset" value="Reset" class="cancel-button" />
             </div>
         </form>
 

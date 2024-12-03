@@ -555,8 +555,11 @@
     }
 
     .absent {
-        background: #ffebee;
+        background-color: #ffebee;
         color: #c62828;
+        font-weight: bold;
+        padding: 0.5rem;
+        border-radius: 5px;
     }
 
     .late {
@@ -1615,6 +1618,14 @@
         /* Màu xanh lá cho thành công */
         border: 1px solid #27ae60;
     }
+
+    .status-absent {
+        background-color: #ffebee; /* Màu nền nhạt cho trạng thái Absent */
+        color: #c62828; /* Màu chữ đỏ cho trạng thái Absent */
+        font-weight: bold; /* Làm cho chữ đậm hơn */
+        padding: 0.5rem; /* Thêm khoảng cách xung quanh chữ */
+        border-radius: 5px; /* Bo góc cho trạng thái */
+    }
     </style>
 </head>
 
@@ -1668,68 +1679,62 @@
                         <?php foreach ($attendanceData as $index => $attendance) : ?>
                         <tr>
                             <td><?= $index + 1 ?></td>
-                            <td><?= DateTime::createFromFormat('Y-m-d', $attendance['WorkDate'])->format('d/m/y') ?>
-                            </td>
+                            <td><?= DateTime::createFromFormat('Y-m-d', $attendance['WorkDate'])->format('d/m/y') ?></td>
                             <td>
                                 <?php if ($attendance['IsAbsent']) : ?>
-                                <!-- Hiển thị thông báo nghỉ nếu là ngày nghỉ -->
-                                <span class="badge badge-secondary">Absent</span>
+                                    <span class="absent">Absent</span>
                                 <?php else : ?>
-                                <?= DateTime::createFromFormat('Y-m-d H:i:s', $attendance['CheckinTime'])->format('d/m/y H:i') ?>
-                                <br />
-                                <?php if ($attendance['CheckinLate']) : ?>
-                                <!-- <span class="badge badge-danger">Late</span> -->
-                                <?php endif; ?>
+                                    <?= DateTime::createFromFormat('Y-m-d H:i:s', $attendance['CheckinTime'])->format('d/m/y H:i') ?>
                                 <?php endif; ?>
                             </td>
                             <td>
                                 <?php if ($attendance['IsAbsent']) : ?>
-                                <!-- Hiển thị thông báo nghỉ nếu là ngày nghỉ -->
-                                <span class="badge badge-secondary">Absent</span>
+                                    <span class="absent">Absent</span>
                                 <?php else : ?>
-                                <?= DateTime::createFromFormat('Y-m-d H:i:s', $attendance['CheckoutTime'])->format('d/m/y H:i') ?>
-                                <?php if ($attendance['CheckoutEarly']) : ?>
-                                <br />
-                                <!-- <span class="badge badge-warning">Early</span> -->
-                                <?php endif; ?>
+                                    <?= DateTime::createFromFormat('Y-m-d H:i:s', $attendance['CheckoutTime'])->format('d/m/y H:i') ?>
                                 <?php endif; ?>
                             </td>
                             <td>
                                 <?php if ($attendance['IsAbsent']) : ?>
-                                <!-- Không có giờ làm nếu là ngày nghỉ -->
-                                N/A
+                                    N/A
                                 <?php else : ?>
-                                <?= htmlspecialchars($attendance['TotalWorkHours'] ?? 'N/A') ?>
+                                    <?= htmlspecialchars($attendance['TotalWorkHours'] ?? 'N/A') ?>
                                 <?php endif; ?>
                             </td>
                             <td>
                                 <?php if ($attendance['IsAbsent']) : ?>
-                                <!-- Không có vị trí check-in nếu là ngày nghỉ -->
-                                N/A
+                                    N/A
                                 <?php else : ?>
-                                <?= htmlspecialchars($attendance['CheckinLocation']) ?>
+                                    <?= htmlspecialchars($attendance['CheckinLocation']) ?>
                                 <?php endif; ?>
                             </td>
                             <td>
                                 <?php if ($attendance['IsAbsent']) : ?>
-                                <!-- Không có vị trí check-out nếu là ngày nghỉ -->
-                                N/A
+                                    N/A
                                 <?php else : ?>
-                                <?= htmlspecialchars($attendance['CheckoutLocation'] ?? 'N/A') ?>
+                                    <?= htmlspecialchars($attendance['CheckoutLocation'] ?? 'N/A') ?>
                                 <?php endif; ?>
                             </td>
                             <td>
                                 <?php if ($attendance['IsAbsent']) : ?>
-                                <!-- Chỉ hiển thị thông báo nghỉ -->
-                                <span class="badge badge-secondary">Absent</span>
+                                    <span class="status-absent">Absent</span>
                                 <?php else : ?>
-                                <?php if ($attendance['CheckinLate']) : ?>
-                                <span class="badge badge-danger" style="margin-bottom: 10px;">Late Check-in</span>
-                                <br />
-                                <?php endif; ?>
-                                <?php if ($attendance['CheckoutEarly']) : ?>
-                                <span class="badge badge-warning">Early Checkout</span>
-                                <?php endif; ?>
+                                    <?php 
+                                        $status = [];
+                                        if ($attendance['CheckinLate']) {
+                                            $status[] = '<span class="badge badge-danger">Late Check-in</span>';
+                                        } elseif (isset($attendance['CheckinStatus']) && $attendance['CheckinStatus'] === 'On Time') {
+                                            $status[] = '<span class="badge badge-success">On Time Check-in</span>';
+                                        }
+
+                                        if ($attendance['CheckoutEarly']) {
+                                            $status[] = '<span class="badge badge-warning">Early Checkout</span>';
+                                        } elseif (isset($attendance['CheckoutStatus']) && $attendance['CheckoutStatus'] === 'On Time') {
+                                            $status[] = '<span class="badge badge-success">On Time Checkout</span>';
+                                        }
+
+                                        echo implode(', ', $status) ?: 'On Time';
+                                    ?>
                                 <?php endif; ?>
                             </td>
                         </tr>

@@ -1,12 +1,19 @@
 <?php
 require_once 'models/AttendanceErrorReportModel.php';
 
+// Controller xử lý các chức năng liên quan đến báo cáo lỗi chấm công
 class AttendanceErrorReportController {
+    // Biến lưu trữ model xử lý báo cáo lỗi
     protected $errorReportModel;
 
+    // Khởi tạo controller với kết nối database
     public function __construct($pdo) {
         $this->errorReportModel = new AttendanceErrorReportModel($pdo);
     }
+
+    // Hàm xử lý gửi báo cáo lỗi chấm công
+    // - Nếu là POST request: Lưu báo cáo mới với file đính kèm (nếu có)
+    // - Nếu là GET request: Hiển thị form báo cáo và danh sách báo cáo cũ
     public function submitReport() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $employeeID = $_SESSION['id'];

@@ -54,7 +54,7 @@ class ErrorReportController {
         header("Location: index.php?action=manageErrorReports");
         exit();
     }
-
+    // Hàm hiển thị trang quản lý báo cáo lỗi cho kế toán
     public function viewManageReports() {
         if ((!isset($_SESSION['id'])) || $_SESSION['role'] !== 'ke toan') {
             header("Location: index.php?action=login");

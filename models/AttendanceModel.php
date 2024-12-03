@@ -51,15 +51,25 @@ class AttendanceModel {
                 $checkinDay = $checkinTime->format('Y-m-d'); // Lấy ngày từ CheckinTime
                 $lateThreshold = new DateTime($checkinDay . ' 08:00:00'); // Thêm ngày vào mốc 08:00 AM
                 
-                $attendance['CheckinLate'] = $checkinTime > $lateThreshold ? true : false; // So sánh checkinTime với mốc 08:00 AM
+                if ($checkinTime > $lateThreshold) {
+                    $attendance['CheckinLate'] = true; // Check-in trễ
+                } else {
+                    $attendance['CheckinLate'] = false; // Check-in đúng giờ
+                    $attendance['CheckinStatus'] = 'On Time'; // Trạng thái check-in đúng giờ
+                }
             }
-    
+
             // Kiểm tra checkout sớm
             if (!empty($attendance['CheckoutTime'])) {
                 $checkoutTime = new DateTime($attendance['CheckoutTime']);
-                $attendance['CheckoutEarly'] = $checkoutTime < $earlyThreshold ? true : false;
+                if ($checkoutTime < $earlyThreshold) {
+                    $attendance['CheckoutEarly'] = true; // Checkout sớm
+                } else {
+                    $attendance['CheckoutEarly'] = false; // Checkout đúng giờ
+                    $attendance['CheckoutStatus'] = 'On Time'; // Trạng thái checkout đúng giờ
+                }
             }
-        }
+}
     
         return $attendanceData;
     }
