@@ -383,9 +383,9 @@
                                     <label for="role" class="form-label">Vai Trò</label>
                                     <select class="form-control" id="role" name="role" required="">
                                         <option value="">Chọn quyền</option>
-                                        <option value="giám đốc">Giám đốc</option>
-                                        <option value="nhân viên">Nhân viên</option>
-                                        <option value="kế toán">Kế toán</option>
+                                        <option value="giam doc">Giám đốc</option>
+                                        <option value="nhan vien">Nhân viên</option>
+                                        <option value="ke toan">Kế toán</option>
                                     </select>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Tạo Tài Khoản</button>

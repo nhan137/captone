@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="assets/css/sidebar_dirrector.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 </head>
+
 <body>
 <aside class="sidebar">
       <div class="sidebar-header">
@@ -28,7 +27,7 @@
           >
         </li>
         <li>
-          <a href="Timekeeping-Rules.html"
+          <a href="index.php?action=list-attendance-rule"
             ><i class="far fa-check-circle"></i>Timekeeping Rules</a
           >
         </li>
@@ -56,15 +55,18 @@
             ><i class="far fa-clock"></i>View Summary Report</a
           >
         </li>
-        <li>
-          <a href="index.php?action=summaryReport">
-            <i class="fas fa-chart-pie"></i> Summary Report
+
+
+        <!-- <li>
+          <a href="reviewthereport.html"
+            ><i class="far fa-clock"></i>Accounting Report Approval
           </a>
-        </li>
+        </li> -->
         <li>
           <a href="index.php?action=logout"> <i class="fab fa-angellist"></i>Logout </a>
         </li>
       </ul>
     </aside>
 </body>
+
 </html>
