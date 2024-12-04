@@ -59,6 +59,51 @@ class OTController {
         include 'views/viewPendingOTRequests.php';
     }
     
+    // Hiển thị danh sách các đơn đang chờ duyệt
+    public function viewPendingRequests() {
+        // if ((!isset($_SESSION['id'])) || $_SESSION['role'] !== 'giam doc') {
+        //     header("Location: index.php?action=login");
+        //     exit();
+        // }
+
+        $requests = $this->overtimeModel->getPendingRequests();
+        require 'views/pending_requests.php';
+    }
+
+    // Duyệt đơn
+    public function approveRequest() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $overtimeID = $_POST['overtimeID'] ?? null;
+            if ($overtimeID) {
+                try {
+                    $this->overtimeModel->approve($overtimeID);
+                    header("Location: index.php?action=viewAllPendingOTRequests");
+                    exit();
+                } catch (Exception $e) {
+                    echo $e->getMessage();
+                }
+            } else { echo "ID không hợp lệ.";
+            }
+        }
+    }
+
+    // Từ chối đơn
+    public function rejectRequest() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $overtimeID = $_POST['overtimeID'] ?? null;
+            if ($overtimeID) {
+                try {
+                    $this->overtimeModel->reject($overtimeID);
+                    header("Location: index.php?action=viewAllPendingOTRequests");
+                    exit();
+                } catch (Exception $e) {
+                    echo $e->getMessage();
+                }
+            } else {
+                echo "ID không hợp lệ.";
+            }
+        }
+    }
 
 }
 ?>

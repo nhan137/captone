@@ -9,15 +9,7 @@
   <link rel="stylesheet" href="assets/css/employee.css">
 </head>
 <body>
-<?php
-            if ($_SESSION['role'] === 'nhan vien') {
-                include 'views/layouts/sidebar.php';
-            } else if ($_SESSION['role'] === 'giam doc') {
-                include 'views/layouts/sidebar_director.php';
-            } else {
-                include 'views/layouts/sidebar_accountant.php';
-            }
-            ?>
+  <?php include 'views/layouts/sidebar.php'; ?>
   <div class="main-content">
     <div class="overtime-container">
       <div class="overtime-header">
@@ -83,8 +75,7 @@
             <textarea id="description" name="description" rows="4" placeholder="Please provide details about your overtime work..." required></textarea>
           </div>
 
-          <div class="form-actions">
-            <button type="submit" class="submit-button">
+          <div class="form-actions"> <button type="submit" class="submit-button">
               <i class="fas fa-paper-plane"></i> Submit Request
             </button>
             <!-- <button type="button" class="cancel-button" onclick="cancelForm()">

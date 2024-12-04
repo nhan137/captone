@@ -182,6 +182,20 @@ switch ($action) {
         $OTController = new OTController($pdo);
         $OTController->viewPendingOTRequests();
         break;
+    case 'viewAllPendingOTRequests':
+        $OTController = new OTController($pdo);
+        $OTController->viewPendingRequests();
+        break;
+    case 'approveRequest':
+        $OTController = new OTController($pdo);
+        $OTController->approveRequest();
+        break;
+    case 'rejectRequest':
+        $OTController = new OTController($pdo);
+        $OTController->rejectRequest();
+        break;
+
+    //giao dien bao cao loi
     case 'viewPendingErrorReports':
         $errorReportController = new ErrorReportController($pdo);
         $errorReportController->viewPendingReports();

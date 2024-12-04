@@ -46,6 +46,11 @@
           >
         </li>
         <li>
+          <a href="index.php?action=viewAllPendingOTRequests"
+            ><i class="far fa-clock"></i>OT Request Approval</a
+          >
+        </li>
+        <li>
           <a href="notification-error.html"
             ><i class="far fa-clock"></i>Receiving Violation notice</a
           >

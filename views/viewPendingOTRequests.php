@@ -10,45 +10,37 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
     <Style>
-       /* Định kiểu chung cho cột Status */
-.status {
-    font-weight: bold;
-    padding: 5px 10px;
-    border-radius: 4px;
-    text-align: center;
-}
+            /* Định kiểu chung cho cột Status */
+        .status {
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 4px;
+            text-align: center;
+        }
 
-/* Status Approved (Approved) */
-.status.approved {
-    background-color: #d4edda;  /* Màu nền xanh nhạt */
-    color: #155724;  /* Màu chữ xanh đậm */
-}
+        /* Status Approved (Approved) */
+        .status.approved {
+            background-color: #d4edda;  /* Màu nền xanh nhạt */
+            color: #155724;  /* Màu chữ xanh đậm */
+        }
 
-/* Status Rejected (Rejected) */
-.status.rejected {
-    background-color: #f8d7da;  /* Màu nền đỏ nhạt */
-    color: #721c24;  /* Màu chữ đỏ đậm */
-}
+        /* Status Rejected (Rejected) */
+        .status.rejected {
+            background-color: #f8d7da;  /* Màu nền đỏ nhạt */
+            color: #721c24;  /* Màu chữ đỏ đậm */
+        }
 
-/* Status Pending (Pending) */
-.status.pending {
-    background-color: #fff3cd;  /* Màu nền vàng nhạt */
-    color: #856404;  /* Màu chữ vàng đậm */
-}
+        /* Status Pending (Pending) */
+        .status.pending {
+            background-color: #fff3cd;  /* Màu nền vàng nhạt */
+            color: #856404;  /* Màu chữ vàng đậm */
+        }
 
 
     </Style>
 </head>
 <body>
-    <?php
-            if ($_SESSION['role'] === 'nhan vien') {
-                include 'views/layouts/sidebar.php';
-            } else if ($_SESSION['role'] === 'giam doc') {
-                include 'views/layouts/sidebar_director.php';
-            } else {
-                include 'views/layouts/sidebar_accountant.php';
-            }
-            ?>
+    <?php include 'views/layouts/sidebar.php'; ?>
     <div class="main-content">
     <div class="overtime-records-container">
         <div class="records-header">
@@ -89,11 +81,11 @@
             <thead>
             <tr>
                 <th><i class="fas fa-hashtag"></i> No.</th>
-                <th><i class="fas fa-id-card"></i> Employee ID</th>
+                <!-- <th><i class="fas fa-id-card"></i> Employee ID</th> -->
                 <th><i class="fas fa-user"></i> Full Name</th>
                 <th><i class="fas fa-user-clock"></i> Shift</th>
                 <th><i class="fas fa-clock"></i> Time</th>
-                <th><i class="fas fa-calendar-day"></i> Date</th>
+                <th><i class="fas fa-calendar-day"></i> Date</th> 
                 <th><i class="fas fa-align-left"></i> Description</th>
                 <th><i class="fas fa-check-circle"></i> Status</th>
             </tr>
@@ -122,7 +114,7 @@
 
                             echo "<tr>";
                             echo "<td>{$counter}</td>";
-                            echo "<td>{$request['employeeID']}</td>";
+                            // echo "<td>{$request['employeeID']}</td>";
                             echo "<td>{$request['FirstName']} {$request['LastName']}</td>";
                             echo "<td>{$request['shift']}</td>";
                             echo "<td>{$request['time']}</td>";
