@@ -11,7 +11,7 @@ class EmployeeModel {
     public function getEmployees($searchName = '') {
         $sql = "SELECT *, CONCAT(FirstName, ' ', LastName) as FullName 
                 FROM employee 
-                WHERE Role NOT IN ('ke toan', 'giam doc')";
+                WHERE Role != 'giam doc'";
         $params = [];
 
         if (!empty($searchName)) {

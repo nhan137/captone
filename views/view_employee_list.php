@@ -25,7 +25,7 @@
             width: calc(100% - 70px);
         }
         h1 {
-            color: #333;
+            color: #007BFF;
             margin: 20px 0;
         }
         .container {
@@ -162,6 +162,20 @@
         .search-btn:hover {
             background-color: #45a049;
         }
+
+        .page-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #007BFF;
+            margin: 20px 0;
+            font-size: 24px;
+        }
+
+        .page-title i {
+            color: #007BFF;
+            font-size: 24px;
+        }
     </style>
     <script>
         function showNotificationModal(employeeId) {
@@ -205,8 +219,9 @@
     </div>
     <div class="content" id="content">
         <div class="container">
-            <h1>Employee List</h1>
-            
+            <h1 class="page-title">
+                <i class="fas fa-users"></i> List of Employees
+            </h1>
             <!-- Thêm form tìm kiếm và lọc -->
             <div class="search-filter-container">
                 <form method="GET" action="index.php" class="search-filter-form">
@@ -216,11 +231,11 @@
                     <div class="search-box">
                         <input type="text" 
                                name="search" 
-                               placeholder="Tìm kiếm theo tên đầy đủ..."
+                               placeholder="Tìm kiếm theo tên ..."
                                value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>"
                         >
                         <button type="submit" class="search-btn">
-                            <i class="fas fa-search"></i> Tìm kiếm
+                            <i class="fas fa-search"></i> Search
                         </button>
                     </div>
                 </form>
