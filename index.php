@@ -11,8 +11,10 @@ require_once 'controllers/AttendanceController.php';
 require_once 'controllers/SalaryController.php';
 require_once 'controllers/OTController.php';
 require_once 'controllers/AttendanceRuleController.php';
+require_once 'controllers/EmployeeController.php';
 require_once 'config.php';
 require_once 'models/OvertimeModel.php';
+
 
 
 
@@ -253,10 +255,22 @@ switch ($action) {
             $attendanceRuleController->delete($id_rule);
             break;
         }
-      
+        // Thêm case cho việc xem danh sách nhân viên
+    case 'viewEmployeeList':
+        $employeeController = new EmployeeController($pdo);
+        $employeeController->viewEmployeeList();
+        break;
+
+    case 'getNotifications':
+        $employeeController = new EmployeeController($pdo);
+        $employeeController->getNotifications();
+        break;
+
     default:
         // Chuyển hướng về trang login nếu không có action hợp lệ
         header("Location: index.php?action=login");
         break;
 }
+
+
 ?>

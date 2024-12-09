@@ -130,3 +130,15 @@ body {
     background-color: #34495e;
     color: #fff;
   }
+
+.sidebar-content {
+    display: flex;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    margin-left: 200px; /* Chiều rộng của sidebar */
+}
+
+/* Thêm các CSS khác nếu cần */

@@ -1704,13 +1704,13 @@
 
 <body>
 <?php
-            if ($_SESSION['role'] === 'nhan vien') {
-                include 'views/layouts/sidebar.php';
-            } else if ($_SESSION['role'] === 'giam doc') {
-                include 'views/layouts/sidebar_director.php';
-            } else {
+            // if ($_SESSION['role'] === 'nhan vien') {
+            //     include 'views/layouts/sidebar.php';
+            // } else if ($_SESSION['role'] === 'giam doc') {
+            //     include 'views/layouts/sidebar_director.php';
+            // } else {
                 include 'views/layouts/sidebar_accountant.php';
-            }
+            // }
             ?>
 
     <!-- Main Content -->
