@@ -21,7 +21,13 @@ class UserController {
                 $_SESSION['username'] = $user['Username'];
                 $_SESSION['id'] = $user['EmployeeID'];
                 $_SESSION['role'] = $user['Role'];
-                header("Location: index.php?action=profile"); // Chuyển hướng đến trang hồ sơ
+                
+                // Kiểm tra role và điều hướng tương ứng
+                if ($user['Role'] == 'giam doc') {
+                    header("Location: index.php?action=viewEmployeeList");
+                } else {
+                    header("Location: index.php?action=profile");
+                }
                 exit();
             } else {
                 echo "Tên đăng nhập hoặc mật khẩu không đúng.";
