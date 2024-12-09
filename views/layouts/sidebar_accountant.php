@@ -28,14 +28,13 @@
           >
         </li>
         <li>
-          <a href="report.html"
-            ><i class="far fa-check-circle"></i>View and export <br />report</a
+          <a href="index.php?action=viewApprovedOTRequests"
+            ><i class="far fa-check-circle"></i>OT Data</a
           >
         </li>
         <li>
-          <a href="leave-management.html">
-            <i class="fas fa-calendar-check"></i>Leave Management<br />
-            System</a
+          <a href="index.php?action=viewApprovedLeaveRequests">
+            <i class="fas fa-calendar-check"></i>Leave Data</a
           >
         </li>
         <h4>

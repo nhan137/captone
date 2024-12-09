@@ -12,6 +12,7 @@ require_once 'controllers/SalaryController.php';
 require_once 'controllers/OTController.php';
 require_once 'controllers/AttendanceRuleController.php';
 require_once 'controllers/EmployeeController.php';
+require_once 'controllers/ViewListDataEmployeeController.php';
 require_once 'config.php';
 require_once 'models/OvertimeModel.php';
 
@@ -265,7 +266,17 @@ switch ($action) {
         $employeeController = new EmployeeController($pdo);
         $employeeController->getNotifications();
         break;
+    
+    // Hiển thị dữ liệu nhân viên của kế toán
+    case 'viewApprovedLeaveRequests':
+        $ViewListDataEmployeeController = new ViewListDataEmployeeController(($pdo));
+        $ViewListDataEmployeeController->viewApprovedLeaveRequests();
+        break;
 
+    case 'viewApprovedOTRequests':
+        $ViewListDataEmployeeController = new ViewListDataEmployeeController(($pdo));
+        $ViewListDataEmployeeController->viewApprovedOTRequests();
+        break;
     default:
         // Chuyển hướng về trang login nếu không có action hợp lệ
         header("Location: index.php?action=login");

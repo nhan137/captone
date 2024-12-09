@@ -6,8 +6,7 @@ if (!isset($_SESSION['id'])) {
     exit();
 }
 
-$overtimeController = new OvertimeController($pdo);
-$overtimeController->handleRequest();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
