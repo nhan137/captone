@@ -80,6 +80,30 @@ class LeaveRequest {
             throw new Exception("Lỗi khi từ chối đơn: " . $e->getMessage());
         }
     }
+
+    // Thêm method mới
+    public function getFilteredLeaveRequests($employeeId, $status = null) {
+        $query = "SELECT lr.*, e.FirstName, e.LastName 
+                 FROM leaverequest lr
+                 JOIN employee e ON lr.EmployeeID = e.EmployeeID
+                 WHERE lr.EmployeeID = ?";
+        
+        $params = [$employeeId];
+        
+        if ($status && $status !== 'all') {
+            $query .= " AND lr.Status = ?";
+            $params[] = $status;
+        }
+        
+        $query .= " ORDER BY lr.SubmitDate DESC";
+        
+        $stmt = $this->pdo->prepare($query);
+        foreach ($params as $key => $value) {
+            $stmt->bindValue($key + 1, $value);
+        }
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 ?>
 

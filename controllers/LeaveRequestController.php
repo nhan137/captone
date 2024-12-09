@@ -49,7 +49,32 @@ class LeaveRequestController {
             header("Location: index.php?action=login");
             exit();
         }
-        $leave_requests = $this->leaveRequestModel->getEmployeeLeaveRequests($_SESSION['id']);
+        
+        // Lấy filter từ URL
+        $filter = isset($_GET['filter']) ? $_GET['filter'] : 'all';
+        
+        // Chuyển đổi filter thành status tương ứng
+        $status = null;
+        switch ($filter) {
+            case 'pending':
+                $status = 'pending';
+                break;
+            case 'approved':
+                $status = 'approved';
+                break;
+            case 'rejected':
+                $status = 'rejected';
+                break;
+            default:
+                $status = null;
+        }
+        
+        // Lấy danh sách đơn nghỉ phép theo filter
+        $leave_requests = $this->leaveRequestModel->getFilteredLeaveRequests($_SESSION['id'], $status);
+        
+        // Thêm biến active filter để highlight button
+        $activeFilter = $filter;
+        
         include 'views/viewPendingRequests.php';
     }
 
