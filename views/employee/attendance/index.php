@@ -1749,34 +1749,6 @@
 
 
             </div>
-
-            <div class="attendance-legend">
-                <div class="legend-item">
-                    <span class="legend-color present"></span>
-                    <span>Present (P)</span>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-color absent"></span>
-                    <span>Absent (A)</span>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-color late"></span>
-                    <span>Late (L)</span>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-color weekend"></span>
-                    <span>Weekend (W)</span>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-color holiday"></span>
-                    <span>Holiday (H)</span>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-color leave"></span>
-                    <span>Leave (L)</span>
-                </div>
-            </div>
-
             <div class="attendance-actions">
                 <button class="export-button">
                     <i class="fas fa-file-export"></i> Export Report

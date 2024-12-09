@@ -25,6 +25,27 @@
             background-color: #fff3cd;
             color: #856404;
         }
+        .btn-outline-warning:hover {
+            color: #212529;
+            background-color: #ffc107;
+            border-color: #ffc107;
+        }
+
+        .btn-outline-success:hover {
+            color: #fff;
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-outline-danger:hover {
+            color: #fff;
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .active-filter {
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -35,14 +56,25 @@
         
         <div class="text-center mb-4">
             <form method="GET" action="">
-                <input type="hidden" name="action" value="viewMyLeaveRequests">
-                <button type="submit" name="filter" value="all" class="btn btn-secondary mx-2">Tất cả</button>
-                <button type="submit" name="filter" value="pending" class="btn btn-warning mx-2">Pending</button>
-                <button type="submit" name="filter" value="approved" class="btn btn-success mx-2">Approved</button>
-                <button type="submit" name="filter" value="rejected" class="btn btn-danger mx-2">Rejected</button>
+                <input type="hidden" name="action" value="viewPendingRequests">
+                <button type="submit" name="filter" value="all" 
+                        class="btn <?= (!isset($_GET['filter']) || $_GET['filter'] === 'all') ? 'btn-dark' : 'btn-secondary' ?> mx-2">
+                    Tất cả
+                </button>
+                <button type="submit" name="filter" value="pending" 
+                        class="btn <?= (isset($_GET['filter']) && $_GET['filter'] === 'pending') ? 'btn-warning' : 'btn-outline-warning' ?> mx-2">
+                    Pending
+                </button>
+                <button type="submit" name="filter" value="approved" 
+                        class="btn <?= (isset($_GET['filter']) && $_GET['filter'] === 'approved') ? 'btn-success' : 'btn-outline-success' ?> mx-2">
+                    Approved
+                </button>
+                <button type="submit" name="filter" value="rejected" 
+                        class="btn <?= (isset($_GET['filter']) && $_GET['filter'] === 'rejected') ? 'btn-danger' : 'btn-outline-danger' ?> mx-2">
+                    Rejected
+                </button>
             </form>
         </div>
-
 
         <table class="table table-striped table-bordered">
             <thead class="table-dark">
