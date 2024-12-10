@@ -59,8 +59,7 @@ class AttendanceModel {
                     $attendance['CheckinStatus'] = 'On Time'; // Thêm trạng thái check-in đúng giờ
                 }
             }
-
-            // Kiểm tra checkout sớm
+// Kiểm tra checkout sớm
             if (!empty($attendance['CheckoutTime'])) {
                 $checkoutTime = new DateTime($attendance['CheckoutTime']);
                 if ($checkoutTime < $earlyThreshold) {
@@ -126,7 +125,7 @@ class AttendanceModel {
             $attendance['CheckinLate'] = $checkinTime > $lateThreshold;
     
             // Kiểm tra check-out sớm
-            $checkoutTime = new DateTime($attendance['CheckoutTime']);
+$checkoutTime = new DateTime($attendance['CheckoutTime']);
             $attendance['CheckoutEarly'] = $checkoutTime < $earlyThreshold;
     
             // Lấy thông tin OT (nếu có) từ bảng `ot`
