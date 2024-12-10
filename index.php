@@ -277,6 +277,12 @@ switch ($action) {
         $ViewListDataEmployeeController = new ViewListDataEmployeeController(($pdo));
         $ViewListDataEmployeeController->viewApprovedOTRequests();
         break;
+
+    case 'viewAttendanceHistory':
+        $controller = new ViewListDataEmployeeController($pdo);
+        $controller->viewAttendanceHistory();
+        break;
+
     default:
         // Chuyển hướng về trang login nếu không có action hợp lệ
         header("Location: index.php?action=login");

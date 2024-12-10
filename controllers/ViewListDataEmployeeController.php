@@ -34,5 +34,42 @@ class ViewListDataEmployeeController {
         
         require 'views/ViewListOTData.php';
     }
+
+    public function viewAttendanceHistory() {
+        if ((!isset($_SESSION['id'])) || $_SESSION['role'] !== 'ke toan') {
+            header("Location: index.php?action=login");
+            exit();
+        }
+
+        $employees = $this->ViewListData->getAllEmployees();
+        $selectedEmployee = isset($_GET['employee_id']) && !empty($_GET['employee_id']) 
+            ? (int)$_GET['employee_id'] 
+            : null;
+        
+        $startDate = isset($_GET['start_date']) && !empty($_GET['start_date']) 
+            ? date('d-m-Y', strtotime($_GET['start_date']))
+            : '';
+        $endDate = isset($_GET['end_date']) && !empty($_GET['end_date'])
+            ? date('d-m-Y', strtotime($_GET['end_date']))
+            : '';
+        
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $itemsPerPage = 10;
+        $offset = ($page - 1) * $itemsPerPage;
+        
+        $result = $this->ViewListData->getAttendanceHistory(
+            $selectedEmployee, 
+            $startDate, 
+            $endDate,
+            $itemsPerPage,
+            $offset
+        );
+        
+        $attendanceData = $result['data'];
+        $totalRecords = $result['total'];
+        $totalPages = ceil($totalRecords / $itemsPerPage);
+        
+        require 'views/ViewAttendanceHistory.php';
+    }
 }
 ?>

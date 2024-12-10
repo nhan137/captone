@@ -53,4 +53,54 @@ class ViewListDataEmployeeModel {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getAttendanceHistory($employeeId = null, $startDate = null, $endDate = null, $limit = 10, $offset = 0) {
+        $query = "SELECT SQL_CALC_FOUND_ROWS cc.*, e.FirstName, e.LastName,
+                  TIMEDIFF(CheckoutTime, CheckinTime) AS TotalWorkHours
+                  FROM checkincheckout cc
+                  JOIN employee e ON cc.EmployeeID = e.EmployeeID
+                  WHERE 1=1";
+        
+        if ($employeeId !== null) {
+            $query .= " AND cc.EmployeeID = :employeeId";
+        }
+        
+        if ($startDate) {
+            $startDate = DateTime::createFromFormat('d-m-Y', $startDate)->format('Y-m-d');
+            $query .= " AND DATE(cc.CheckinTime) >= :startDate";
+        }
+        
+        if ($endDate) {
+            $endDate = DateTime::createFromFormat('d-m-Y', $endDate)->format('Y-m-d');
+            $query .= " AND DATE(cc.CheckoutTime) <= :endDate";
+        }
+        
+        $query .= " ORDER BY cc.CheckinTime DESC LIMIT :limit OFFSET :offset";
+        
+        $stmt = $this->pdo->prepare($query);
+        
+        if ($employeeId !== null) {
+            $stmt->bindValue(':employeeId', $employeeId, PDO::PARAM_INT);
+        }
+        if ($startDate) {
+            $stmt->bindValue(':startDate', $startDate);
+        }
+        if ($endDate) {
+            $stmt->bindValue(':endDate', $endDate);
+        }
+        
+        $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', (int)$offset, PDO::PARAM_INT);
+        
+        $stmt->execute();
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        $stmt = $this->pdo->query("SELECT FOUND_ROWS()");
+        $totalRecords = $stmt->fetchColumn();
+        
+        return [
+            'data' => $results,
+            'total' => $totalRecords
+        ];
+    }
 }

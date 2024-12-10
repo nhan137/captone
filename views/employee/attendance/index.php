@@ -1622,7 +1622,7 @@
     .status-absent {
         background-color: #ffebee; /* Màu nền nhạt cho trạng thái Absent */
         color: #c62828; /* Màu chữ đỏ cho trạng thái Absent */
-        font-weight: bold; /* Làm cho chữ đậm hơn */
+        font-weight: bold; /* L��m cho chữ đậm hơn */
         padding: 0.5rem; /* Thêm khoảng cách xung quanh chữ */
         border-radius: 5px; /* Bo góc cho trạng thái */
     }
@@ -1721,19 +1721,21 @@
                                 <?php else : ?>
                                     <?php 
                                         $status = [];
+                                        // Check-in status
                                         if ($attendance['CheckinLate']) {
                                             $status[] = '<span class="badge badge-danger">Late Check-in</span>';
-                                        } elseif (isset($attendance['CheckinStatus']) && $attendance['CheckinStatus'] === 'On Time') {
+                                        } else {
                                             $status[] = '<span class="badge badge-success">On Time Check-in</span>';
                                         }
 
+                                        // Check-out status
                                         if ($attendance['CheckoutEarly']) {
-                                            $status[] = '<span class="badge badge-warning">Early Checkout</span>';
-                                        } elseif (isset($attendance['CheckoutStatus']) && $attendance['CheckoutStatus'] === 'On Time') {
-                                            $status[] = '<span class="badge badge-success">On Time Checkout</span>';
+                                            $status[] = '<span class="badge badge-warning">Early Check-out</span>';
+                                        } else {
+                                            $status[] = '<span class="badge badge-success">On Time Check-out</span>';
                                         }
 
-                                        echo implode(', ', $status) ?: 'On Time';
+                                        echo implode(' ', $status);
                                     ?>
                                 <?php endif; ?>
                             </td>

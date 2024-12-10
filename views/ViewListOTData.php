@@ -45,6 +45,16 @@
             min-width: 150px;
         }
 
+        /* Thêm style cho cột time */
+        #overtimeTable td:nth-child(6) {
+            text-align: center;
+            min-width: 80px;
+        }
+        
+        /* Icon đồng hồ trong header */
+        .fa-clock {
+            margin-right: 5px;
+        }
 
     </style>
 </head>
@@ -82,6 +92,7 @@
                             <th><i class="fas fa-calendar-day"></i> Date</th>
                             <th><i class="fas fa-user-clock"></i> Shift</th>
                             <th><i class="fas fa-align-left"></i> Description</th>
+                            <th><i class="fas fa-clock"></i> Time</th>
                             <th><i class="fas fa-tools"></i> Actions</th>
                         </tr>
                     </thead>
@@ -93,6 +104,7 @@
                                 <td><?= $request['date'] ?></td>
                                 <td><?= $request['shift'] ?></td> 
                                 <td><?= $request['description'] ?></td>
+                                <td><?= $request['time'] ?></td>
                                 <td>
                                     <div class="header-actions">
                                         <!-- <form action="index.php?action=approveRequest" method="POST" style="display: inline-block;">

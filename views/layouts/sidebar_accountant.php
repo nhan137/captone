@@ -37,6 +37,11 @@
             <i class="fas fa-calendar-check"></i>Leave Data</a
           >
         </li> 
+        <li>
+          <a href="index.php?action=viewAttendanceHistory">
+            <i class="fas fa-calendar-check"></i>Attendance History</a
+          >
+        </li> 
         <h4>
           <span>General</span>
           <div class="menu-separator"></div>
