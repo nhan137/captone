@@ -5,9 +5,6 @@ if (!isset($_SESSION['id'])) {
     header("Location: index.php?action=login");
     exit();
 }
-
-$overtimeController = new OvertimeController($pdo);
-$overtimeController->handleRequest();
 ?>
 <!DOCTYPE html>
 <html lang="en">

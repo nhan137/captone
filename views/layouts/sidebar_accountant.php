@@ -33,11 +33,11 @@
           >
         </li>
         <li>
-          <a href="leave-management.html">
+          <a href="#">
             <i class="fas fa-calendar-check"></i>Leave Management<br />
             System</a
           >
-        </li>
+        </li> 
         <h4>
           <span>General</span>
           <div class="menu-separator"></div>
