@@ -72,6 +72,25 @@ class OvertimeModel {
             throw new Exception("Lỗi khi từ chối đơn: " . $e->getMessage());
         }
     }
+
+    public function getFilteredOvertimeRequests($employeeId, $status = null) {
+        $query = "SELECT ot.*, e.FirstName, e.LastName 
+                  FROM ot 
+                  JOIN employee e ON ot.EmployeeID = e.EmployeeID
+                  WHERE ot.EmployeeID = :employeeId";
+        $params = ['employeeId' => $employeeId];
+
+        // Chỉ thêm điều kiện lọc theo status
+        if ($status && $status !== 'all') {
+            $query .= " AND ot.status = :status";
+            $params['status'] = $status;
+        }
+
+        $query .= " ORDER BY ot.overtimeID DESC";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute($params);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
     
 ?>

@@ -51,11 +51,19 @@ class OTController {
             header("Location: index.php?action=login");
             exit();
         }
-    
-        // Lấy danh sách đơn OT của nhân viên hiện tại
-        $overtime_requests = $this->overtimeModel->getEmployeeOvertimeRequests($_SESSION['id']);
-    
-        // Gửi danh sách đơn OT đến view
+
+        // Chỉ lấy status filter
+        $status = isset($_GET['status']) ? $_GET['status'] : 'all';
+
+        // Lấy danh sách đơn OT đã được lọc
+        $overtime_requests = $this->overtimeModel->getFilteredOvertimeRequests(
+            $_SESSION['id'],
+            $status
+        );
+
+        // Truyền giá trị active filter để hiển thị trong view
+        $activeStatusFilter = $status;
+
         include 'views/viewPendingOTRequests.php';
     }
     

@@ -36,6 +36,50 @@
             color: #856404;  /* Màu chữ vàng đậm */
         }
 
+        .filter-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .filter-button:hover {
+            background-color: #45a049;
+        }
+
+        #custom-date-inputs {
+            margin-top: 10px;
+        }
+
+        #custom-date-inputs input[type="date"] {
+            padding: 5px;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .filter-form {
+            margin-bottom: 20px;
+        }
+
+        .filter-group {
+            display: inline-block;
+            margin-right: 15px;
+        }
+
+        .filter-group select {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+        }
+
+        .filter-group label {
+            margin-right: 8px;
+        }
 
     </Style>
 </head>
@@ -56,24 +100,19 @@
         </div>
 
         <div class="records-filters">
-        <div class="filter-group">
-            <label><i class="fas fa-calendar"></i> Date Range</label>
-            <select>
-            <option>This Month</option>
-            <option>Last Month</option>
-            <option>Last 3 Months</option>
-            <option>Custom Range</option>
-            </select>
-        </div>
-        <div class="filter-group">
-            <label><i class="fas fa-filter"></i> Status</label>
-            <select>
-            <option>All Status</option>
-            <option>Pending</option>
-            <option>Approved</option>
-            <option>Rejected</option>
-            </select>
-        </div>
+            <form method="GET" action="index.php" class="filter-form">
+                <input type="hidden" name="action" value="viewPendingOTRequests">
+                
+                <div class="filter-group">
+                    <label><i class="fas fa-filter"></i> Status</label>
+                    <select name="status" onchange="this.form.submit()">
+                        <option value="all" <?php echo isset($activeStatusFilter) && $activeStatusFilter == 'all' ? 'selected' : ''; ?>>All Status</option>
+                        <option value="Pending" <?php echo isset($activeStatusFilter) && $activeStatusFilter == 'Pending' ? 'selected' : ''; ?>>Pending</option>
+                        <option value="Approved" <?php echo isset($activeStatusFilter) && $activeStatusFilter == 'Approved' ? 'selected' : ''; ?>>Approved</option>
+                        <option value="Rejected" <?php echo isset($activeStatusFilter) && $activeStatusFilter == 'Rejected' ? 'selected' : ''; ?>>Rejected</option>
+                    </select>
+                </div>
+            </form>
         </div>
 
         <div class="records-table">
