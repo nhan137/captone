@@ -132,5 +132,27 @@ class AccountModel {
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
     }
+
+    public function searchAccounts($searchTerm) {
+        $query = "SELECT * FROM {$this->table} 
+                  WHERE CONCAT(FirstName, ' ', LastName) LIKE :search 
+                  OR Username LIKE :search 
+                  OR FirstName LIKE :search 
+                  OR LastName LIKE :search
+                  OR Email LIKE :search
+                  OR PhoneNumber LIKE :search";
+        
+        $stmt = $this->conn->prepare($query);
+        $searchTerm = "%$searchTerm%";
+        $stmt->bindParam(':search', $searchTerm);
+        
+        try {
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Search error: " . $e->getMessage());
+            return [];
+        }
+    }
 }
 ?>

@@ -10,7 +10,14 @@ class AccountController {
 
     // Hiển thị danh sách tài khoản
     public function index() {
-        $accounts = $this->model->getAllAccounts();
+        $accounts = [];
+        $searchTerm = isset($_GET['search']) ? trim($_GET['search']) : '';
+        
+        if (!empty($searchTerm)) {
+            $accounts = $this->model->searchAccounts($searchTerm);
+        } else {
+            $accounts = $this->model->getAllAccounts();
+        }
 
         require_once 'views/admin/account/index.php';
     }
