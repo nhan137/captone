@@ -20,6 +20,18 @@
     <!-- Custom styles for this template-->
     <link href="assets/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <style>
+    .pagination {
+        margin: 20px 0;
+    }
+    .page-link {
+        color: #4e73df;
+    }
+    .page-item.active .page-link {
+        background-color: #4e73df;
+        border-color: #4e73df;
+    }
+    </style>
 
 </head>
 
@@ -43,36 +55,44 @@
             <li class="nav-item active">
                 <a class="nav-link" href="">
                     <i class="fas fa-fw fa-user"></i>
-                    <span>Tài khoản</span>
+                    <span>Account</span>
                 </a>
             </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Heading -->
-            <!--  Menu Collage
-            
-            <div class="sidebar-heading">
-                Interface
-            </div>
+            <!-- Nav Items - History -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Components</span>
+                <a class="nav-link" href="index.php?action=all_ot_history">
+                    <i class="fas fa-fw fa-clock"></i>
+                    <span class="font-weight-bold">Overtime History</span>
                 </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">Buttons</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
-                    </div>
-                </div>
             </li>
-            -->
 
+            <li class="nav-item">
+                <a class="nav-link" href="index.php?action=all_error_reports">
+                    <i class="fas fa-fw fa-exclamation-triangle"></i>
+                    <span class="font-weight-bold">Error Reports History</span>
+                </a>
+            </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="index.php?action=all_leave_history">
+                    <i class="fas fa-fw fa-calendar"></i>
+                    <span class="font-weight-bold">Leave History</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="index.php?action=all_attendance_history">
+                    <i class="fas fa-fw fa-clipboard-list"></i>
+                    <span class="font-weight-bold">Attendance History</span>
+                </a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">

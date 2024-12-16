@@ -133,29 +133,24 @@ class AccountController {
         }
     }
 
-    public function getAllOTHistory() {
-        try {
-            $otHistory = $this->model->getAllOTHistory();
-            require_once 'views/admin/account/all_ot_history.php';
-        } catch (PDOException $e) {
-            // Log lỗi hoặc hiển thị thông báo
-            echo "Error: " . $e->getMessage();
-        }
-    }
-
-    public function getAllErrorReports() {
-        $errorReports = $this->model->getAllErrorReports();
-        require_once 'views/admin/account/all_error_reports.php';
-    }
-
-    public function getAllLeaveHistory() {
-        $leaveHistory = $this->model->getAllLeaveHistory();
-        require_once 'views/admin/account/all_leave_history.php';
-    }
-
-    public function getAllAttendanceHistory() {
+    public function viewAllAttendanceHistory() {
         $attendanceHistory = $this->model->getAllAttendanceHistory();
-        require_once 'views/admin/account/all_attendance_history.php';
+        require 'views/admin/account/all_attendance_history.php';
+    }
+
+    public function viewAllOTHistory() {
+        $otHistory = $this->model->getAllOTHistory();
+        require 'views/admin/account/all_ot_history.php';
+    }
+
+    public function viewAllLeaveHistory() {
+        $leaveHistory = $this->model->getAllLeaveHistory();
+        require 'views/admin/account/all_leave_history.php';
+    }
+
+    public function viewAllErrorReports() {
+        $errorReports = $this->model->getAllErrorReports();
+        require 'views/admin/account/all_error_reports.php';
     }
 }
 ?>

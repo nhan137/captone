@@ -47,7 +47,7 @@
                 } else if ($_SESSION['role'] === 'giam doc') {
                     include 'views/layouts/sidebar_director.php';
                 } else {
-                    
+                    include 'views/layouts/sidebar_accountant.php';
                 }
         ?>
     <div class="main-content">
