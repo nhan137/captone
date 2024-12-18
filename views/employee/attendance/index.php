@@ -133,7 +133,7 @@
     }
 
     .user-profile {
-        display: flex;
+display: flex;
         align-items: center;
         color: #161a2d;
     }
@@ -285,7 +285,7 @@
     }
 
     .profile-section {
-        text-align: center;
+text-align: center;
         margin-bottom: 2rem;
     }
 
@@ -438,7 +438,7 @@
     .confirmation-actions {
         display: flex;
         justify-content: center;
-        margin-top: 2rem;
+margin-top: 2rem;
     }
 
     .back-button {
@@ -479,7 +479,8 @@
         background: #fff;
         padding: 2rem;
         border-radius: 10px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        margin: 20px;
     }
 
     .attendance-header {
@@ -487,123 +488,129 @@
         justify-content: space-between;
         align-items: center;
         margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #eee;
+        flex-wrap: wrap;
+        gap: 1rem;
     }
 
     .attendance-header h2 {
         color: #2c3e50;
+        font-size: 1.5rem;
         display: flex;
         align-items: center;
         gap: 0.5rem;
     }
 
-    .attendance-header h2 i {
-        color: #3498db;
-    }
-
-    .month-selector {
+    .date-filter-form {
         display: flex;
         align-items: center;
         gap: 1rem;
     }
 
-    .month-nav {
-        background: none;
-        border: none;
-        color: #3498db;
-        cursor: pointer;
-        font-size: 1.2rem;
+    .date-inputs {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
     }
 
+    .form-group {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .form-group label {
+        color: #2c3e50;
+        font-weight: 500;
+        white-space: nowrap;
+    }
+
+    .form-group input[type="date"] {
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 14px;
+        height: 38px;
+    }
+
+    .filter-button {
+        background-color: #3498db;
+        color: white;
+        padding: 8px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+
+    .filter-button:hover {
+        background-color: #2980b9;
+    }
+
+    /* Table Styles */
     .attendance-table-wrapper {
-        overflow-x: auto;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        overflow: hidden;
         margin-bottom: 2rem;
     }
 
     .attendance-table {
         width: 100%;
         border-collapse: collapse;
-        font-size: 0.9rem;
     }
 
-    .attendance-table th,
-    .attendance-table td {
-        padding: 0.5rem;
-        text-align: center;
-        border: 1px solid #ddd;
-    }
-
-    .attendance-table thead th {
+    .attendance-table th {
         background: #f8f9fa;
-        color: #2c3e50;
+        padding: 15px;
         font-weight: 600;
+        color: #2c3e50;
+        text-align: left;
+        border-bottom: 2px solid #eee;
     }
 
-    .attendance-table th i {
-        margin-right: 0.5rem;
-        color: #3498db;
+    .attendance-table td {
+        padding: 15px;
+        border-bottom: 1px solid #eee;
     }
 
-    .days-header th {
-        background: #e9ecef;
-        font-weight: normal;
+    .attendance-table tr:hover {
+        background-color: #f8f9fa;
     }
 
-    /* Attendance Status Colors */
-    .present {
-        background: #e8f5e9;
-        color: #2e7d32;
+    /* Status Badges */
+    .badge {
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 500;
+        display: inline-block;
+        margin: 2px;
     }
 
-    .absent {
-        background-color: #ffebee;
-        color: #c62828;
-        font-weight: bold;
-        padding: 0.5rem;
-        border-radius: 5px;
+    .badge-success {
+        background-color: #27ae60;
+        color: white;
     }
 
-    .late {
-        background: #fff3e0;
-        color: #ef6c00;
+    .badge-warning {
+        background-color: #f39c12;
+        color: white;
     }
 
-    .weekend {
-        background: #f3e5f5;
-        color: #6a1b9a;
+    .badge-danger {
+        background-color: #e74c3c;
+        color: white;
     }
 
-    .holiday {
-        background: #e3f2fd;
-        color: #1565c0;
-    }
-
-    .leave {
-        background: #f1f8e9;
-        color: #558b2f;
-    }
-
-    .attendance-legend {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-        margin-bottom: 2rem;
-        padding: 1rem;
-        background: #f8f9fa;
-        border-radius: 5px;
-    }
-
-    .legend-item {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .legend-color {
-        width: 20px;
-        height: 20px;
-        border-radius: 4px;
-    }
-
+    /* Action Buttons */
     .attendance-actions {
         display: flex;
         gap: 1rem;
@@ -612,1019 +619,43 @@
 
     .export-button,
     .print-button {
-        padding: 0.8rem 1.5rem;
+        padding: 10px 20px;
         border: none;
         border-radius: 5px;
         cursor: pointer;
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        font-size: 1rem;
-        transition: background-color 0.3s ease;
+        font-size: 14px;
+        transition: all 0.3s;
     }
 
     .export-button {
-        background-color: #2ecc71;
-        color: white;
-    }
-
-    .print-button {
         background-color: #3498db;
         color: white;
     }
 
-    .export-button:hover {
-        background-color: #27ae60;
+    .print-button {
+        background-color: #2ecc71;
+        color: white;
     }
 
+    .export-button:hover,
     .print-button:hover {
-        background-color: #2980b9;
+        opacity: 0.9;
     }
 
-    @media (max-width: 1024px) {
-        .attendance-table {
-            font-size: 0.8rem;
-        }
-
-        .attendance-legend {
-            gap: 0.5rem;
-        }
-    }
-
+    /* Responsive Design */
     @media (max-width: 768px) {
         .attendance-header {
             flex-direction: column;
             gap: 1rem;
         }
 
-        .attendance-actions {
+        .date-filter-form {
             flex-direction: column;
-        }
-
-        .legend-item {
-            font-size: 0.9rem;
-        }
-    }
-
-    .error-report-container {
-        background: #fff;
-        padding: 2rem;
-        border-radius: 10px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .error-report-header {
-        margin-bottom: 2rem;
-    }
-
-    .error-report-header h2 {
-        color: #2c3e50;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .error-report-header h2 i {
-        color: #e74c3c;
-    }
-
-    .error-report-form {
-        background: #f8f9fa;
-        padding: 2rem;
-        border-radius: 8px;
-        margin-bottom: 2rem;
-    }
-
-    .error-report-form h3,
-    .error-report-history h3 {
-        color: #2c3e50;
-        margin-bottom: 1.5rem;
-        font-size: 1.2rem;
-    }
-
-    .form-group {
-        margin-bottom: 1.5rem;
-    }
-
-    .form-group label {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        margin-bottom: 0.5rem;
-        color: #2c3e50;
-    }
-
-    .form-group label i {
-        color: #3498db;
-    }
-
-    .form-group input[type="date"],
-    .form-group textarea {
-        width: 100%;
-        padding: 0.8rem;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        font-size: 1rem;
-    }
-
-    .file-input {
-        padding: 0.8rem;
-        background: #fff;
-        border: 1px dashed #3498db;
-        border-radius: 5px;
-        width: 100%;
-    }
-
-    .table-wrapper {
-        overflow-x: auto;
-        margin-bottom: 2rem;
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    th,
-    td {
-        padding: 1rem;
-        text-align: left;
-        border-bottom: 1px solid #eee;
-    }
-
-    th {
-        background: #f8f9fa;
-        color: #2c3e50;
-        font-weight: 600;
-    }
-
-    th i {
-        color: #3498db;
-        margin-right: 0.5rem;
-    }
-
-    .attachment-link {
-        color: #3498db;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .attachment-link:hover {
-        text-decoration: underline;
-    }
-
-    .status-processing {
-        background: #fff3e0;
-        color: #ef6c00;
-        padding: 0.3rem 0.8rem;
-        border-radius: 20px;
-        font-size: 0.9rem;
-    }
-
-    .status-resolved {
-        background: #e8f5e9;
-        color: #2e7d32;
-        padding: 0.3rem 0.8rem;
-        border-radius: 20px;
-        font-size: 0.9rem;
-    }
-
-    .form-actions {
-        display: flex;
-        gap: 1rem;
-        justify-content: flex-end;
-    }
-
-    .submit-button,
-    .cancel-button {
-        padding: 0.8rem 1.5rem;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-size: 1rem;
-        transition: all 0.3s ease;
-    }
-
-    .submit-button {
-        background-color: #2ecc71;
-        color: white;
-    }
-
-    .submit-button:hover {
-        background-color: #27ae60;
-    }
-
-    .cancel-button {
-        background-color: #e74c3c;
-        color: white;
-    }
-
-    .cancel-button:hover {
-        background-color: #c0392b;
-    }
-
-    @media (max-width: 768px) {
-        .error-report-form {
-            padding: 1rem;
-        }
-
-        .form-actions {
-            flex-direction: column;
-        }
-
-        .submit-button,
-        .cancel-button {
             width: 100%;
-            justify-content: center;
         }
-    }
-
-    .leave-application-container {
-        background: #fff;
-        padding: 2rem;
-        border-radius: 10px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .leave-header {
-        margin-bottom: 2rem;
-    }
-
-    .leave-header h2 {
-        color: #2c3e50;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .leave-header h2 i {
-        color: #3498db;
-    }
-
-    .leave-info-box {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem;
-        margin-bottom: 2rem;
-    }
-
-    .info-item {
-        background: #f8f9fa;
-        padding: 1.5rem;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-    }
-
-    .info-item i {
-        font-size: 2rem;
-        color: #3498db;
-    }
-
-    .info-content h4 {
-        color: #7f8c8d;
-        font-size: 0.9rem;
-        margin-bottom: 0.5rem;
-    }
-
-    .info-content p {
-        color: #2c3e50;
-        font-size: 1.2rem;
-        font-weight: bold;
-    }
-
-    .leave-request-form {
-        background: #f8f9fa;
-        padding: 2rem;
-        border-radius: 8px;
-    }
-
-    .form-row {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .form-group {
-        margin-bottom: 1.5rem;
-    }
-
-    .form-group label {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        margin-bottom: 0.5rem;
-        color: #2c3e50;
-    }
-
-    .form-group label i {
-        color: #3498db;
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-        width: 100%;
-        padding: 0.8rem;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        font-size: 1rem;
-        background: #fff;
-    }
-
-    .form-group textarea {
-        resize: vertical;
-    }
-
-    .file-input {
-        padding: 0.8rem;
-        background: #fff;
-        border: 1px dashed #3498db;
-        border-radius: 5px;
-    }
-
-    .form-actions {
-        display: flex;
-        gap: 1rem;
-        justify-content: flex-end;
-        margin-top: 2rem;
-    }
-
-    .submit-button,
-    .cancel-button {
-        padding: 0.8rem 1.5rem;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-size: 1rem;
-        transition: all 0.3s ease;
-    }
-
-    .submit-button {
-        background-color: #2ecc71;
-        color: white;
-    }
-
-    .submit-button:hover {
-        background-color: #27ae60;
-    }
-
-    .cancel-button {
-        background-color: #e74c3c;
-        color: white;
-    }
-
-    .cancel-button:hover {
-        background-color: #c0392b;
-    }
-
-    @media (max-width: 768px) {
-        .leave-info-box {
-            grid-template-columns: 1fr;
-        }
-
-        .form-row {
-            grid-template-columns: 1fr;
-        }
-
-        .form-actions {
-            flex-direction: column;
-        }
-
-        .submit-button,
-        .cancel-button {
-            width: 100%;
-            justify-content: center;
-        }
-    }
-
-    .leave-details-container {
-        background: #fff;
-        padding: 2rem;
-        border-radius: 10px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .leave-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 2rem;
-    }
-
-    .application-status {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.5rem 1rem;
-        border-radius: 20px;
-        font-size: 0.9rem;
-    }
-
-    .application-status.pending {
-        background: #fff3e0;
-        color: #ef6c00;
-    }
-
-    .details-section {
-        background: #f8f9fa;
-        padding: 1.5rem;
-        border-radius: 8px;
-        margin-bottom: 2rem;
-    }
-
-    .details-section h3 {
-        color: #2c3e50;
-        font-size: 1.1rem;
-        margin-bottom: 1.5rem;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .details-section h3 i {
-        color: #3498db;
-    }
-
-    .details-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-    }
-
-    .detail-item {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    .detail-item.full-width {
-        grid-column: 1 / -1;
-    }
-
-    .detail-item label {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        color: #7f8c8d;
-        font-size: 0.9rem;
-    }
-
-    .detail-item label i {
-        color: #3498db;
-    }
-
-    .detail-item input,
-    .detail-item textarea {
-        width: 100%;
-        padding: 0.8rem;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        background: #fff;
-        color: #2c3e50;
-        font-size: 1rem;
-    }
-
-    .detail-item input[readonly],
-    .detail-item textarea[readonly] {
-        background: #f8f9fa;
-        cursor: not-allowed;
-    }
-
-    .form-actions {
-        display: flex;
-        gap: 1rem;
-        justify-content: flex-end;
-        margin-top: 2rem;
-    }
-
-    .back-button,
-    .print-button {
-        padding: 0.8rem 1.5rem;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-size: 1rem;
-        transition: all 0.3s ease;
-    }
-
-    .back-button {
-        background-color: #95a5a6;
-        color: white;
-    }
-
-    .back-button:hover {
-        background-color: #7f8c8d;
-    }
-
-    .print-button {
-        background-color: #3498db;
-        color: white;
-    }
-
-    .print-button:hover {
-        background-color: #2980b9;
-    }
-
-    @media (max-width: 768px) {
-        .leave-header {
-            flex-direction: column;
-            gap: 1rem;
-            text-align: center;
-        }
-
-        .details-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .form-actions {
-            flex-direction: column;
-        }
-
-        .back-button,
-        .print-button {
-            width: 100%;
-            justify-content: center;
-        }
-    }
-
-    .leave-history-table {
-        overflow-x: auto;
-    }
-
-    .leave-history-table table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 1rem;
-    }
-
-    .leave-history-table th,
-    .leave-history-table td {
-        padding: 1rem;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-    }
-
-    .leave-history-table th {
-        background: #f1f1f1;
-        color: #2c3e50;
-        font-weight: 600;
-    }
-
-    .leave-history-table th i {
-        color: #3498db;
-        margin-right: 0.5rem;
-    }
-
-    .leave-history-table tbody tr:hover {
-        background-color: #f8f9fa;
-    }
-
-    /* Status badges */
-    .status-approved,
-    .status-rejected,
-    .status-pending {
-        padding: 0.3rem 0.8rem;
-        border-radius: 20px;
-        font-size: 0.9rem;
-        display: inline-block;
-    }
-
-    .status-approved {
-        background: #e8f5e9;
-        color: #2e7d32;
-    }
-
-    .status-rejected {
-        background: #ffebee;
-        color: #c62828;
-    }
-
-    .status-pending {
-        background: #fff3e0;
-        color: #ef6c00;
-    }
-
-    @media (max-width: 768px) {
-        .leave-history-table {
-            font-size: 0.9rem;
-        }
-
-        .leave-history-table th,
-        .leave-history-table td {
-            padding: 0.8rem;
-        }
-    }
-
-    .overtime-container {
-        background: #fff;
-        padding: 2rem;
-        border-radius: 10px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .overtime-header {
-        margin-bottom: 2rem;
-    }
-
-    .overtime-header h2 {
-        color: #2c3e50;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .overtime-header h2 i {
-        color: #3498db;
-    }
-
-    .overtime-stats {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem;
-        margin-bottom: 2rem;
-    }
-
-    .stat-card {
-        background: #f8f9fa;
-        padding: 1.5rem;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-    }
-
-    .stat-card i {
-        font-size: 2rem;
-        color: #3498db;
-    }
-
-    .stat-info h4 {
-        color: #7f8c8d;
-        font-size: 0.9rem;
-        margin-bottom: 0.5rem;
-    }
-
-    .stat-info p {
-        color: #2c3e50;
-        font-size: 1.2rem;
-        font-weight: bold;
-    }
-
-    .overtime-form {
-        background: #f8f9fa;
-        padding: 2rem;
-        border-radius: 8px;
-    }
-
-    .overtime-form h3 {
-        color: #2c3e50;
-        margin-bottom: 1.5rem;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .overtime-form h3 i {
-        color: #3498db;
-    }
-
-    .form-row {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .form-group {
-        margin-bottom: 1.5rem;
-    }
-
-    .form-group label {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        margin-bottom: 0.5rem;
-        color: #2c3e50;
-    }
-
-    .form-group label i {
-        color: #3498db;
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-        width: 100%;
-        padding: 0.8rem;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        font-size: 1rem;
-    }
-
-    .form-group textarea {
-        resize: vertical;
-    }
-
-    .form-actions {
-        display: flex;
-        gap: 1rem;
-        justify-content: flex-end;
-        margin-top: 2rem;
-    }
-
-    .submit-button,
-    .cancel-button {
-        padding: 0.8rem 1.5rem;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-size: 1rem;
-        transition: all 0.3s ease;
-    }
-
-    .submit-button {
-        background-color: #2ecc71;
-        color: white;
-    }
-
-    .submit-button:hover {
-        background-color: #27ae60;
-    }
-
-    .cancel-button {
-        background-color: #e74c3c;
-        color: white;
-    }
-
-    .cancel-button:hover {
-        background-color: #c0392b;
-    }
-
-    @media (max-width: 768px) {
-        .overtime-stats {
-            grid-template-columns: 1fr;
-        }
-
-        .form-row {
-            grid-template-columns: 1fr;
-        }
-
-        .form-actions {
-            flex-direction: column;
-        }
-
-        .submit-button,
-        .cancel-button {
-            width: 100%;
-            justify-content: center;
-        }
-    }
-
-    .overtime-records-container {
-        background: #fff;
-        padding: 2rem;
-        border-radius: 10px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .records-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 2rem;
-    }
-
-    .header-actions {
-        display: flex;
-        gap: 1rem;
-    }
-
-    .new-request-button,
-    .export-button {
-        padding: 0.8rem 1.5rem;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-size: 1rem;
-        transition: all 0.3s ease;
-    }
-
-    .new-request-button {
-        background-color: #2ecc71;
-        color: white;
-    }
-
-    .export-button {
-        background-color: #3498db;
-        color: white;
-    }
-
-    .records-filters {
-        display: flex;
-        gap: 1.5rem;
-        margin-bottom: 2rem;
-    }
-
-    .filter-group {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    .filter-group label {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        color: #7f8c8d;
-    }
-
-    .filter-group select {
-        padding: 0.5rem;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        min-width: 150px;
-    }
-
-    .records-table {
-        overflow-x: auto;
-        margin-bottom: 2rem;
-    }
-
-    .records-table table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    .records-table th,
-    .records-table td {
-        padding: 1rem;
-        text-align: left;
-        border-bottom: 1px solid #eee;
-    }
-
-    .records-table th {
-        background: #f8f9fa;
-        color: #2c3e50;
-        font-weight: 600;
-    }
-
-    .records-table th i {
-        color: #3498db;
-        margin-right: 0.5rem;
-    }
-
-    .records-table tbody tr:hover {
-        background-color: #f8f9fa;
-    }
-
-    .status-badge {
-        padding: 0.3rem 0.8rem;
-        border-radius: 20px;
-        font-size: 0.9rem;
-    }
-
-    .status-badge.pending {
-        background: #fff3e0;
-        color: #ef6c00;
-    }
-
-    .status-badge.approved {
-        background: #e8f5e9;
-        color: #2e7d32;
-    }
-
-    .status-badge.rejected {
-        background: #ffebee;
-        color: #c62828;
-    }
-
-    .records-summary {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem;
-        margin-top: 2rem;
-        padding-top: 2rem;
-        border-top: 1px solid #eee;
-    }
-
-    .summary-item {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        padding: 1rem;
-        background: #f8f9fa;
-        border-radius: 8px;
-    }
-
-    .summary-item i {
-        font-size: 2rem;
-        color: #3498db;
-    }
-
-    .summary-info h4 {
-        color: #7f8c8d;
-        font-size: 0.9rem;
-        margin-bottom: 0.5rem;
-    }
-
-    .summary-info p {
-        color: #2c3e50;
-        font-size: 1.2rem;
-        font-weight: bold;
-    }
-
-    @media (max-width: 768px) {
-        .records-header {
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .header-actions {
-            width: 100%;
-            flex-direction: column;
-        }
-
-        .records-filters {
-            flex-direction: column;
-        }
-
-        .records-summary {
-            grid-template-columns: 1fr;
-        }
-
-        .new-request-button,
-        .export-button {
-            width: 100%;
-            justify-content: center;
-        }
-    }
-
-    /* Cơ bản cho badge */
-    .badge {
-        display: inline-block;
-        padding: 0.5em 1em;
-        font-size: 0.875rem;
-        font-weight: 700;
-        text-align: center;
-        border-radius: 12px;
-        color: #fff;
-    }
-
-    /* Badge cho cảnh báo (Warning) */
-    .badge-warning {
-        background-color: #f39c12;
-        /* Màu vàng cảnh báo */
-        border: 1px solid #e67e22;
-        /* Màu viền đậm hơn để tạo điểm nhấn */
-    }
-
-    /* Badge cho lỗi (Error/Danger) */
-    .badge-danger {
-        background-color: #e74c3c;
-        /* Màu đỏ cho lỗi */
-        border: 1px solid #c0392b;
-        /* Màu viền đỏ đậm */
-    }
-
-    /* Tùy chọn thêm các badge khác */
-    .badge-info {
-        background-color: #3498db;
-        /* Màu xanh dương cho thông tin */
-        border: 1px solid #2980b9;
-    }
-
-    .badge-success {
-        background-color: #2ecc71;
-        /* Màu xanh lá cho thành công */
-        border: 1px solid #27ae60;
-    }
-
-    .status-absent {
-        background-color: #ffebee; /* Màu nền nhạt cho trạng thái Absent */
-        color: #c62828; /* Màu chữ đỏ cho trạng thái Absent */
-        font-weight: bold; /* L��m cho chữ đậm hơn */
-        padding: 0.5rem; /* Thêm khoảng cách xung quanh chữ */
-        border-radius: 5px; /* Bo góc cho trạng thái */
     }
     </style>
 </head>
@@ -1638,25 +669,23 @@
 
             <div class="attendance-header">
                 <h2><i class="fas fa-history"></i> Attendance History</h2>
-                <!-- <div class="month-selector">
-                    <button class="month-nav">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <h3>October 2024</h3>
-                    <button class="month-nav">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div> -->
-                <form method="GET">
-                    <label for="start_date">Start Date:</label>
-                    <input type="date" id="start_date" name="start_date"
-                        value="<?= htmlspecialchars($_GET['start_date'] ?? date('Y-m-01')) ?>">
+                <form class="date-filter-form" method="GET">
+                    <input type="hidden" name="action" value="attendance">
+                    <div class="form-group">
+                        <label>Start Date:</label>
+                        <input type="date" name="start_date" 
+                            value="<?= htmlspecialchars($_GET['start_date'] ?? date('Y-m-01')) ?>">
+                    </div>
 
-                    <label for="end_date">End Date:</label>
-                    <input type="date" id="end_date" name="end_date"
-                        value="<?= htmlspecialchars($_GET['end_date'] ?? date('Y-m-t')) ?>">
+                    <div class="form-group">
+                        <label>End Date:</label>
+                        <input type="date" name="end_date" 
+                            value="<?= htmlspecialchars($_GET['end_date'] ?? date('Y-m-t')) ?>">
+                    </div>
 
-                    <button type="submit">Filter</button>
+                    <button type="submit" class="filter-button">
+                        <i class="fas fa-filter"></i> Filter
+                    </button>
                 </form>
             </div>
 
@@ -1706,7 +735,7 @@
                                     N/A
                                 <?php else : ?>
                                     <?= htmlspecialchars($attendance['CheckinLocation']) ?>
-                                <?php endif; ?>
+<?php endif; ?>
                             </td>
                             <td>
                                 <?php if ($attendance['IsAbsent']) : ?>

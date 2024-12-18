@@ -249,6 +249,39 @@
         #attendanceTable td:last-child {
             width: 20%;
         }
+
+        /* Thêm style mới cho cột GPS location */
+        #attendanceTable td:nth-child(6),
+        #attendanceTable td:nth-child(7) {
+            max-width: 150px;        /* Giới hạn chiều rộng tối đa */
+            overflow: hidden;        /* Ẩn nội dung thừa */
+            text-overflow: ellipsis; /* Hiển thị dấu ... khi text quá dài */
+            white-space: nowrap;     /* Không xuống dòng */
+        }
+
+        /* Thêm tooltip khi hover */
+        #attendanceTable td:nth-child(6),
+        #attendanceTable td:nth-child(7) {
+            position: relative;
+            cursor: pointer;
+        }
+
+        #attendanceTable td:nth-child(6):hover,
+        #attendanceTable td:nth-child(7):hover {
+            overflow: visible;
+            white-space: normal;
+            background-color: #f8f9fa;
+            z-index: 1;
+            position: relative;
+        }
+
+        /* Điều chỉnh độ rộng các cột */
+        #attendanceTable th:nth-child(6),
+        #attendanceTable td:nth-child(6),
+        #attendanceTable th:nth-child(7),
+        #attendanceTable td:nth-child(7) {
+            width: 150px;
+        }
     </style>
 </head>
 <body>
@@ -310,35 +343,23 @@
                                         <span class="status-absent">Absent</span>
                                     <?php else : ?>
                                         <?php 
-                                            $status = [];
-                                            
-                                            // Check-in status
-                                            if (!empty($record['CheckinTime'])) {
-                                                $checkinTime = new DateTime($record['CheckinTime']);
-                                                $checkinDay = $checkinTime->format('Y-m-d');
-                                                $lateThreshold = new DateTime($checkinDay . ' 08:00:00');
-                                                
-                                                if ($checkinTime > $lateThreshold) {
-                                                    $status[] = '<span class="badge badge-danger">Late Check-in</span>';
-                                                } else {
-                                                    $status[] = '<span class="badge badge-success">On Time Check-in</span>';
-                                                }
-                                            }
-                                            
-                                            // Check-out status
-                                            if (!empty($record['CheckoutTime'])) {
-                                                $checkoutTime = new DateTime($record['CheckoutTime']);
-                                                $checkoutDay = $checkoutTime->format('Y-m-d');
-                                                $earlyThreshold = new DateTime($checkoutDay . ' 17:30:00');
-                                                
-                                                if ($checkoutTime < $earlyThreshold) {
-                                                    $status[] = '<span class="badge badge-warning">Early Check-out</span>';
-                                                } else {
-                                                    $status[] = '<span class="badge badge-success">On Time Check-out</span>';
-                                                }
+                                            // Hiển thị trạng thái check-in
+                                            if ($record['CheckinStatus'] === 'On Time') {
+                                                echo '<span class="badge badge-success">Check-in On Time</span>';
+                                            } else {
+                                                echo '<span class="badge badge-danger">Late Check-in</span>';
                                             }
 
-                                            echo implode(' ', $status);
+                                            echo ' '; // Khoảng cách giữa các badge
+
+                                            // Hiển thị trạng thái check-out
+                                            if (!empty($record['CheckoutTime'])) {
+                                                if ($record['CheckoutStatus'] === 'On Time') {
+                                                    echo '<span class="badge badge-success">Check-out On Time</span>';
+                                                } else {
+                                                    echo '<span class="badge badge-warning">Early Check-out</span>';
+                                                }
+                                            }
                                         ?>
                                     <?php endif; ?>
                                 </td>

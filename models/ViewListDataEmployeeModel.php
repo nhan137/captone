@@ -98,6 +98,34 @@ class ViewListDataEmployeeModel {
         $stmt = $this->pdo->query("SELECT FOUND_ROWS()");
         $totalRecords = $stmt->fetchColumn();
         
+        // Thêm xử lý trạng thái cho mỗi bản ghi
+        foreach ($results as &$record) {
+            // Xử lý Check-in Status
+            $checkinTime = new DateTime($record['CheckinTime']);
+            $workDate = $checkinTime->format('Y-m-d');
+            $startTime = new DateTime($workDate . ' 08:00:00');
+            
+            if ($checkinTime <= $startTime) {
+                $record['CheckinStatus'] = 'On Time';
+            } else {
+                $record['CheckinStatus'] = 'Late';
+            }
+
+            // Xử lý Check-out Status
+            if (!empty($record['CheckoutTime'])) {
+                $checkoutTime = new DateTime($record['CheckoutTime']);
+                $endTime = new DateTime($workDate . ' 17:30:00');
+                
+                if ($checkoutTime >= $endTime) {
+                    $record['CheckoutStatus'] = 'On Time';
+                } else {
+                    $record['CheckoutStatus'] = 'Early';
+                }
+            } else {
+                $record['CheckoutStatus'] = 'N/A';
+            }
+        }
+
         return [
             'data' => $results,
             'total' => $totalRecords

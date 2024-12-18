@@ -98,7 +98,26 @@ switch ($action) {
     case 'delete-account': 
         $accountController = new AccountController(pdo: $pdo);
         $accountController->delete();
-        break;   
+        break;
+    case 'all_ot_history':
+        $accountController = new AccountController($pdo);
+        $accountController->getAllOTHistory();
+        break;
+
+    case 'all_error_reports':
+        $accountController = new AccountController($pdo);
+        $accountController->getAllErrorReports();
+        break;
+
+    case 'all_leave_history':
+        $accountController = new AccountController($pdo);
+        $accountController->getAllLeaveHistory();
+        break;
+
+    case 'all_attendance_history':
+        $accountController = new AccountController($pdo);
+        $accountController->getAllAttendanceHistory();
+        break;
     // Chức năng gửi đơn nghỉ phép
     case 'submitLeaveRequest':
         $LeaveRequestController = new LeaveRequestController($pdo);

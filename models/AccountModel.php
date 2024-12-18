@@ -132,5 +132,70 @@ class AccountModel {
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
     }
+
+    public function searchAccounts($searchTerm) {
+        $query = "SELECT * FROM {$this->table} 
+                  WHERE CONCAT(FirstName, ' ', LastName) LIKE :search 
+                  OR Username LIKE :search 
+                  OR FirstName LIKE :search 
+                  OR LastName LIKE :search
+                  OR Email LIKE :search
+                  OR PhoneNumber LIKE :search";
+        
+        $stmt = $this->conn->prepare($query);
+        $searchTerm = "%$searchTerm%";
+        $stmt->bindParam(':search', $searchTerm);
+        
+        try {
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Search error: " . $e->getMessage());
+            return [];
+        }
+    }
+
+    public function getAllOTHistory() {
+        $query = "SELECT o.overtimeID, o.employeeID, o.date, o.shift, o.time, 
+                  o.description, o.status,
+                  e.FirstName, e.LastName 
+                  FROM ot o 
+                  JOIN employee e ON o.employeeID = e.EmployeeID 
+                  ORDER BY o.date DESC";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getAllErrorReports() {
+        $query = "SELECT er.*, e.FirstName, e.LastName 
+                  FROM attendanceerrorreport er 
+                  JOIN employee e ON er.EmployeeID = e.EmployeeID 
+                  ORDER BY er.ReportDate DESC";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getAllLeaveHistory() {
+        $query = "SELECT lr.*, e.FirstName, e.LastName 
+                  FROM leaverequest lr 
+                  JOIN employee e ON lr.EmployeeID = e.EmployeeID 
+                  ORDER BY lr.StartDate DESC";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getAllAttendanceHistory() {
+        $query = "SELECT c.*, e.FirstName, e.LastName,
+                  TIMEDIFF(c.CheckoutTime, c.CheckinTime) as TotalHours
+                  FROM checkincheckout c
+                  JOIN employee e ON c.EmployeeID = e.EmployeeID 
+                  ORDER BY c.CheckinTime DESC";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 ?>
