@@ -51,7 +51,7 @@
             <i class="fas fa-bug"></i>Time Attendance <br />Error Notification</a>
         </li>
         <li>
-          <a href="index.php?action=salary">
+          <a href="index.php?action=payroll">
               <i class="fas fa-rectangle-list"></i>Salary</a>
         </li>
         <li>

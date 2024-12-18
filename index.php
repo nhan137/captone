@@ -13,6 +13,9 @@ require_once 'controllers/OTController.php';
 require_once 'controllers/AttendanceRuleController.php';
 require_once 'controllers/EmployeeController.php';
 require_once 'controllers/ViewListDataEmployeeController.php';
+require_once 'controllers/Accountant/Employee_list_Controller.php';
+require_once 'controllers/Accountant/PayrollController.php';
+
 require_once 'config.php';
 require_once 'models/OvertimeModel.php';
 
@@ -281,6 +284,22 @@ switch ($action) {
     case 'viewAttendanceHistory':
         $controller = new ViewListDataEmployeeController($pdo);
         $controller->viewAttendanceHistory();
+        break;
+    
+    //Accountant - Kế Toán
+    case 'ViewEmployeeListAccountant':
+        $ViewEmployeeList = new Employee_list_Controller($pdo);
+        $ViewEmployeeList->viewEmployeeList();
+        break;
+    
+    case 'payroll':
+        if (!isset($_SESSION['id']) || $_SESSION['role'] !== 'ke toan') {
+            header("Location: index.php?action=login");
+            exit();
+        }
+        require_once 'controllers/Accountant/PayrollController.php';
+        $controller = new PayrollController($pdo);
+        $controller->index();
         break;
 
     default:
