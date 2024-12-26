@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 18, 2024 lúc 02:30 PM
+-- Thời gian đã tạo: Th12 26, 2024 lúc 04:54 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -134,7 +134,7 @@ INSERT INTO `employee` (`EmployeeID`, `Username`, `Password`, `FirstName`, `Last
 (1, 'NguyenDoanNhan', '$2y$10$OM49cMvvGJN5YPyOMjER6.joVY0tV2XWdtynK83XyH0PNoJ6FWK3m', 'Nguyễn Doãn', 'Nhân', '2003-12-13', NULL, '123456789', '2020-11-18', 'Da Nang', 'nhannguyen13072003@gmail.com', '0366010078', 'Có gia đình', 'Da Nang', 'Viet Nam', 'Việt Nam', 'nhan vien', 50000.00),
 (2, 'PhanPhuTuan', '$2y$10$.eEzU0GFNB9gpaTWxxW06e3zq9h7Jh5nsr1HN2YhwPxoLZ833KGs6', 'Phan Phu', 'tuan', '2003-11-12', 'male', '0728149212', '2024-11-19', 'Đà nẵng city', 'phutuan@gmail.com', '0366010078', 'Độc thân', 'đà nẵng', 'việt nam', 'Việt Nam', 'nhan vien', 100000.00),
 (13, 'Khangnguyen', '$2y$10$l8kCydLJ8die4ND38w1zH.IzLGbohC7eOgfVdgTw/0OGcH6bD2L7O', 'Nguyen', 'khang', '2003-12-07', NULL, '049203015584', '2003-12-08', 'điện bàn', 'trieu8845@gmail.com', '0329462933', 'Độc thân', NULL, 'điện bàn quảng nam', 'Việt Nam', 'giam doc', 0.00),
-(17, 'NguyenDoanminh', '$2y$10$P9g4uMiYfLaAA89rIe2hFes.3b6bFluEAnMWi5jOdA.kbxCTyjKbS', 'Nguyen', 'Nghia', '2003-12-12', 'male', '049203015584', '2021-11-11', 'điện bàn', 'trieu8845@gmail.com', '0329462933', 'Độc thân', 'quảng nam ', 'điện bàn quảng nam', 'Việt Nam', 'ke toan', 0.00),
+(17, 'NguyenDoanminh', '$2y$10$P9g4uMiYfLaAA89rIe2hFes.3b6bFluEAnMWi5jOdA.kbxCTyjKbS', 'nguyen', 'Nghia', '2003-12-12', 'male', '049203015584', '2021-11-11', 'điện bàn', 'trieu8845@gmail.com', '0329462933', 'Độc thân', 'quảng nam ', 'điện bàn quảng nam', 'Việt Nam', 'ke toan', 0.00),
 (18, 'TranThiHong', '$2y$10$2FqHyx7f2C1s4oxzRwPZ/.KU5q/PZBHsE8bWmJYMXruB2UpCuZulO', 'Trần Thị', 'Hồng', '1995-05-15', 'female', '123789456', '2019-03-20', 'Da Nang', 'hong.tran@gmail.com', '0905123456', 'Độc thân', 'Da Nang', 'Da Nang', 'Việt Nam', 'nhan vien', 0.00),
 (19, 'LeVanThanh', '$2y$10$2FqHyx7f2C1s4oxzRwPZ/.KU5q/PZBHsE8bWmJYMXruB2UpCuZulO', 'Lê Văn', 'Thành', '1990-08-22', 'male', '987654321', '2018-06-15', 'Quang Nam', 'thanh.le@gmail.com', '0935789123', 'Có gia đình', 'Quang Nam', 'Quang Nam', 'Việt Nam', 'nhan vien', 0.00),
 (20, 'NguyenThiLan', '$2y$10$2FqHyx7f2C1s4oxzRwPZ/.KU5q/PZBHsE8bWmJYMXruB2UpCuZulO', 'Nguyễn Thị', 'Lan', '1993-12-10', 'female', '456123789', '2020-01-10', 'Hue', 'lan.nguyen@gmail.com', '0978456123', 'Độc thân', 'Hue', 'Hue', 'Việt Nam', 'nhan vien', 0.00),

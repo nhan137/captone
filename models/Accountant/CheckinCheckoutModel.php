@@ -10,9 +10,10 @@ class CheckinCheckoutModel {
     public function getEmployees() {
         $query = "SELECT EmployeeID as id, 
                         CONCAT(FirstName, ' ', LastName) as FullName, 
-                        HourlyRate 
+                        BaseSalary 
                  FROM employee 
-                 WHERE Role != 'admin'";
+                 WHERE Role NOT IN ('admin', 'ke toan', 'giam doc')";
+                 
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -36,7 +37,7 @@ class CheckinCheckoutModel {
     }
 
     // Lưu hoặc cập nhật bảng payroll
-    public function saveOrUpdatePayroll($employeeId, $month, $year, $totalHours, $hourlyRate, $totalSalary) {
+    public function saveOrUpdatePayroll($employeeId, $month, $year, $totalHours, $totalSalary) {
         $existingPayroll = $this->checkExistingPayroll($employeeId, $month, $year);
 
         if ($existingPayroll) {
@@ -150,5 +151,33 @@ class CheckinCheckoutModel {
             }
         }
         return round($totalHours, 2);
+    }
+
+    // Thêm phương thức tính số ngày làm việc trong tháng
+    public function getWorkingDaysInMonth($month, $year) {
+        $firstDay = new DateTime("$year-$month-01");
+        $lastDay = new DateTime($firstDay->format('Y-m-t'));
+        
+        $workingDays = 0;
+        $currentDay = clone $firstDay;
+        
+        while ($currentDay <= $lastDay) {
+            // 0 = Chủ nhật, 6 = Thứ 7
+            if ($currentDay->format('w') != 0 && $currentDay->format('w') != 6) {
+                $workingDays++;
+            }
+            $currentDay->modify('+1 day');
+        }
+        
+        return $workingDays;
+    }
+
+    // Sửa lại phương thức tính lương
+    public function calculateSalary($baseSalary, $totalHours, $workingDays) {
+        // Tính lương một giờ = Lương cơ bản / (số ngày làm * 8 giờ)
+        $hourlyRate = $baseSalary / ($workingDays * 8);
+        
+        // Tính tổng lương = số giờ làm * lương một giờ
+        return $totalHours * $hourlyRate;
     }
 }

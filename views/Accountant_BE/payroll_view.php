@@ -63,6 +63,29 @@ if (!isset($_SESSION['id']) || $_SESSION['role'] !== 'ke toan') {
         button:hover {
             background-color: #218838;
         }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            gap: 5px;
+        }
+        
+        .pagination a, .pagination span {
+            padding: 8px 16px;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            color: #007BFF;
+        }
+        
+        .pagination .active {
+            background-color: #007BFF;
+            color: white;
+            border: 1px solid #007BFF;
+        }
+        
+        .pagination a:hover:not(.active) {
+            background-color: #ddd;
+        }
     </style>
 </head>
 <body>
@@ -72,7 +95,7 @@ if (!isset($_SESSION['id']) || $_SESSION['role'] !== 'ke toan') {
         <label for="month">Chọn tháng:</label>
         <select name="month" id="month" required>
             <?php for ($i = 1; $i <= 12; $i++): ?>
-                <option value="<?= $i ?>" <?= (isset($_POST['month']) && $_POST['month'] == $i) ? 'selected' : '' ?>>
+                <option value="<?= $i ?>" <?= (isset($pagination['month']) && $pagination['month'] == $i) ? 'selected' : '' ?>>
                     <?= $i ?>
                 </option>
             <?php endfor; ?>
@@ -81,7 +104,7 @@ if (!isset($_SESSION['id']) || $_SESSION['role'] !== 'ke toan') {
         <label for="year">Chọn năm:</label>
         <select name="year" id="year" required>
             <?php for ($y = date('Y') - 5; $y <= date('Y'); $y++): ?>
-                <option value="<?= $y ?>" <?= (isset($_POST['year']) && $_POST['year'] == $y) ? 'selected' : '' ?>>
+                <option value="<?= $y ?>" <?= (isset($pagination['year']) && $pagination['year'] == $y) ? 'selected' : '' ?>>
                     <?= $y ?>
                 </option>
             <?php endfor; ?>
@@ -101,36 +124,54 @@ if (!isset($_SESSION['id']) || $_SESSION['role'] !== 'ke toan') {
         <?php endif; ?>
     </div>
 
-    <?php if (!empty($salaries)): ?>
+    <?php if (!empty($salariesOnPage)): ?>
         <h2 style="text-align: center;">Kết quả tính lương</h2>
         <table>
             <tr>
                 <th>Employee ID</th>
                 <th>Họ và tên</th>
+                <th>Lương cơ bản</th>
+                <th>Số ngày làm việc</th>
                 <th>Số giờ làm</th>
-                <th>Lương theo giờ</th>
                 <th>Tổng lương</th>
                 <th>Ghi chú</th>
             </tr>
-            <?php foreach ($salaries as $salary): ?>
+            <?php foreach ($salariesOnPage as $salary): ?>
                 <tr>
                     <td><?= htmlspecialchars($salary['EmployeeID']) ?></td>
                     <td><?= htmlspecialchars($salary['FullName']) ?></td>
+                    <td><?= number_format($salary['BaseSalary'], 0) ?> VND</td>
+                    <td><?= $salary['WorkingDays'] ?> ngày</td>
                     <td><?= number_format($salary['TotalHours'], 2) ?> giờ</td>
-                    <td><?= number_format($salary['HourlyRate'], 2) ?> VND</td>
-                    <td><?= number_format($salary['Salary'], 2) ?> VND</td>
+                    <td><?= number_format($salary['Salary'], 0) ?> VND</td>
                     <td><?= htmlspecialchars($salary['Note']) ?></td>
                 </tr>
             <?php endforeach; ?>
         </table>
+
+        <?php if ($pagination['totalPages'] > 1): ?>
+            <div class="pagination">
+                <?php if ($pagination['currentPage'] > 1): ?>
+                    <a href="?action=payroll&page=1"><<</a>
+                    <a href="?action=payroll&page=<?= $pagination['currentPage']-1 ?>"><</a>
+                <?php endif; ?>
+
+                <?php for ($i = max(1, $pagination['currentPage']-2); $i <= min($pagination['totalPages'], $pagination['currentPage']+2); $i++): ?>
+                    <?php if ($i == $pagination['currentPage']): ?>
+                        <span class="active"><?= $i ?></span>
+                    <?php else: ?>
+                        <a href="?action=payroll&page=<?= $i ?>"><?= $i ?></a>
+                    <?php endif; ?>
+                <?php endfor; ?>
+
+                <?php if ($pagination['currentPage'] < $pagination['totalPages']): ?>
+                    <a href="?action=payroll&page=<?= $pagination['currentPage']+1 ?>">></a>
+                    <a href="?action=payroll&page=<?= $pagination['totalPages'] ?>">>></a>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
     <?php elseif ($_SERVER['REQUEST_METHOD'] === 'POST'): ?>
         <p style="text-align: center; color: red;">Không có dữ liệu tính lương cho tháng và năm đã chọn.</p>
-    <?php endif; ?>
-
-    <?php if (!empty($salaries)): ?>
-        <div style="text-align: center; margin: 20px 0;">
-            <button onclick="exportToExcel()" style="background-color: #007bff;">Xuất báo cáo Excel</button>
-        </div>
     <?php endif; ?>
 </body>
 </html>
