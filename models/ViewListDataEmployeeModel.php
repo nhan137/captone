@@ -19,7 +19,6 @@ class ViewListDataEmployeeModel {
             $query .= " AND ot.employeeID = ?";
             $params[] = $employeeId;
         }
-        
         $query .= " ORDER BY ot.overtimeID DESC";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute($params);

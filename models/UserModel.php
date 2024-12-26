@@ -17,15 +17,16 @@ class UserModel {
     //     return $stmt->fetch(PDO::FETCH_ASSOC); // Trả về thông tin người dùng nếu đăng nhập đúng
     // }
     public function checkLogin($username, $password) {
-        $sql = "SELECT * FROM employee WHERE Username = ?";
+        // Thêm BINARY để phân biệt chữ hoa/thường
+        $sql = "SELECT * FROM employee WHERE BINARY Username = ?";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([$username]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-    
+
         if ($user && password_verify($password, $user['Password'])) {
-            return $user; // Trả về thông tin người dùng nếu mật khẩu đúng
+            return $user;
         }
-        return false; // Trả về false nếu không tìm thấy người dùng hoặc mật khẩu sai
+        return false;
     }
 
     // Lấy thông tin người dùng
