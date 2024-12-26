@@ -413,18 +413,18 @@
                                 <div class="mb-3">
                                     <label for="role" class="form-label">Vai trò</label>
                                     <select class="form-control" id="role" name="role" required>
-                                        <option value="giám đốc"
+                                        <!-- <option value="giám đốc"
                                             <?php echo ($account['Role'] == 'giám đốc') ? 'selected' : ''; ?>>Giám
                                             đốc
-                                        </option>
+                                        </option> -->
                                         <option value="nhân viên"
                                             <?php echo ($account['Role'] == 'nhân viên') ? 'selected' : ''; ?>>Nhân
                                             viên
                                         </option>
-                                        <option value="kế toán"
+                                        <!-- <option value="kế toán"
                                             <?php echo ($account['Role'] == 'kế toán') ? 'selected' : ''; ?>>Kế toán
                                         </option>
-                                    </select>
+                                    </select> -->
                                 </div>
                                 <button type="submit" class="btn btn-primary">Cập nhật tài Khoản</button>
                                 <a href="index.php?action=account" class="btn btn-secondary">Hủy</a>

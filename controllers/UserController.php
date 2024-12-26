@@ -11,9 +11,16 @@ class UserController {
 
     public function login() {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Validate và sanitize input
+            $username = trim($_POST['username']);
+            $password = trim($_POST['password']);
 
-            $username = $_POST['username'];
-            $password = $_POST['password'];
+            // Kiểm tra username chỉ chứa các ký tự cho phép
+            if (!preg_match('/^[a-zA-Z0-9_]+$/', $username)) {
+                echo "Tên đăng nhập chỉ được chứa chữ cái, số và dấu gạch dưới.";
+                include 'views/login_view.php';
+                return;
+            }
 
             $user = $this->userModel->checkLogin($username, $password);
             
