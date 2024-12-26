@@ -17,7 +17,7 @@ class UserController {
 
             // Kiểm tra username chỉ chứa các ký tự cho phép
             if (!preg_match('/^[a-zA-Z0-9_]+$/', $username)) {
-                echo "Tên đăng nhập chỉ được chứa chữ cái, số và dấu gạch dưới.";
+                $_SESSION['login_error'] = "Tên đăng nhập chỉ được chứa chữ cái, số và dấu gạch dưới.";
                 include 'views/login_view.php';
                 return;
             }
@@ -29,7 +29,6 @@ class UserController {
                 $_SESSION['id'] = $user['EmployeeID'];
                 $_SESSION['role'] = $user['Role'];
                 
-                // Kiểm tra role và điều hướng tương ứng
                 if ($user['Role'] == 'giam doc') {
                     header("Location: index.php?action=viewEmployeeList");
                 } else {
@@ -37,11 +36,13 @@ class UserController {
                 }
                 exit();
             } else {
-                echo "Tên đăng nhập hoặc mật khẩu không đúng.";
+                $_SESSION['login_error'] = "Tên đăng nhập hoặc mật khẩu không đúng.";
+                include 'views/login_view.php';
+                return;
             }
         }
 
-        include 'views/login_view.php'; // Hiển thị trang đăng nhập
+        include 'views/login_view.php';
     }
 
     // Hàm hiển thị thông tin cá nhân

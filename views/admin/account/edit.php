@@ -425,6 +425,7 @@
                                             <?php echo ($account['Role'] == 'kế toán') ? 'selected' : ''; ?>>Kế toán
                                         </option>
                                     </select> -->
+                                    </select>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Cập nhật tài Khoản</button>
                                 <a href="index.php?action=account" class="btn btn-secondary">Hủy</a>
