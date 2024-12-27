@@ -3,30 +3,51 @@
 
 class EmployeePayrollModel {
     private $db;
+    private $itemsPerPage = 15; // Số bản ghi mỗi trang
 
     public function __construct($dbConnection) {
         $this->db = $dbConnection;
     }
 
-    public function getEmployeePayroll($employeeId, $year = null) {
-        // Câu lệnh SQL để lấy bảng lương
-        $sql = "SELECT PayrollID, Month, Year, TotalHours, HourlyRate, ActualSalary FROM payroll WHERE EmployeeID = ?";
+    public function getEmployeePayroll($employeeId, $year = null, $page = 1) {
+        // Tính offset cho phân trang
+        $offset = ($page - 1) * $this->itemsPerPage;
+        $params = [$employeeId];
         
-        // Nếu có năm, thêm điều kiện vào câu lệnh SQL
+        // SQL cơ bản
+        $sql = "SELECT PayrollID, Month, Year, TotalHours, HourlyRate, ActualSalary 
+                FROM payroll 
+                WHERE EmployeeID = ?";
+        
+        // Thêm điều kiện năm nếu có
         if ($year) {
             $sql .= " AND Year = ?";
+            $params[] = $year;
+        }
+        
+        // Thêm LIMIT và OFFSET cho phân trang
+        $sql .= " ORDER BY Year DESC, Month DESC LIMIT " . $this->itemsPerPage . " OFFSET " . $offset;
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute($params);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getTotalPages($employeeId, $year = null) {
+        $params = [$employeeId];
+        $sql = "SELECT COUNT(*) as total FROM payroll WHERE EmployeeID = ?";
+        
+        if ($year) {
+            $sql .= " AND Year = ?";
+            $params[] = $year;
         }
 
         $stmt = $this->db->prepare($sql);
+        $stmt->execute($params);
         
-        // Thực thi câu lệnh với tham số
-        if ($year) {
-            $stmt->execute([$employeeId, $year]);
-        } else {
-            $stmt->execute([$employeeId]);
-        }
-
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return ceil($result['total'] / $this->itemsPerPage);
     }
 }
 ?>

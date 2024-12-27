@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quên Mật Khẩu | HRTECH</title>
+    <title>Forgot Password | HRTECH</title>
     <link rel="stylesheet" href="assets/css/forgot_password.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
@@ -12,17 +12,17 @@
     <div class="navbar">
         <div class="logo"></div>
         <div class="menu">
-            <a href="#">Trang chủ</a>
-            <a href="#">Về chúng tôi</a>
-            <a href="#">Liên Hệ</a>
-            <button class="language-button">Tiếng Việt</button>
-            <a href="index.php?action=login" class="login-button">Đăng Nhập</a>
+            <a href="#">Home</a>
+            <a href="#">About Us</a>
+            <a href="#">Contact</a>
+            <button class="language-button">English</button>
+            <a href="index.php?action=login" class="login-button">Login</a>
         </div>
     </div>
 
     <!-- Form Quên Mật Khẩu -->
     <div class="login-form">
-        <h2>Quên Mật Khẩu</h2>
+        <h2>Forgot Password</h2>
         
         <?php if (!empty($error)): ?>
             <div class="alert alert-danger">
@@ -32,18 +32,18 @@
         <?php endif; ?>
 
         <form id="forgotPasswordForm" method="POST" action="index.php?action=processForgotPassword">
-            <label for="email">Email của bạn</label>
+            <label for="email">Your Email</label>
             <input 
                 type="email" 
                 id="email" 
                 name="email" 
-                placeholder="Nhập email của bạn"
+                placeholder="Enter your email"
                 value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>"
                 required
             />
 
-            <button type="submit" name="nutguiyeucau">Gửi yêu cầu</button>
-            <a href="index.php?action=login" class="forgot-password">Quay lại đăng nhập</a>
+            <button type="submit" name="nutguiyeucau">Send Request</button>
+            <a href="index.php?action=login" class="forgot-password">Back to Login</a>
         </form>
     </div>
 </body>

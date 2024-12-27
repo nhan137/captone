@@ -11,11 +11,18 @@ class EmployeePayrollController {
     }
 
     public function showPayroll($employeeId) {
-        // Lấy năm từ tham số GET
         $year = isset($_GET['year']) ? $_GET['year'] : null;
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         
-        // Lấy bảng lương với năm đã chọn
-        $payrolls = $this->model->getEmployeePayroll($employeeId, $year);
+        // Lấy tổng số trang
+        $totalPages = $this->model->getTotalPages($employeeId, $year);
+        
+        // Đảm bảo page không vượt quá giới hạn
+        $page = max(1, min($page, $totalPages));
+        
+        // Lấy dữ liệu cho trang hiện tại
+        $payrolls = $this->model->getEmployeePayroll($employeeId, $year, $page);
+        
         include 'views/employee/salary/employee_payroll_view.php';
     }
 }
