@@ -18,6 +18,16 @@ body {
   background-color: #f5f5f5;
 }
 
+.alert {
+  background-color: #f8d7da !important; /* Màu nền cho thông báo lỗi */
+  color: #721c24 !important; /* Màu chữ cho thông báo lỗi */
+  border: 1px solid #f5c6cb !important; /* Đường viền cho thông báo lỗi */
+  padding: 15px !important; /* Khoảng cách bên trong */
+  margin: 20px 0 !important; /* Khoảng cách bên ngoài */
+  border-radius: 5px !important; /* Bo góc */
+  font-size: 16px !important; /* Kích thước chữ */
+}
+
 .sidebar {
   position: fixed;
   top: 0;

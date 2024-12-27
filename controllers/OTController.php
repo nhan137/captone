@@ -16,6 +16,8 @@ class OTController {
             exit();
         }
     
+        $message = ''; // Biến để lưu thông báo
+    
         // Xử lý khi nhận yêu cầu POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $employee_id = $_SESSION['id'];
@@ -24,25 +26,28 @@ class OTController {
             $time = $_POST['time'];
             $description = $_POST['description'];
     
-            // Gửi đơn OT thông qua model
-            if ($this->overtimeModel->submitOT(
-                $employee_id, 
-                $date, 
-                $shift, 
-                $time, 
-                $description
-            )) {
-                // Nếu thành công, chuyển hướng đến trang xem các yêu cầu OT đã gửi
-                header("Location: index.php?action=viewPendingOTRequests");
-                exit();
+            // Kiểm tra giá trị giờ làm thêm
+            if ($time < 0) {
+                $message = "Overtime value cannot be negative. Please re-enter.";
             } else {
-                // Nếu thất bại, hiển thị thông báo lỗi
-                echo "Đã có lỗi xảy ra, vui lòng thử lại!";
+                // Gửi đơn OT thông qua model
+                if ($this->overtimeModel->submitOT(
+                    $employee_id, 
+                    $date, 
+                    $shift, 
+                    $time, 
+                    $description
+                )) {
+                    header("Location: index.php?action=viewPendingOTRequests");
+                    exit();
+                } else {
+                    $message = "Đã có lỗi xảy ra, vui lòng thử lại!";
+                }
             }
-        } else {
-            // Hiển thị trang form để gửi đơn OT
-            include 'views/submitOTView.php';
         }
+    
+        // Hiển thị trang form để gửi đơn OT
+        include 'views/submitOTView.php';
     }
     
     //

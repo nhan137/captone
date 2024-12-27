@@ -8,6 +8,11 @@
   <link rel="stylesheet" href="path/to/your-styles.css">
   <link rel="stylesheet" href="assets/css/employee.css">
 </head>
+<style>
+  /* CSS cho thông báo */
+
+
+</style>
 <body>
   <?php include 'views/layouts/sidebar.php'; ?>
   <div class="main-content">
@@ -16,29 +21,12 @@
         <h2><i class="fas fa-business-time"></i> Overtime Registration</h2>
       </div>
 
-      <!-- <div class="overtime-stats">
-        <div class="stat-card">
-          <i class="fas fa-clock"></i>
-          <div class="stat-info">
-            <h4>Total OT Hours</h4>
-            <p>24 hours</p>
-          </div>
+      <!-- Hiển thị thông báo nếu có -->
+      <?php if (!empty($message)): ?>
+        <div class="alert ">
+          <p><?php echo htmlspecialchars($message); ?></p>
         </div>
-        <div class="stat-card">
-          <i class="fas fa-calendar-check"></i>
-          <div class="stat-info">
-            <h4>This Month</h4>
-            <p>8 hours</p>
-          </div>
-        </div>
-        <div class="stat-card">
-          <i class="fas fa-hourglass-half"></i>
-          <div class="stat-info">
-            <h4>Pending Requests</h4>
-            <p>2 requests</p>
-          </div>
-        </div>
-      </div> -->
+      <?php endif; ?>
 
       <div class="overtime-form">
         <h3><i class="fas fa-file-alt"></i> New OT Request</h3>
@@ -64,10 +52,6 @@
               <label for="date"><i class="fas fa-calendar-alt"></i> Date</label>
               <input type="date" id="date" name="date" required />
             </div>
-            <!-- <div class="form-group">
-              <label for="department"><i class="fas fa-building"></i> Department</label>
-              <input type="text" id="department" name="department" required />
-            </div> -->
           </div>
 
           <div class="form-group">
@@ -75,22 +59,18 @@
             <textarea id="description" name="description" rows="4" placeholder="Please provide details about your overtime work..." required></textarea>
           </div>
 
-          <div class="form-actions"> <button type="submit" class="submit-button">
+          <div class="form-actions">
+            <button type="submit" class="submit-button">
               <i class="fas fa-paper-plane"></i> Submit Request
             </button>
-            <!-- <button type="button" class="cancel-button" onclick="cancelForm()">
-              <i class="fas fa-times"></i> Cancel
-            </button> -->
           </div>
 
           <a href="index.php?action=viewPendingOTRequests" class="pending-link">
-                <i class="fas fa-calendar-check"></i> View Pending OT Requests
-            </a>
+            <i class="fas fa-calendar-check"></i> View Pending OT Requests
+          </a>
         </form>
       </div>
     </div>
   </div>
-
-  
 </body>
 </html>
