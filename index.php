@@ -15,6 +15,7 @@ require_once 'controllers/EmployeeController.php';
 require_once 'controllers/ViewListDataEmployeeController.php';
 require_once 'controllers/Accountant/Employee_list_Controller.php';
 require_once 'controllers/Accountant/PayrollController.php';
+require_once 'controllers/Accountant/SalaryDetailController.php';
 
 require_once 'config.php';
 require_once 'models/OvertimeModel.php';
@@ -319,6 +320,16 @@ switch ($action) {
         require_once 'controllers/Accountant/PayrollController.php';
         $controller = new PayrollController($pdo);
         $controller->index();
+        break;
+
+    case 'salary_detail':
+        require_once 'controllers/Accountant/SalaryDetailController.php';
+        $controller = new SalaryDetailController($pdo);
+        if (isset($_GET['sub_action']) && $_GET['sub_action'] === 'view_detail') {
+            $controller->viewDetail();
+        } else {
+            $controller->index();
+        }
         break;
 
     default:

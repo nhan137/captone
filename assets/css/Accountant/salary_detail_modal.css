@@ -1,0 +1,36 @@
+.salary-detail {
+    padding: 20px;
+}
+.salary-detail h2 {
+    color: #333;
+    border-bottom: 2px solid #4a90e2;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+}
+.employee-info, .salary-info {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+.employee-info h3, .salary-info h3 {
+    color: #4a90e2;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+.employee-info p, .salary-info p {
+    margin: 10px 0;
+    line-height: 1.6;
+    color: #555;
+}
+.employee-info strong, .salary-info strong {
+    display: inline-block;
+    width: 140px;
+    color: #333;
+}
+@media (max-width: 768px) {
+    .employee-info strong, .salary-info strong {
+        display: block;
+        margin-bottom: 5px;
+    }
+}

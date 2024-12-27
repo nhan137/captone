@@ -52,11 +52,11 @@
         </li>
         <li>
           <a href="index.php?action=payroll">
-              <i class="fas fa-rectangle-list"></i>Salary</a>
+              <i class="fas fa-rectangle-list"></i>Caculate Salary</a>
         </li>
         <li>
-          <a href="index.php?action=caculate-salary">
-              <i class="fas fa-rectangle-list"></i>Caculate Salary</a>
+          <a href="index.php?action=salary_detail">
+              <i class="fas fa-rectangle-list"></i>Salary Table</a>
         </li>
         <li>
           <a href="index.php?action=logout"> <i class="fab fa-angellist"></i>Logout </a>

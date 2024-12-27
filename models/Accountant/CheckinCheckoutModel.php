@@ -37,21 +37,24 @@ class CheckinCheckoutModel {
     }
 
     // Lưu hoặc cập nhật bảng payroll
-    public function saveOrUpdatePayroll($employeeId, $month, $year, $totalHours, $totalSalary) {
+    public function saveOrUpdatePayroll($employeeId, $month, $year, $totalHours, $hourlyRate) {
+        $actualSalary = $totalHours * $hourlyRate;
+        
         $existingPayroll = $this->checkExistingPayroll($employeeId, $month, $year);
 
         if ($existingPayroll) {
             $query = "UPDATE payroll 
                      SET TotalHours = :totalHours,
-                         TotalSalary = :totalSalary
+                         HourlyRate = :hourlyRate,
+                         ActualSalary = :actualSalary
                      WHERE EmployeeID = :employeeId 
                      AND Month = :month 
                      AND Year = :year";
         } else {
             $query = "INSERT INTO payroll 
-                     (EmployeeID, Month, Year, TotalHours, TotalSalary)
+                     (EmployeeID, Month, Year, TotalHours, HourlyRate, ActualSalary)
                      VALUES 
-                     (:employeeId, :month, :year, :totalHours, :totalSalary)";
+                     (:employeeId, :month, :year, :totalHours, :hourlyRate, :actualSalary)";
         }
 
         $params = [
@@ -59,7 +62,8 @@ class CheckinCheckoutModel {
             ':month' => $month,
             ':year' => $year,
             ':totalHours' => $totalHours,
-            ':totalSalary' => $totalSalary
+            ':hourlyRate' => $hourlyRate,
+            ':actualSalary' => $actualSalary
         ];
 
         $stmt = $this->db->prepare($query);
@@ -68,7 +72,7 @@ class CheckinCheckoutModel {
 
     // Kiểm tra payroll đã tồn tại
     public function checkExistingPayroll($employeeId, $month, $year) {
-        $query = "SELECT PayrollID, EmployeeID, Month, Year, TotalHours, TotalSalary
+        $query = "SELECT PayrollID, EmployeeID, Month, Year, TotalHours, HourlyRate, ActualSalary
                  FROM payroll 
                  WHERE EmployeeID = :employeeId 
                  AND Month = :month 
@@ -85,9 +89,9 @@ class CheckinCheckoutModel {
     // Lấy lịch sử tính lương
     public function getPayrollHistory($month, $year) {
         $query = "SELECT p.PayrollID, p.EmployeeID, p.Month, p.Year, 
-                        p.TotalHours, p.TotalSalary,
+                        p.TotalHours, p.HourlyRate, p.ActualSalary,
                         CONCAT(e.FirstName, ' ', e.LastName) as FullName,
-                        e.HourlyRate
+                        e.BaseSalary
                  FROM payroll p 
                  JOIN employee e ON p.EmployeeID = e.EmployeeID 
                  WHERE p.Month = :month AND p.Year = :year";
