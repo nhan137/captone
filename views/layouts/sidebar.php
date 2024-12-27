@@ -59,6 +59,9 @@
                 <a href="index.php?action=submitOT"><i class="fas fa-clock"></i>Overtime Registration</a>
             </li>
             <li>
+                <a href="index.php?action=viewEmployeePayroll"><i class="fas fa-clock"></i>Salary</a>
+            </li>
+            <li>
                 <a href="index.php?action=logout"> <i class="fab fa-angellist"></i>Logout </a>
             </li>
             <!-- <h4>

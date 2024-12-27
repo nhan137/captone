@@ -16,6 +16,7 @@ require_once 'controllers/ViewListDataEmployeeController.php';
 require_once 'controllers/Accountant/Employee_list_Controller.php';
 require_once 'controllers/Accountant/PayrollController.php';
 require_once 'controllers/Accountant/SalaryDetailController.php';
+require_once 'controllers/Employee/EmployeePayrollController.php'; 
 
 require_once 'config.php';
 require_once 'models/OvertimeModel.php';
@@ -331,7 +332,12 @@ switch ($action) {
             $controller->index();
         }
         break;
-
+        
+    case 'viewEmployeePayroll': // Hành động mới để xem bảng lương của nhân viên
+            $employeePayrollController = new EmployeePayrollController($pdo);
+            $employeeId = $_SESSION['id']; // Giả sử ID nhân viên được lưu trong session
+            $employeePayrollController->showPayroll($employeeId);
+            break;
     default:
         // Chuyển hướng về trang login nếu không có action hợp lệ
         header("Location: index.php?action=login");
