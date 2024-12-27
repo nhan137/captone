@@ -57,6 +57,7 @@ body {
   font-weight: 500;
   white-space: nowrap;
   margin: 10px 0;
+  padding-left: 10px;
   position: relative;
 }
 
@@ -97,10 +98,16 @@ body {
   display: none;
 }
 
+.sidebar-links li {
+  width: 100%;
+  padding: 0;
+}
+
 .sidebar-links li a {
   display: flex;
   align-items: center;
-  gap: 0 20px;
+  width: 100%;
+  gap: 20px;
   color: #fff;
   font-weight: 500;
   white-space: nowrap;
@@ -113,7 +120,15 @@ body {
   color: #161a2d;
   background: #fff;
   border-radius: 4px;
+  width: calc(100% - 20px);
+  margin: 0 10px;
 }
+
+.sidebar-links li a i {
+  min-width: 20px;
+  text-align: center;
+}
+
 .sidebar-header h3 {
   margin-left: 23px;
 }

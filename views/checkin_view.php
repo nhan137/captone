@@ -33,6 +33,7 @@
         <!-- Form Check In -->
         <form id="checkin-form" onsubmit="submitAndRedirect(event)" class="form">
             <input type="hidden" id="employee-id" value="<?php echo $_SESSION['id']; ?>" />
+            <input type="hidden" id="is-in-company" name="is_in_company" />
             
             <div class="form-group">
                 <label>Employee ID</label>
@@ -61,6 +62,7 @@
 
         <!-- Form Check Out -->
         <form id="checkout-form" onsubmit="handleCheckout(event)" class="form hidden">
+            <input type="hidden" id="is-in-company-checkout" name="is_in_company" />
             <div class="form-group">
                 <label for="checkout-time">Check-out Time</label>
                 <input type="text" id="checkout-time" readonly required />

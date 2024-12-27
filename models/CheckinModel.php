@@ -177,9 +177,40 @@ class CheckinModel {
     }
 
     public function isValidGPSLocation($gpsLocation) {
-        // Giả sử tọa độ công ty là 10.762622, 106.660172
-        $companyGPS = "16.057122, 108.1858697";
-        return $gpsLocation === $companyGPS;
+        // Tách tọa độ thành latitude và longitude
+        list($lat, $lon) = array_map('trim', explode(',', $gpsLocation));
+        
+        // Định nghĩa các điểm của khu vực công ty
+        $polygonPoints = [
+            [16.063481, 108.156315], // Điểm phía Bắc
+            [16.063281, 108.156715], // Điểm phía Đông
+            [16.063081, 108.156515], // Điểm phía Nam
+            [16.063281, 108.156315]  // Điểm phía Tây
+        ];
+        
+        // Kiểm tra xem tọa độ có nằm trong khu vực không
+        return $this->isWithinPolygon((float)$lat, (float)$lon, $polygonPoints);
+    }
+
+    private function isWithinPolygon($latUser, $lonUser, $polygonPoints) {
+        $n = count($polygonPoints);
+        $inside = false;
+
+        for ($i = 0, $j = $n - 1; $i < $n; $j = $i++) {
+            $lat1 = $polygonPoints[$i][0];
+            $lon1 = $polygonPoints[$i][1];
+            $lat2 = $polygonPoints[$j][0];
+            $lon2 = $polygonPoints[$j][1];
+
+            if ($lonUser > min($lon1, $lon2) && $lonUser <= max($lon1, $lon2) &&
+                $latUser <= max($lat1, $lat2) && $lat1 != $lat2) {
+                $xinters = ($lonUser - $lon1) * ($lat2 - $lat1) / ($lon2 - $lon1) + $lat1;
+                if ($lat1 == $lat2 || $latUser <= $xinters) {
+                    $inside = !$inside;
+                }
+            }
+        }
+        return $inside;
     }
 }
 

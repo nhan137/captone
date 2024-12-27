@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đơn Nghỉ Phép Của Tôi</title>
+    <title>My Leave Requests</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -52,14 +52,14 @@
     <?php include 'views/layouts/sidebar.php'; ?>
     
     <div class="container my-5">
-        <h1 class="text-center mb-4">Đơn Nghỉ Phép Của Tôi</h1>
+        <h1 class="text-center mb-4">My Leave Requests</h1>
         
         <div class="text-center mb-4">
             <form method="GET" action="">
                 <input type="hidden" name="action" value="viewPendingRequests">
                 <button type="submit" name="filter" value="all" 
                         class="btn <?= (!isset($_GET['filter']) || $_GET['filter'] === 'all') ? 'btn-dark' : 'btn-secondary' ?> mx-2">
-                    Tất cả
+                    All
                 </button>
                 <button type="submit" name="filter" value="pending" 
                         class="btn <?= (isset($_GET['filter']) && $_GET['filter'] === 'pending') ? 'btn-warning' : 'btn-outline-warning' ?> mx-2">
@@ -80,15 +80,15 @@
             <thead class="table-dark">
                 <tr>
                     <th>ID</th>
-                    <th>Ngày bắt đầu</th>
-                    <th>Ngày kết thúc</th>
-                    <th>Loại nghỉ phép</th>
-                    <th>Ca</th>
-                    <th>Mô tả</th>
-                    <th>Trạng thái</th>
-                    <!-- <th>Người duyệt</th> -->
-                    <th>Ngày gửi đơn</th>
-                    <th>Ngày phê duyệt</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Leave Type</th>
+                    <th>Shift</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <!-- <th>Approved By</th> -->
+                    <th>Submit Date</th>
+                    <th>Approval Date</th>
                 </tr>
             </thead>
             <tbody>
@@ -111,7 +111,7 @@
                     <?php endforeach; ?>
                 <?php else: ?>
                     <tr>
-                        <td colspan="9" class="text-center">Bạn chưa có đơn nghỉ phép nào.</td>
+                        <td colspan="9" class="text-center">You don't have any leave requests yet.</td>
                     </tr>
                 <?php endif; ?>
             </tbody>

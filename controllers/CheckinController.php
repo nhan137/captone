@@ -123,7 +123,7 @@ class CheckinController {
                 }
     
                 if (!$this->checkinModel->isValidGPSLocation($gpsLocation)) {
-                    echo "Vị trí GPS không đúng với vị trí công ty!";
+                    echo "Bạn không ở trong khu vực công ty!";
                     exit();
                 }
     
@@ -174,10 +174,10 @@ class CheckinController {
                     exit();
                 }
     
-                // if (!$this->checkinModel->isValidGPSLocation($gpsLocation)) {
-                //     echo "Vị trí GPS không đúng với vị trí công ty!";
-                //     exit();
-                // }
+                if (!$this->checkinModel->isValidGPSLocation($gpsLocation)) {
+                    echo "Bạn không ở trong khu vực công ty!";
+                    exit();
+                }
     
                 if ($this->checkinModel->isCheckoutEarly($datetime)) {
                     echo "Check-out sớm!";

@@ -24,7 +24,7 @@
         <li>
           <a href="index.php?action=profile">
             <i class="fas fa-address-card"> </i> Personal Information<br />
-            Dashboard</a
+          </a
           >
         </li>
         <li>

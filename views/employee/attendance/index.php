@@ -165,9 +165,10 @@ display: flex;
     }
 
     .main-content {
-        padding: 30px;
-        max-width: 1200px;
-        margin: 0 auto;
+        margin-left: 260px;
+        padding: 0;
+        min-height: 100vh;
+        background: #f0f4ff;
     }
 
     .personal-info-form {
@@ -476,11 +477,12 @@ margin-top: 2rem;
     }
 
     .attendance-container {
-        background: #fff;
+        background: white;
         padding: 2rem;
         border-radius: 10px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         margin: 20px;
+        width: calc(100% - 40px); /* Đảm bảo container không bị tràn */
     }
 
     .attendance-header {
@@ -488,10 +490,9 @@ margin-top: 2rem;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 2rem;
-        padding-bottom: 1rem;
-        border-bottom: 1px solid #eee;
-        flex-wrap: wrap;
-        gap: 1rem;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 8px;
     }
 
     .attendance-header h2 {
@@ -560,6 +561,7 @@ margin-top: 2rem;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         overflow: hidden;
         margin-bottom: 2rem;
+        width: 100%;
     }
 
     .attendance-table {
@@ -587,12 +589,14 @@ margin-top: 2rem;
 
     /* Status Badges */
     .badge {
-        padding: 6px 12px;
-        border-radius: 20px;
-        font-size: 12px;
+        display: inline-flex;
+        align-items: center;
+        padding: 4px 8px;
+        border-radius: 15px;
+        font-size: 11px;
         font-weight: 500;
-        display: inline-block;
-        margin: 2px;
+        margin-right: 4px;
+        white-space: nowrap;
     }
 
     .badge-success {
@@ -657,6 +661,52 @@ margin-top: 2rem;
             width: 100%;
         }
     }
+
+    .attendance-table td:last-child {
+        white-space: nowrap;
+        min-width: 280px;
+    }
+
+    .status-container {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        min-width: 150px;
+    }
+
+    .badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 12px;
+        border-radius: 15px;
+        font-size: 13px;
+        font-weight: 500;
+    }
+
+    .badge-success {
+        background-color: #e7f6ec;
+        color: #1d6f42;
+        border: 1px solid #d1e7dd;
+    }
+
+    .badge-warning {
+        background-color: #fff8e6;
+        color: #997404;
+        border: 1px solid #ffeeba;
+    }
+
+    .badge-danger {
+        background-color: #ffebee;
+        color: #dc3545;
+        border: 1px solid #f5c2c7;
+    }
+
+    /* Responsive styles */
+    @media (min-width: 768px) {
+        .status-container {
+            flex-wrap: nowrap;
+        }
+    }
     </style>
 </head>
 
@@ -666,7 +716,7 @@ margin-top: 2rem;
     <!-- Main Content -->
     <div class="main-content">
         <div class="attendance-container">
-
+            <!-- Header -->
             <div class="attendance-header">
                 <h2><i class="fas fa-history"></i> Attendance History</h2>
                 <form class="date-filter-form" method="GET">
@@ -689,6 +739,7 @@ margin-top: 2rem;
                 </form>
             </div>
 
+            <!-- Table -->
             <div class="attendance-table-wrapper">
                 <table class="attendance-table">
                     <thead>
@@ -745,28 +796,18 @@ margin-top: 2rem;
                                 <?php endif; ?>
                             </td>
                             <td>
-                                <?php if ($attendance['IsAbsent']) : ?>
-                                    <span class="status-absent">Absent</span>
-                                <?php else : ?>
-                                    <?php 
-                                        $status = [];
-                                        // Check-in status
-                                        if ($attendance['CheckinLate']) {
-                                            $status[] = '<span class="badge badge-danger">Late Check-in</span>';
-                                        } else {
-                                            $status[] = '<span class="badge badge-success">On Time Check-in</span>';
-                                        }
-
-                                        // Check-out status
-                                        if ($attendance['CheckoutEarly']) {
-                                            $status[] = '<span class="badge badge-warning">Early Check-out</span>';
-                                        } else {
-                                            $status[] = '<span class="badge badge-success">On Time Check-out</span>';
-                                        }
-
-                                        echo implode(' ', $status);
-                                    ?>
-                                <?php endif; ?>
+                                <div class="status-container">
+                                    <?php if ($attendance['IsAbsent']) : ?>
+                                        <span class="badge badge-danger">Absent</span>
+                                    <?php else : ?>
+                                        <span class="badge <?= $attendance['CheckinLate'] ? 'badge-danger' : 'badge-success' ?>">
+                                            <?= $attendance['CheckinLate'] ? 'Late Check-in' : 'Check-in On Time' ?>
+                                        </span>
+                                        <span class="badge <?= $attendance['CheckoutEarly'] ? 'badge-warning' : 'badge-success' ?>">
+                                            <?= $attendance['CheckoutEarly'] ? 'Early Check-out' : 'Check-out On Time' ?>
+                                        </span>
+                                    <?php endif; ?>
+                                </div>
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -777,9 +818,9 @@ margin-top: 2rem;
                         <?php endif; ?>
                     </tbody>
                 </table>
-
-
             </div>
+
+            <!-- Actions -->
             <div class="attendance-actions">
                 <button class="export-button">
                     <i class="fas fa-file-export"></i> Export Report

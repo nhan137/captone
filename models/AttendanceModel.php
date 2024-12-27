@@ -75,96 +75,36 @@ class AttendanceModel {
         return $attendanceData;
     }
 
-    public function getAttendanceAndOT($employee_id, $start_date, $end_date) {
-        // Truy vấn quy tắc chấm công từ bảng attendance_rules (lấy RuleID mặc định tạm thời hoặc theo nhân viên)
-        $sql = "SELECT * FROM attendancerule WHERE RuleID = 1"; // Thay RuleID = 1 với RuleID của nhân viên nếu có
-        $stmt = $this->conn->prepare($sql);
+    public function getAttendanceAndOT($employeeId, $startDate, $endDate) {
+        $query = "SELECT 
+            c.EmployeeID,
+            DATE(c.CheckinTime) as WorkDate,
+            c.CheckinTime,
+            c.CheckoutTime,
+            c.GPSLocation as CheckinLocation,
+            c.CheckoutLocation,
+            CASE WHEN c.CheckinTime IS NULL OR c.CheckoutTime IS NULL THEN 1 ELSE 0 END as IsAbsent,
+            TIME_FORMAT(TIMEDIFF(c.CheckoutTime, c.CheckinTime), '%H:%i:%s') as TotalWorkHours,
+            CASE 
+                WHEN TIME(c.CheckinTime) > '08:00:00' THEN 1 
+                ELSE 0 
+            END as CheckinLate,
+            CASE 
+                WHEN TIME(c.CheckoutTime) < '17:30:00' THEN 1 
+                ELSE 0 
+            END as CheckoutEarly
+        FROM checkincheckout c
+        WHERE c.EmployeeID = :employeeId 
+        AND DATE(c.CheckinTime) BETWEEN :startDate AND :endDate
+        ORDER BY c.CheckinTime DESC";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':employeeId', $employeeId);
+        $stmt->bindParam(':startDate', $startDate);
+        $stmt->bindParam(':endDate', $endDate);
         $stmt->execute();
-        $rule = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-        if (!$rule) {
-            throw new Exception("Attendance rules not found.");
-        }
-    
-        // Truy vấn chấm công của nhân viên trong khoảng thời gian đã cho
-        $sql = "
-            SELECT 
-                CheckinTime, 
-                CheckoutTime, 
-                TIMEDIFF(CheckoutTime, CheckinTime) AS TotalWorkHours, 
-                GPSLocation AS CheckinLocation, 
-                CheckoutLocation AS CheckoutLocation, 
-                DATE(CheckinTime) AS WorkDate
-            FROM checkincheckout
-            WHERE EmployeeID = ? 
-              AND DATE(CheckinTime) BETWEEN ? AND ?
-            ORDER BY CheckinTime ASC";
-        
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$employee_id, $start_date, $end_date]);
-        $attendanceData = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
-        // Mốc giờ check-in trễ và check-out sớm từ quy tắc
-        $lateThreshold = new DateTime($rule['LateCheckinThreshold']);
-        $earlyThreshold = new DateTime($rule['EarlyCheckoutThreshold']);
-        
-        // Duyệt qua từng bản ghi để kiểm tra chấm công
-        foreach ($attendanceData as &$attendance) {
-            // Kiểm tra nghỉ phép
-            if (empty($attendance['CheckinTime']) || empty($attendance['CheckoutTime'])) {
-                $attendance['IsAbsent'] = true; // Nghỉ
-                $attendance['CheckinLate'] = false;
-                $attendance['CheckoutEarly'] = false;
-                continue;
-            } else {
-                $attendance['IsAbsent'] = false;
-            }
-    
-            // Kiểm tra check-in trễ
-            $checkinTime = new DateTime($attendance['CheckinTime']);
-            $attendance['CheckinLate'] = $checkinTime > $lateThreshold;
-    
-            // Kiểm tra check-out sớm
-$checkoutTime = new DateTime($attendance['CheckoutTime']);
-            $attendance['CheckoutEarly'] = $checkoutTime < $earlyThreshold;
-    
-            // Lấy thông tin OT (nếu có) từ bảng `ot`
-            $otSql = "
-                SELECT 
-                    SUM(TIME_TO_SEC(time)) AS TotalOTSeconds
-                FROM ot
-                WHERE employeeID = ? 
-                  AND date = ? 
-                  AND status = 'Approved'";
-            $otStmt = $this->conn->prepare($otSql);
-            $otStmt->execute([$employee_id, $attendance['WorkDate']]);
-            $otData = $otStmt->fetch(PDO::FETCH_ASSOC);
-    
-            // Chuyển đổi thời gian OT từ giây sang giờ
-            $attendance['TotalOTHours'] = $otData && $otData['TotalOTSeconds'] 
-                ? round($otData['TotalOTSeconds'] / 3600, 2) 
-                : 0;
-    
-            // Tính tiền làm thêm (OT) theo công thức từ quy tắc
-            if ($attendance['TotalOTHours'] > 0) {
-                $attendance['OvertimePay'] = $attendance['TotalOTHours'] * $rule['BaseOvertimeRate'];
-            } else {
-                $attendance['OvertimePay'] = 0;
-            }
-    
-            // Tính hình phạt nếu có (check-in trễ hoặc check-out sớm)
-            $attendance['LatePenalty'] = 0;
-            if ($attendance['CheckinLate']) {
-                $attendance['LatePenalty'] = $rule['LatePenaltyRate'];
-            }
-    
-            $attendance['EarlyLeavePenalty'] = 0;
-            if ($attendance['CheckoutEarly']) {
-                $attendance['EarlyLeavePenalty'] = $rule['EarlyLeavePenaltyRate'];
-            }
-        }
-    
-        return $attendanceData;
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
     

@@ -25,11 +25,11 @@
                     <i class="fas fa-address-card"></i> Personal Information Dashboard
                 </a>
             </li>
-            <li>
+            <!-- <li>
                 <a href="index.php?action=list-attendance-rule">
                     <i class="far fa-check-circle"></i>Timekeeping Rules
                 </a>
-            </li>
+            </li> -->
             <li>
                 <a href="index.php?action=viewEmployeeList">
                     <i class="fas fa-calendar-check"></i>VIEW EMPLOYEE LIST
