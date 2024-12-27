@@ -13,7 +13,6 @@ require_once 'controllers/OTController.php';
 require_once 'controllers/AttendanceRuleController.php';
 require_once 'controllers/EmployeeController.php';
 require_once 'controllers/ViewListDataEmployeeController.php';
-require_once 'controllers/Accountant/Employee_list_Controller.php';
 require_once 'controllers/Accountant/PayrollController.php';
 require_once 'controllers/Accountant/SalaryDetailController.php';
 require_once 'controllers/Employee/EmployeePayrollController.php'; 
@@ -308,10 +307,7 @@ switch ($action) {
         break;
     
     //Accountant - Kế Toán
-    case 'ViewEmployeeListAccountant':
-        $ViewEmployeeList = new Employee_list_Controller($pdo);
-        $ViewEmployeeList->viewEmployeeList();
-        break;
+    
     
     case 'payroll':
         if (!isset($_SESSION['id']) || $_SESSION['role'] !== 'ke toan') {

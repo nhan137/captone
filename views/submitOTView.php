@@ -54,8 +54,8 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="time"><i class="fas fa-clock"></i> Time</label>
-              <input type="time" id="time" name="time" required />
+              <label for="time"><i class="fas fa-clock"></i> Hours</label>
+              <input type="number" step="0.01" id="time" name="time" required placeholder="Enter hours (e.g., 1.5)" />
             </div>
           </div>
 
